@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>歐洲13國自駕之旅 2026</title>
+
+<!-- PWA 設定 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="歐遊2026">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a1209">
+<meta name="description" content="歐洲13國57天自駕旅行規劃">
+
+<!-- App 圖示（SVG inline 轉換成 data URI） -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%231a1209'/%3E%3Ctext x='90' y='110' font-size='90' text-anchor='middle'%3E🗺%3C/text%3E%3Ctext x='90' y='158' font-size='22' text-anchor='middle' fill='%23c9a84c' font-family='sans-serif' font-weight='bold'%3E歐遊26%3C/text%3E%3C/svg%3E">
+
+<!-- Manifest inline -->
+<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22%E6%AD%90%E6%B4%B213%E5%9C%8B%E8%87%AA%E9%A7%95%E4%B9%8B%E6%97%852026%22%2C%22short_name%22%3A%22%E6%AD%90%E9%81%8A2026%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231a1209%22%2C%22theme_color%22%3A%22%231a1209%22%2C%22start_url%22%3A%22.%22%7D">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a1209; --cream:#f5f0e8; --parchment:#ede7d9; --warm-mid:#c4a882;
+  --accent:#8b4513; --accent2:#2c5f2e; --accent3:#1b3a6b; --gold:#c9a84c;
+  --muted:#7a6a58; --card-bg:#faf7f2; --border:#d4c9b8; --red:#c0392b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+/* iPhone 瀏海/圓角安全區域 */
+nav{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+main{padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+
+/* HEADER */
+header{background:var(--ink);color:var(--cream);position:relative;overflow:hidden}
+.header-inner{max-width:1100px;margin:0 auto;padding:36px 32px 28px;display:flex;align-items:flex-end;gap:28px;position:relative;z-index:2}
+.header-stamp{width:80px;height:80px;border:2.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;text-align:center;color:var(--gold);letter-spacing:.5px;text-transform:uppercase;line-height:1.4}
+.header-text h1{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--cream);line-height:1.1}
+.header-text h1 span{color:var(--gold)}
+.header-meta{display:flex;gap:20px;margin-top:8px;font-size:.8rem;color:var(--warm-mid);letter-spacing:.5px;flex-wrap:wrap}
+.header-bg{position:absolute;top:0;right:0;bottom:0;width:40%;opacity:.05;background:repeating-linear-gradient(45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%);background-size:12px 12px}
+
+/* NAV */
+nav{background:var(--accent);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;overflow-x:auto}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,.75);font-family:'Noto Sans TC',sans-serif;font-size:.88rem;font-weight:500;padding:15px 22px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;letter-spacing:.3px}
+.nav-btn:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(0,0,0,.15)}
+
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:28px 32px}
+.section{display:none}
+.section.active{display:block}
+.section-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:6px}
+.section-title span{color:var(--accent)}
+.section-desc{color:var(--muted);font-size:.88rem;margin-bottom:24px}
+
+/* ── ROUTE TAB ── */
+.route-overview{background:linear-gradient(135deg,#1a1209,#2d1f0e);color:var(--cream);border-radius:12px;padding:24px 28px;margin-bottom:24px}
+.route-overview h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);margin-bottom:12px}
+.route-stats{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.route-stat{text-align:center;padding:10px 16px;background:rgba(255,255,255,.08);border-radius:8px}
+.route-stat-val{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold)}
+.route-stat-label{font-size:.72rem;color:var(--warm-mid);letter-spacing:.5px;text-transform:uppercase}
+.country-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.country-pill{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gold);font-size:.78rem;padding:4px 10px;border-radius:12px}
+.country-arrow{color:rgba(255,255,255,.3);font-size:.9rem}
+
+.route-controls{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.btn-route{padding:9px 18px;border-radius:7px;font-size:.85rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;border:none;transition:all .2s}
+.btn-add-segment{background:var(--accent3);color:#fff}
+.btn-add-segment:hover{background:#122a50}
+.btn-add-day{background:var(--accent2);color:#fff}
+.btn-add-day:hover{background:#1e4220}
+.btn-reset-route{background:none;border:1.5px solid var(--border);color:var(--muted)}
+.btn-export{background:var(--accent2);color:#fff}
+.btn-export:hover{background:#1e4220}
+.btn-import{background:var(--accent3);color:#fff}
+.btn-import:hover{background:#122a50}
+.btn-sync{background:linear-gradient(135deg,#c9a84c,#a07830);color:#fff;font-weight:600}
+.btn-sync:hover{background:linear-gradient(135deg,#b8922a,#8b6420)}
+.sync-bar{background:#1a1209;color:#f5f0e8;padding:10px 16px;border-radius:10px;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sync-bar.connected{background:linear-gradient(135deg,#1a3a1a,#2c5f2e)}
+.sync-bar.connecting{background:#2a2010}
+.sync-status-dot{width:10px;height:10px;border-radius:50%;background:#666;flex-shrink:0}
+.sync-status-dot.on{background:#4ade80;box-shadow:0 0 6px #4ade80}
+.sync-status-dot.loading{background:#fbbf24;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.sync-room-code{font-family:monospace;font-size:1.1rem;font-weight:700;color:#c9a84c;letter-spacing:3px;background:rgba(255,255,255,.08);padding:3px 10px;border-radius:5px}
+.sync-modal{background:var(--card-bg);border-radius:12px;padding:28px;width:90%;max-width:400px;box-shadow:0 16px 48px rgba(0,0,0,.35)}
+.sync-modal h3{font-family:"Playfair Display",serif;font-size:1.2rem;margin-bottom:6px;color:var(--ink)}
+.sync-modal p{font-size:.83rem;color:var(--muted);margin-bottom:16px;line-height:1.6}
+.sync-input{width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:8px;font-size:1.1rem;font-family:monospace;letter-spacing:3px;text-align:center;text-transform:uppercase;outline:none;background:#fff}
+.sync-input:focus{border-color:var(--gold)}
+.sync-divider{text-align:center;color:var(--muted);font-size:.8rem;margin:12px 0;position:relative}
+.sync-divider::before,.sync-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--border)}
+.sync-divider::before{left:0}.sync-divider::after{right:0}
+
+.route-timeline{position:relative;padding-left:0}
+.segment-block{margin-bottom:16px}
+.segment-header{background:var(--ink);color:var(--cream);padding:10px 16px;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between}
+.segment-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold)}
+.segment-dates{font-size:.75rem;color:var(--warm-mid)}
+.segment-days{border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;overflow:hidden}
+
+.route-day-row{display:grid;grid-template-columns:90px 1fr 1fr 70px 1fr 80px;gap:0;border-bottom:1px solid var(--border);background:var(--card-bg);transition:background .15s}
+.route-day-row:last-child{border-bottom:none}
+.route-day-row:hover{background:#f0ead8;box-shadow:inset 3px 0 0 var(--gold)}
+.route-day-row.editing{background:#fffbf0}
+.rdr-cell{padding:9px 12px;font-size:.84rem;border-right:1px solid var(--border);display:flex;align-items:center}
+.rdr-cell:last-child{border-right:none;justify-content:flex-end;gap:4px}
+.rdr-date{font-weight:700;color:var(--accent);font-size:.8rem;flex-direction:column;align-items:flex-start;gap:1px}
+.rdr-date .daynum{font-size:.68rem;color:var(--muted);font-weight:400}
+.rdr-location{}
+.rdr-spots-cell{flex-direction:column;align-items:flex-start;gap:3px}
+.spot-badge{background:var(--parchment);border:1px solid var(--border);border-radius:10px;padding:2px 8px;font-size:.72rem;color:var(--ink)}
+.rdr-hotel{}
+.rdr-km{font-size:.82rem;color:var(--accent3);font-weight:600;justify-content:center;text-align:center;flex-direction:column;gap:1px}
+.rdr-km .km-num{font-size:1rem;font-weight:700}
+.rdr-km .km-label{font-size:.65rem;color:var(--muted);letter-spacing:.5px}
+.rdr-input{width:100%;border:1px solid var(--gold);border-radius:4px;padding:3px 7px;font-size:.83rem;font-family:'Noto Sans TC',sans-serif;background:#fffde7;outline:none}
+.rdr-input-small{width:100%;border:1px solid var(--gold);border-radius:4px;padding:2px 5px;font-size:.75rem;font-family:'Noto Sans TC',sans-serif;background:#fffde7;outline:none}
+.rdr-btn{background:none;border:none;cursor:pointer;padding:3px 5px;border-radius:4px;font-size:.85rem;transition:background .15s}
+.rdr-btn:hover{background:var(--parchment)}
+.route-table-header{display:grid;grid-template-columns:90px 1fr 1fr 70px 1fr 80px;background:var(--ink);color:rgba(255,255,255,.7);font-size:.73rem;letter-spacing:.5px;text-transform:uppercase}
+.rth-cell{padding:7px 12px;border-right:1px solid rgba(255,255,255,.1)}
+.rth-cell:last-child{border-right:none}
+
+/* COUNTRY NAV */
+.country-nav{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
+.country-btn{background:var(--card-bg);border:1.5px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.82rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:all .2s;color:var(--ink)}
+.country-btn:hover{border-color:var(--accent);color:var(--accent)}
+.country-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
+
+/* SPOT CARDS */
+.spots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;margin-bottom:18px}
+.spot-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s}
+.spot-card:hover{transform:translateY(-2px);box-shadow:0 5px 18px rgba(0,0,0,.11)}
+.spot-card-header{background:var(--ink);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.spot-name{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--cream);font-weight:700}
+.spot-tag{font-size:.7rem;background:var(--gold);color:var(--ink);border-radius:4px;padding:2px 7px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+.spot-body{padding:14px 16px}
+.spot-desc{font-size:.86rem;line-height:1.7;color:#444;margin-bottom:10px}
+.spot-desc-en{font-size:.78rem;line-height:1.6;color:#777;font-style:italic;margin-bottom:10px;padding:8px 10px;background:#f7f4ee;border-left:3px solid var(--gold);border-radius:0 4px 4px 0}
+.spot-section-label{font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;margin-top:9px}
+.spot-detail{font-size:.82rem;color:#333;line-height:1.55;margin-bottom:4px}
+.spot-driving{font-size:.8rem;color:#7a3a10;background:#fdf3ea;border-radius:5px;padding:7px 10px;line-height:1.55;margin-top:6px}
+.spot-links{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
+.spot-link{display:inline-flex;align-items:center;gap:4px;font-size:.78rem;padding:5px 11px;border-radius:5px;text-decoration:none;border:1.5px solid;cursor:pointer;transition:all .2s;background:none;font-family:'Noto Sans TC',sans-serif}
+.spot-link.map{color:var(--accent3);border-color:var(--accent3)}
+.spot-link.map:hover{background:var(--accent3);color:#fff}
+.spot-link.edit{color:var(--muted);border-color:var(--border)}
+.spot-link.edit:hover{border-color:var(--muted)}
+.spot-link.del{color:var(--red);border-color:#ecc}
+.spot-link.del:hover{background:var(--red);color:#fff;border-color:var(--red)}
+
+/* ADD BUTTONS */
+.add-spot-btn{display:flex;align-items:center;gap:7px;background:var(--accent2);color:#fff;border:none;border-radius:7px;padding:10px 20px;font-size:.88rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:background .2s;margin-bottom:10px}
+.add-spot-btn:hover{background:#1e4220}
+.add-day-btn{display:flex;align-items:center;gap:7px;background:var(--accent3);color:#fff;border:none;border-radius:7px;padding:10px 20px;font-size:.88rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:background .2s;margin-bottom:20px}
+.add-day-btn:hover{background:#122a50}
+
+/* ITINERARY */
+.day-card{background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:9px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 7px rgba(0,0,0,.06)}
+.day-card-header{background:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);cursor:pointer}
+.day-num{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--accent);margin-right:10px}
+.day-title{font-weight:600;font-size:.96rem}
+.day-meta{font-size:.78rem;color:var(--muted);margin-top:2px}
+.day-chevron{font-size:1.1rem;color:var(--muted);transition:transform .2s}
+.day-card.collapsed .day-chevron{transform:rotate(-90deg)}
+.day-body{padding:16px 18px}
+.day-card.collapsed .day-body{display:none}
+.stop-list{list-style:none;margin-bottom:12px}
+.stop-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px dashed var(--border)}
+.stop-item:last-child{border-bottom:none}
+.stop-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:1px}
+.stop-icon.sight{background:#dbeafe}
+.stop-icon.food{background:#fef3c7}
+.stop-icon.stay{background:#d1fae5}
+.stop-icon.drive{background:#f3e8ff}
+.stop-text .stop-name{font-weight:600;font-size:.9rem}
+.stop-text .stop-note{font-size:.78rem;color:var(--muted)}
+.day-photos{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.photo-thumb{width:75px;height:75px;object-fit:cover;border-radius:5px;cursor:pointer;border:2px solid var(--border);transition:border-color .2s}
+.photo-thumb:hover{border-color:var(--accent)}
+.add-photo-btn{width:75px;height:75px;border:2px dashed var(--border);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:.68rem;color:var(--muted);background:none;transition:border-color .2s}
+.add-photo-btn:hover{border-color:var(--accent);color:var(--accent)}
+.add-photo-btn .plus{font-size:1.4rem;line-height:1}
+.day-actions{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap}
+.day-action-btn{font-size:.78rem;padding:5px 12px;border-radius:5px;border:1.5px solid;cursor:pointer;background:none;font-family:'Noto Sans TC',sans-serif;transition:all .2s}
+.day-action-btn.edit{color:var(--accent3);border-color:var(--accent3)}
+.day-action-btn.edit:hover{background:var(--accent3);color:#fff}
+.day-action-btn.del{color:var(--red);border-color:#ecc}
+.day-action-btn.del:hover{background:var(--red);color:#fff;border-color:var(--red)}
+
+/* EXPENSE */
+.expense-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:24px}
+.expense-stat{background:var(--card-bg);border:1px solid var(--border);border-radius:9px;padding:16px 18px}
+.expense-stat-label{font-size:.75rem;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.expense-stat-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700}
+.expense-stat-val span{font-size:.85rem;color:var(--muted);font-family:'Noto Sans TC',sans-serif}
+.expense-table-wrap{overflow-x:auto}
+.expense-table{width:100%;border-collapse:collapse;font-size:.86rem}
+.expense-table th{background:var(--ink);color:var(--cream);padding:10px 12px;text-align:left;font-weight:600;letter-spacing:.3px;font-size:.77rem}
+.expense-table td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.expense-table tr:hover td{background:var(--parchment)}
+.expense-type-badge{display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:20px;font-weight:600}
+.type-food{background:#fef3c7;color:#92400e}
+.type-transport{background:#dbeafe;color:#1e40af}
+.type-stay{background:#d1fae5;color:#065f46}
+.type-ticket{background:#ede9fe;color:#5b21b6}
+.type-other{background:#f3f4f6;color:#374151}
+.payer-badge{font-size:.75rem;padding:2px 7px;border-radius:10px;background:var(--parchment);border:1px solid var(--border)}
+.payer-shared{background:#fde8d8;border-color:#fbbf24;color:#92400e}
+.add-expense-btn{display:flex;align-items:center;gap:7px;background:var(--gold);color:var(--ink);border:none;border-radius:7px;padding:10px 20px;font-size:.88rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:background .2s;margin-bottom:18px;font-weight:600}
+.add-expense-btn:hover{background:#b8922a;color:#fff}
+.icon-btn{background:none;border:none;cursor:pointer;padding:3px 5px;font-size:.83rem;border-radius:3px;transition:background .15s}
+.icon-btn:hover{background:var(--parchment)}
+.split-box{background:linear-gradient(135deg,#f0f9f0,#e8f5e9);border:1.5px solid #81c784;border-radius:9px;padding:18px;margin-top:24px}
+.split-box h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--accent2);margin-bottom:7px}
+.split-box p{font-size:.86rem;color:#444;line-height:1.65;margin-bottom:12px}
+.split-link{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;border-radius:7px;padding:9px 20px;text-decoration:none;font-weight:600;font-size:.88rem;transition:background .2s}
+.split-link:hover{background:#1ebe5d}
+.split-summary{margin-top:14px;padding-top:14px;border-top:1px solid #c8e6c9}
+.split-summary h4{font-size:.88rem;font-weight:700;margin-bottom:7px;color:var(--accent2)}
+.split-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed #c8e6c9;font-size:.85rem}
+.split-row:last-child{border-bottom:none}
+.split-amt{font-weight:600;color:var(--accent2)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card-bg);border-radius:11px;padding:28px;width:90%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 18px 55px rgba(0,0,0,.32)}
+.modal h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:18px;color:var(--ink)}
+.form-group{margin-bottom:13px}
+.form-group label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:4px;text-transform:uppercase}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:8px 11px;border:1.5px solid var(--border);border-radius:6px;font-size:.88rem;font-family:'Noto Sans TC',sans-serif;background:#fff;color:var(--ink);outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:68px}
+.modal-actions{display:flex;gap:9px;margin-top:18px;justify-content:flex-end}
+.btn-primary{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:9px 22px;font-size:.88rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:background .2s}
+.btn-primary:hover{background:#6b3410}
+.btn-cancel{background:none;color:var(--muted);border:1.5px solid var(--border);border-radius:6px;padding:9px 18px;font-size:.88rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:44px 20px;color:var(--muted)}
+.empty-state .empty-icon{font-size:2.8rem;margin-bottom:10px}
+.empty-state p{font-size:.92rem}
+
+.file-input-hidden{display:none}
+
+/* ── Custom Confirm Modal ── */
+.confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9998;align-items:center;justify-content:center}
+.confirm-overlay.open{display:flex}
+.confirm-box{background:#faf7f2;border-radius:12px;padding:28px 28px 20px;width:88%;max-width:360px;box-shadow:0 16px 48px rgba(0,0,0,.35);text-align:center}
+.confirm-box h4{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:10px;color:#1a1209}
+.confirm-box p{font-size:.88rem;color:#7a6a58;margin-bottom:20px;line-height:1.6}
+.confirm-actions{display:flex;gap:10px;justify-content:center}
+.confirm-yes{background:#c0392b;color:#fff;border:none;border-radius:7px;padding:9px 24px;font-size:.9rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;font-weight:600}
+.confirm-yes:hover{background:#a93226}
+.confirm-cancel{background:none;color:#7a6a58;border:1.5px solid #d4c9b8;border-radius:7px;padding:9px 20px;font-size:.9rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer}
+
+@media(max-width:640px){
+  main{padding:14px}
+  .header-inner{padding:20px 14px 16px;flex-direction:column;align-items:flex-start}
+  .header-text h1{font-size:1.7rem}
+  .nav-btn{padding:13px 13px;font-size:.78rem}
+  .spots-grid{grid-template-columns:1fr}
+  .route-day-row,.route-table-header{grid-template-columns:70px 1fr 1fr 50px 40px}
+  .rdr-cell:nth-child(5),.rth-cell:nth-child(5){display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-bg"></div>
+<div class="header-inner">
+  <div class="header-stamp">8/19<br>—<br>10/15<br>2026</div>
+  <div class="header-text">
+    <h1>歐洲 <span>13 國</span> 自駕之旅</h1>
+    <div class="header-meta">
+      <span>🚗 自駕探索</span>
+      <span>👥 四人同行</span>
+      <span>✈️ 布達佩斯進出</span>
+      <span>🗺 57天 / 8月19日～10月15日</span>
+    </div>
+  </div>
+</div>
+</header>
+
+<nav>
+<div class="nav-inner">
+  <button class="nav-btn active" onclick="switchTab('route',this)">🗺 行程總覽</button>
+  <button class="nav-btn" onclick="switchTab('spots',this)">📌 推薦景點</button>
+  <button class="nav-btn" onclick="switchTab('itinerary',this)">📅 每日記錄</button>
+  <button class="nav-btn" onclick="switchTab('expense',this)">💰 費用記錄</button>
+</div>
+</nav>
+
+<main>
+
+<!-- ══ TAB 0: ROUTE ══ -->
+<div id="tab-route" class="section active">
+<h2 class="section-title">行程 <span>總覽</span></h2>
+<p class="section-desc">57天暫定路線 · 可直接在表格中點擊編輯每天的行程</p>
+
+<div class="route-overview">
+  <h3>🗺 整體路線規劃</h3>
+  <div class="route-stats">
+    <div class="route-stat"><div class="route-stat-val">57</div><div class="route-stat-label">天數</div></div>
+    <div class="route-stat"><div class="route-stat-val">13</div><div class="route-stat-label">國家</div></div>
+    <div class="route-stat"><div class="route-stat-val">4</div><div class="route-stat-label">人</div></div>
+    <div class="route-stat"><div class="route-stat-val">BUD</div><div class="route-stat-label">進出機場</div></div>
+    <div class="route-stat"><div class="route-stat-val" id="totalKm">—</div><div class="route-stat-label">預估總里程</div></div>
+  </div>
+  <div class="country-flow">
+    <span class="country-pill">🇭🇺 匈牙利</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇸🇰 斯洛伐克</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇵🇱 波蘭</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇱🇹 立陶宛</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇱🇻 拉脫維亞</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇪🇪 愛沙尼亞</span><span class="country-arrow">↓</span>
+    <span class="country-pill">🇸🇮 斯洛維尼亞</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇭🇷 克羅埃西亞</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇧🇦 波赫</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇲🇪 蒙特內哥羅</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇷🇸 塞爾維亞</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇦🇹 奧地利</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇨🇿 捷克</span><span class="country-arrow">→</span>
+    <span class="country-pill">🇭🇺 匈牙利 ✈</span>
+  </div>
+</div>
+
+<div class="route-controls">
+  <button class="btn-route btn-add-segment" onclick="addSegment()">＋ 新增路段</button>
+  <button class="btn-route btn-add-day" onclick="addRouteDay()">＋ 新增天</button>
+  <button class="btn-route btn-reset-route" onclick="resetRoute()">🔄 恢復預設行程</button>
+  <button class="btn-route btn-export" onclick="exportData()">📥 匯出備份</button>
+  <button class="btn-route btn-import" onclick="importData()">📤 匯入資料</button>
+  <button class="btn-route btn-sync" onclick="openSyncModal()">☁️ 多人同步</button>
+</div>
+<div id="syncBar" style="display:none" class="sync-bar">
+  <div class="sync-status-dot" id="syncDot"></div>
+  <div style="flex:1;font-size:.82rem">
+    <span id="syncBarText">未連線</span>
+    <span class="sync-room-code" id="syncBarCode" style="display:none"></span>
+  </div>
+  <button onclick="syncNow()" style="background:rgba(255,255,255,.15);border:none;color:#f5f0e8;border-radius:5px;padding:4px 10px;font-size:.78rem;cursor:pointer">🔄 立即同步</button>
+  <button onclick="disconnectSync()" style="background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);border-radius:5px;padding:4px 10px;font-size:.78rem;cursor:pointer">斷線</button>
+</div>
+
+<div id="routeTimeline"></div>
+</div>
+
+<!-- ══ TAB 1: SPOTS ══ -->
+<div id="tab-spots" class="section">
+<h2 class="section-title">推薦 <span>景點</span></h2>
+<p class="section-desc">依國家瀏覽推薦景點，含自駕注意事項與英文介紹</p>
+<div class="country-nav" id="countryNav"></div>
+<button class="add-spot-btn" onclick="openSpotModal()">＋ 新增景點</button>
+<div class="spots-grid" id="spotsGrid"></div>
+</div>
+
+<!-- ══ TAB 2: ITINERARY ══ -->
+<div id="tab-itinerary" class="section">
+<h2 class="section-title">每日 <span>行程記錄</span></h2>
+<p class="section-desc">記錄每天的路線、景點、餐廳、住宿與照片</p>
+<div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+  <button class="add-day-btn" style="margin-bottom:0" onclick="openDayModal()">＋ 新增行程日</button>
+  <button class="btn-route btn-export" style="padding:10px 16px;border-radius:7px;font-size:.85rem" onclick="exportData()">📥 備份</button>
+  <button class="btn-route btn-import" style="padding:10px 16px;border-radius:7px;font-size:.85rem" onclick="importData()">📤 匯入</button>
+</div>
+<div id="dayList"></div>
+</div>
+
+<!-- ══ TAB 3: EXPENSE ══ -->
+<div id="tab-expense" class="section">
+<h2 class="section-title">費用 <span>記錄</span></h2>
+<p class="section-desc">追蹤個人及公費花費，公費可連結 Line Split 分帳</p>
+<div class="expense-summary">
+  <div class="expense-stat"><div class="expense-stat-label">總花費(EUR)</div><div class="expense-stat-val" id="statTotal">€ 0 <span>EUR</span></div></div>
+  <div class="expense-stat"><div class="expense-stat-label">公費合計</div><div class="expense-stat-val" id="statShared">€ 0 <span>EUR</span></div></div>
+  <div class="expense-stat"><div class="expense-stat-label">每人應付</div><div class="expense-stat-val" id="statPer">€ 0 <span>EUR</span></div></div>
+  <div class="expense-stat"><div class="expense-stat-label">筆數</div><div class="expense-stat-val" id="statCount">0 <span>筆</span></div></div>
+</div>
+<div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+  <button class="add-expense-btn" style="margin-bottom:0" onclick="openExpenseModal()">＋ 新增花費</button>
+  <button class="btn-route btn-export" style="padding:10px 16px;border-radius:7px;font-size:.85rem" onclick="exportData()">📥 備份</button>
+  <button class="btn-route btn-import" style="padding:10px 16px;border-radius:7px;font-size:.85rem" onclick="importData()">📤 匯入</button>
+</div>
+<div class="expense-table-wrap">
+<table class="expense-table">
+  <thead><tr><th>日期</th><th>說明</th><th>類型</th><th>金額</th><th>幣別</th><th>付款人</th><th>公費</th><th>操作</th></tr></thead>
+  <tbody id="expenseBody"></tbody>
+</table>
+</div>
+<div id="expenseEmpty" class="empty-state" style="display:none"><div class="empty-icon">💳</div><p>尚未新增任何花費</p></div>
+<div style="display:flex;justify-content:flex-end;margin:12px 0 4px">
+  <button class="btn-route btn-export" style="padding:8px 16px;border-radius:7px;font-size:.82rem" onclick="exportData()">📥 備份資料</button>
+</div>
+<div class="split-box">
+  <h3>💚 Line Split 公費分帳</h3>
+  <p>公費部分可透過 Line Split 平均分攤給四位成員。下方顯示公費明細，複製後貼入 Line Split 即可。</p>
+  <div id="splitSummary" class="split-summary" style="display:none">
+    <h4>公費明細</h4>
+    <div id="splitRows"></div>
+    <div class="split-row" style="margin-top:7px;font-weight:700"><span>每人應付</span><span class="split-amt" id="splitPerPerson">€ 0</span></div>
+  </div>
+  <br><a href="https://line.me/R/ti/p/%40linepay" target="_blank" class="split-link">📱 開啟 Line Split</a>
+</div>
+</div>
+
+</main>
+
+<!-- SYNC MODAL -->
+<div class="modal-overlay" id="syncModal">
+  <div class="sync-modal">
+    <h3>☁️ 多人同步設定</h3>
+    <p>輸入同一組房間碼，四人資料即時同步。<br>需要先填入 JSONBin API Key（免費，說明見下方）。</p>
+    <div class="form-group">
+      <label>🔑 JSONBin API Key</label>
+      <input type="text" id="syncApiKey" placeholder="$2b$10$..." style="font-size:.82rem;letter-spacing:0">
+      <div style="font-size:.72rem;color:var(--muted);margin-top:4px">前往 <a href="https://jsonbin.io" target="_blank" style="color:var(--accent3)">jsonbin.io</a> 免費註冊 → 複製 API Key</div>
+    </div>
+    <div class="sync-divider">加入或建立房間</div>
+    <div class="form-group">
+      <label>房間碼（6碼，留空則建立新房間）</label>
+      <input type="text" id="syncRoomCode" class="sync-input" placeholder="ABCD12" maxlength="6">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeSyncModal()">取消</button>
+      <button class="btn-primary btn-sync" onclick="connectSync()">☁️ 連線</button>
+    </div>
+    <div id="syncModalStatus" style="margin-top:12px;font-size:.8rem;color:var(--muted);text-align:center"></div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="confirm-overlay" id="confirmModal">
+  <div class="confirm-box">
+    <h4 id="confirmTitle">確認刪除</h4>
+    <p id="confirmMsg">確定要執行此操作嗎？</p>
+    <div class="confirm-actions">
+      <button class="confirm-cancel" onclick="closeConfirm()">取消</button>
+      <button class="confirm-yes" id="confirmYesBtn">確定刪除</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- SPOT MODAL -->
+<div class="modal-overlay" id="spotModal">
+<div class="modal">
+  <h3 id="spotModalTitle">新增景點</h3>
+  <div class="form-group"><label>國家</label><select id="spotCountry"></select></div>
+  <div class="form-group"><label>景點名稱</label><input type="text" id="spotName" placeholder="例：布拉格舊城廣場"></div>
+  <div class="form-group"><label>類型標籤</label><input type="text" id="spotTag" placeholder="例：古蹟、自然、美食"></div>
+  <div class="form-group"><label>中文介紹</label><textarea id="spotDesc" placeholder="重要資訊與介紹…"></textarea></div>
+  <div class="form-group"><label>英文介紹 (English)</label><textarea id="spotDescEN" placeholder="English description..."></textarea></div>
+  <div class="form-group"><label>📍 值得一訪的小景點</label><textarea id="spotSubspots" placeholder="例：天文鐘、泰恩教堂、黑光劇場…"></textarea></div>
+  <div class="form-group"><label>🍴 推薦美食</label><input type="text" id="spotFood" placeholder="例：燉牛肉、波希米亞啤酒"></div>
+  <div class="form-group"><label>🛍 紀念品 / 特殊體驗</label><input type="text" id="spotSouv" placeholder="例：波西米亞水晶、啤酒溫泉浴"></div>
+  <div class="form-group"><label>🚗 自駕 & 停車注意</label><textarea id="spotDriving" placeholder="例：老城禁止進入，需停外圍停車場…"></textarea></div>
+  <div class="form-group"><label>Google 地圖連結</label><input type="text" id="spotMap" placeholder="https://maps.google.com/..."></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeSpotModal()">取消</button>
+    <button class="btn-primary" onclick="saveSpot()">儲存景點</button>
+  </div>
+</div>
+</div>
+
+<!-- DAY MODAL -->
+<div class="modal-overlay" id="dayModal">
+<div class="modal">
+  <h3 id="dayModalTitle">新增行程日</h3>
+  <div class="form-group"><label>日期</label><input type="date" id="dayDate"></div>
+  <div class="form-group"><label>出發地</label><input type="text" id="dayFrom" placeholder="例：布拉格"></div>
+  <div class="form-group"><label>目的地</label><input type="text" id="dayTo" placeholder="例：克拉科夫"></div>
+  <div class="form-group"><label>今日里程（km）</label><input type="number" id="dayKm" placeholder="例：350"></div>
+  <div class="form-group"><label>景點（每行一個）</label><textarea id="daySpots" placeholder="例：奧斯威辛集中營&#10;維利奇卡鹽礦"></textarea></div>
+  <div class="form-group"><label>餐廳（每行一個）</label><textarea id="dayRestaurants" placeholder="例：U Fleků 餐廳"></textarea></div>
+  <div class="form-group"><label>住宿</label><input type="text" id="dayHotel" placeholder="例：Ibis Kraków Stare Miasto"></div>
+  <div class="form-group"><label>備注</label><textarea id="dayNote" placeholder="今日特別紀錄…"></textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeDayModal()">取消</button>
+    <button class="btn-primary" onclick="saveDay()">儲存行程</button>
+  </div>
+</div>
+</div>
+
+<!-- EXPENSE MODAL -->
+<div class="modal-overlay" id="expenseModal">
+<div class="modal">
+  <h3 id="expenseModalTitle">新增花費</h3>
+  <div class="form-group"><label>日期</label><input type="date" id="expDate"></div>
+  <div class="form-group"><label>說明</label><input type="text" id="expDesc" placeholder="例：布拉格城堡門票"></div>
+  <div class="form-group"><label>類型</label>
+    <select id="expType">
+      <option value="food">🍽 餐飲</option><option value="transport">🚗 交通</option>
+      <option value="stay">🏨 住宿</option><option value="ticket">🎟 門票/活動</option>
+      <option value="other">📦 其他</option>
+    </select>
+  </div>
+  <div class="form-group"><label>金額</label><input type="number" id="expAmount" placeholder="0.00" step="0.01"></div>
+  <div class="form-group"><label>幣別</label>
+    <select id="expCurrency">
+      <option value="EUR">EUR €</option><option value="CZK">CZK Kč</option>
+      <option value="PLN">PLN zł</option><option value="HUF">HUF Ft</option>
+      <option value="RSD">RSD din</option><option value="BAM">BAM KM</option><option value="TWD">TWD NT$</option>
+    </select>
+  </div>
+  <div class="form-group"><label>付款人</label><input type="text" id="expPayer" placeholder="例：小明"></div>
+  <div class="form-group"><label><input type="checkbox" id="expShared" style="margin-right:6px">公費（四人均攤）</label></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeExpenseModal()">取消</button>
+    <button class="btn-primary" onclick="saveExpense()">儲存花費</button>
+  </div>
+</div>
+</div>
+
+<!-- PHOTO PREVIEW -->
+<div class="modal-overlay" id="photoModal" onclick="closePhotoModal()">
+  <img id="photoPreviewImg" style="max-width:90vw;max-height:90vh;border-radius:8px;display:block">
+</div>
+
+<!-- ROUTE DAY MODAL -->
+<div class="modal-overlay" id="routeDayModal">
+<div class="modal">
+  <h3 id="routeDayModalTitle">編輯行程</h3>
+  <div class="form-group"><label>日期</label><input type="text" id="rdDate" readonly style="background:#eee"></div>
+  <div class="form-group"><label>出發地</label><input type="text" id="rdFrom" placeholder="例：布達佩斯"></div>
+  <div class="form-group"><label>目的地 / 夜宿城市</label><input type="text" id="rdTo" placeholder="例：埃格爾"></div>
+  <div class="form-group"><label>今日景點 / 行程重點（每行一個）</label><textarea id="rdSpots" placeholder="例：埃格爾城堡&#10;美女谷酒窖"></textarea></div>
+  <div class="form-group"><label>預估里程（km）</label><input type="number" id="rdKm" placeholder="例：280"></div>
+  <div class="form-group"><label>🏨 住宿名稱</label><input type="text" id="rdHotelName" placeholder="例：Hotel Senator Eger"></div>
+  <div class="form-group"><label>🗺 住宿 Google 地圖連結</label><input type="text" id="rdHotelMap" placeholder="https://maps.google.com/..."></div>
+  <div class="form-group"><label>備注</label><textarea id="rdNote" placeholder="特別事項、開車注意…"></textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeRouteDayModal()">取消</button>
+    <button class="btn-primary" onclick="saveRouteDay()">儲存</button>
+  </div>
+</div>
+</div>
+
+<input type="file" class="file-input-hidden" id="photoFileInput" accept="image/*" multiple>
+
+<script>
+const DEFAULT_SPOTS = [
+
+  // ════════════════════════════════
+  // 🇨🇿 捷克 Czech Republic
+  // ════════════════════════════════
+  { id:101, country:'CZ', name:'布拉格舊城廣場 & 天文鐘', tag:'必訪古蹟',
+    desc:'布拉格最具代表性的核心地帶，廣場四周林立著哥德式、巴洛克式與文藝復興式建築。建於1410年的天文鐘（Orloj）是全球第三古老且仍在運作的天文鐘，每小時整點死神搖鈴、十二使徒木偶依序現身。廣場另一側的泰恩教堂兩座黑色尖塔高聳入雲，是布拉格天際線最標誌性的元素。建議傍晚時分來，金色燈光照映整座廣場，氣氛絕佳。白天廣場人潮洶湧，若想拍空景可在清晨6-7點前往。',
+    food:'U Fleků 老餐廳（1499年創業，必喝自釀黑啤酒）、Svíčková 燉牛肉配奶油醬、Trdelník 煙囪捲餅（廣場周邊現烤）',
+    souv:'波西米亞手工水晶玻璃、木偶（Marionette）、波希米亞石榴石飾品',
+        descEN:'Prague\'s most iconic square is surrounded by Gothic, Baroque and Renaissance architecture. The 1410 Astronomical Clock performs hourly with mechanical apostles. The twin Gothic spires of Tyn Church dominate the skyline. Visit at golden hour or at 6am for empty streets.',
+    subspots:'天文鐘（Orloj，整點表演）、泰恩教堂（Tyn Church）、聖尼古拉斯教堂、揚·胡斯紀念碑、老市政廳登塔（俯瞰廣場）',
+    driving:'舊城區全面禁止外來車輛進入，最近停車場為Na Prikope附近，步行約10-15分鐘進入廣場。建議搭地鐵A線至Staromestska站。',
+    map:'https://maps.google.com/?q=Old+Town+Square+Prague' },
+
+  { id:102, country:'CZ', name:'布拉格城堡區 & 查理大橋', tag:'地標',
+    desc:'布拉格城堡是世界上面積最大的古代城堡之一，建築群涵蓋聖維特大教堂、舊皇宮、黃金小巷等。聖維特大教堂的彩繪玻璃窗與哥德式飛扶壁令人嘆為觀止，登上南塔可俯瞰全布拉格。查理大橋建於1357年，橋上30座聖人雕像各有典故，清晨薄霧中的橋景如夢似幻。建議一早就先走查理大橋，避開人潮並欣賞晨霧。',
+    food:'黃金小巷附近的傳統酒館、烤豬腳（Vepřo knedlo zelo）配麵包糰子',
+    souv:'黃金小巷的手工製品、城堡紀念品店的錫器',
+        descEN:'Prague Castle — the world\'s largest ancient castle complex — encompasses St Vitus Cathedral, the Old Royal Palace and Golden Lane. Charles Bridge (1357) has 30 Baroque saint statues and is most magical at dawn before the crowds arrive.',
+    subspots:'聖維特大教堂（南塔登頂）、舊皇宮（Stary kralovský palac）、黃金小巷（Zlata ulicka）、羅布科維茨宮、查理大橋30座聖像、橋塔登頂',
+    driving:'城堡區無法開車直達，建議停在Letna公園附近停車場步行上山約20分鐘；或搭地鐵A線至Malostranska站再步行或搭22號電車。',
+    map:'https://maps.google.com/?q=Prague+Castle' },
+
+  { id:103, country:'CZ', name:'捷克克魯姆洛夫 Český Krumlov', tag:'UNESCO世遺',
+    desc:'被列為UNESCO世界文化遺產的中世紀小鎮，伏爾塔瓦河（Vltava）以S形曲線環繞整座小城，從城堡高點俯瞰如同一幅油畫。克魯姆洛夫城堡規模僅次於布拉格城堡，城堡花園與巴洛克劇院保存完好。老城區窄小石板路上排滿色彩繽紛的文藝復興式老屋，可租獨木舟在河上漂流欣賞城堡景色。旺季人多，建議住一晚感受夜晚寧靜氣氛。',
+    food:'Krčma v Šatlavské（城堡腳下老式地牢餐廳，必訪）、烤豬排配紅椰菜、蜂蜜薑餅',
+    souv:'手工蕾絲、陶瓷彩繪器皿、木刻工藝品',
+        descEN:'This UNESCO medieval town is encircled by the S-shaped Vltava River. Cesky Krumlov Castle is the second largest in Czech Republic. Rent a canoe to drift past the castle walls. Stay overnight to experience the magic after day-trippers leave.',
+    subspots:'克魯姆洛夫城堡（含巴洛克劇院和花園）、城堡塔樓俯瞰點、河上獨木舟漂流、老城廣場（Namesti Svornosti）、城牆步道',
+    driving:'老城禁止外來車輛進入，停車場位於城鎮入口（Chvalšinska或Jeleni zahrada停車場），步行進入老城約10分鐘。旺季建議早上8點前抵達。',
+    map:'https://maps.google.com/?q=Cesky+Krumlov' },
+
+  { id:104, country:'CZ', name:'庫特納霍拉 Kutná Hora', tag:'UNESCO世遺',
+    desc:'中世紀曾是歐洲最重要的銀礦城市，財富讓此地留下驚人建築遺產。最著名的是人骨教堂（Sedlec Ossuary），內部裝飾以約4萬具人骨製成，包括骷髏吊燈與人骨徽章，震撼又詭異。聖芭芭拉大教堂是哥德式傑作，與布拉格聖維特大教堂齊名，礦工壁畫描繪了中世紀採礦生活。距布拉格約1小時車程，很適合排一日來回。',
+    food:'城鎮廣場旁的傳統捷克餐館、烤鴨配紅椰菜與麵包糰子',
+    souv:'銀製飾品（呼應當地銀礦歷史）',
+        descEN:'Kutna Hora was once Europe\'s most important silver mining city. The Sedlec Ossuary (Bone Church) is decorated with 40,000 human bones including a chandelier. St Barbara\'s Cathedral rivals Prague\'s St Vitus. Easy 70km day trip from Prague.',
+    subspots:'人骨教堂Sedlec Ossuary（必訪，令人震撼）、聖芭芭拉大教堂（St Barbara Cathedral）、義大利宮庭（Vlassky dvur，舊鑄幣廠）、石泉廣場',
+    driving:'從布拉格走D1高速公路往東，在Kutna Hora出口下，全程約70公里。人骨教堂在Sedlec區距老城約2公里，兩地各有停車場（免費）。',
+    map:'https://maps.google.com/?q=Kutna+Hora' },
+
+  // ════════════════════════════════
+  // 🇵🇱 波蘭 Poland
+  // ════════════════════════════════
+  { id:201, country:'PL', name:'克拉科夫舊城 Kraków', tag:'UNESCO世遺',
+    desc:'波蘭最美的城市，中世紀舊城完整保存，1978年列為首批UNESCO世界遺產。中央廣場（Rynek Główny）是歐洲最大的中世紀廣場之一，廣場中央的紡織會館（Sukiennice）現為市集與博物館。瓦維爾山丘上的王室城堡與大教堂是波蘭民族認同的核心，波蘭歷代國王長眠於此。卡奇米日猶太區保存了豐富的猶太歷史文化，也是時髦的藝文餐廳區。',
+    food:'Zapiekanka 烤長棍麵包（卡奇米日市場必吃）、Pierogi 波蘭餃子（多種口味）、Żurek 酸麵包湯',
+    souv:'波蘭琥珀飾品、民俗刺繡、手工陶瓷',
+        descEN:'Krakow\'s perfectly preserved medieval old town was among the first UNESCO sites (1978). Wawel Castle houses the tombs of Polish kings. The Kazimierz Jewish quarter offers compelling history and Krakow\'s best restaurant scene.',
+    subspots:'中央廣場紡織會館、聖瑪麗亞大教堂（每小時整點號角）、瓦維爾城堡（Wawel Castle）、卡奇米日猶太區（Kazimierz）、辛德勒工廠博物館',
+    driving:'老城周邊設有禁車區，建議停在Park & Ride停車場搭電車進城；市中心Parking Galeria Kazimierz可步行進入卡奇米日區。',
+    map:'https://maps.google.com/?q=Krakow+Old+Town' },
+
+  { id:202, country:'PL', name:'奧斯威辛-比克瑙集中營', tag:'歷史必訪',
+    desc:'二戰期間納粹德國最大的滅絕營，估計逾110萬人（大多數為猶太人）在此遇難。現為UNESCO世界遺產與重要的歷史教育場所，分為奧斯威辛一號（博物館展覽）及比克瑙（廣大的集中營遺址）兩區。參觀需3-4小時，部分展覽內容極為沉重，建議有心理準備。強烈建議提前在官網預約導覽，旺季常售罄。距克拉科夫約1.5小時車程。',
+    food:'返回克拉科夫用餐為宜，參觀後通常胃口不佳',
+    souv:'此地不販售紀念品，僅有教育性書籍',
+        descEN:'Auschwitz-Birkenau was Nazi Germany\'s largest extermination camp where over 1.1 million people were murdered. Now a UNESCO World Heritage Site. Allow 3-4 hours. Pre-book guided tours online — they sell out months ahead.',
+    subspots:'奧斯威辛一號主要博物館（14個展覽廳）、比克瑙入口大門（紅磚瞭望台）、比克瑙鐵路月台、毒氣室遺址、紀念碑',
+    driving:'從克拉科夫走A4高速公路往西，在Oswiecim出口下，全程約65公里。集中營旁有大型免費停車場（Parking P1），步行至入口約5分鐘。',
+    map:'https://maps.google.com/?q=Auschwitz+Birkenau' },
+
+  { id:203, country:'PL', name:'維利奇卡鹽礦 Wieliczka', tag:'UNESCO世遺',
+    desc:'距克拉科夫市中心僅15公里，開採歷史逾700年的地下鹽礦迷宮，深度達135公尺，地下通道總長超過300公里。最令人嘆服的是礦工以食鹽雕刻的地下大教堂——聖金嘉教堂，從祭壇、浮雕到吊燈全為鹽晶製成，精緻程度令人難以置信。導覽路線約2公里、2小時，地下溫度常年約14度，記得帶外套。門票須事先網路預約。',
+    food:'地面餐廳的波蘭傳統料理、Bigos獵人燉菜',
+    souv:'鹽礦出產的粉紅鹽、鹽雕小擺件',
+        descEN:'Wieliczka Salt Mine, just 15km from Krakow, has been mined for 700+ years. The 135m-deep labyrinth culminates in the breathtaking St Kinga\'s Chapel — altars, reliefs and chandeliers all carved from rock salt. Tours last 2 hours at a constant 14°C. Book tickets online.',
+    subspots:'聖金嘉教堂（St Kinga Chapel，鹽晶大教堂）、地底湖（Weimar Chamber）、礦工傳說雕像展廳、地下餐廳',
+    driving:'從克拉科夫市中心開車約20分鐘；停車場在鹽礦入口旁（付費）；亦可從克拉科夫主火車站搭304巴士直達，約30分鐘。',
+    map:'https://maps.google.com/?q=Wieliczka+Salt+Mine' },
+
+  { id:204, country:'PL', name:'華沙舊城 Warsaw', tag:'UNESCO世遺',
+    desc:'二戰期間幾乎被夷為平地的華沙，戰後居民憑著老照片與繪畫將舊城重建，此一壯舉本身就是UNESCO列遺的重要理由。舊城廣場色彩繽紛、城牆完整，重建品質之高令人幾乎忘記這是戰後重建。城市也有現代活力：蕭邦博物館是全球最佳音樂博物館之一，華沙起義博物館記錄1944年起義的壯烈史事，必須預留至少半天。',
+    food:'Bar Mleczny（共產時代留下的平民食堂，超便宜道地）、烤鴨胸、蕎麥粥配菇類',
+    souv:'蕭邦相關紀念品、波蘭陶瓷（Bolesławiec）',
+        descEN:'Warsaw\'s Old Town was rebuilt from rubble after WWII using old photographs — the reconstruction itself earned UNESCO status. The Chopin Museum and Warsaw Rising Museum are world-class must-visits.',
+    subspots:'舊城廣場（Rynek Starego Miasta）、皇家城堡（Zamek Królewski）、蕭邦博物館（Muzeum Chopina）、華沙起義博物館、維拉諾夫宮（Wilanow Palace）',
+    driving:'華沙市中心停車昂貴且困難，建議使用地鐵；如開車，停在Parking Multikino Zlote Tarasy，距老城步行約20分鐘。',
+    map:'https://maps.google.com/?q=Warsaw+Old+Town' },
+
+  // ════════════════════════════════
+  // 🇱🇹 立陶宛 Lithuania
+  // ════════════════════════════════
+  { id:301, country:'LT', name:'維爾紐斯舊城 Vilnius', tag:'UNESCO世遺',
+    desc:'波羅的海三國中規模最大、保存最完整的舊城，以巴洛克建築密度之高聞名全歐，有「北方巴洛克珍珠」之稱。蓋帝米納斯塔（Gediminas Tower）是城市最古老的象徵，登頂可俯瞰整個舊城。烏日彼斯共和國（Užupis）是老城內的波希米亞藝術家聚落，自行宣布獨立，憲法刻在多國語言的金屬板上，是超有趣的景點。聖安娜教堂的火焰哥德式磚砌立面，據說連拿破崙都想搬回巴黎。',
+    food:'Šaltibarščiai 冷甜菜根湯（粉紅色，夏天必點）、Cepelinai 飛船形馬鈴薯糰子（國民料理）、Kibinai 韃靼酥皮肉派（特拉凱名物）',
+    souv:'琥珀珠寶（波羅的海琥珀全球9成產自此區）、亞麻桌布、立陶宛木雕',
+        descEN:'Vilnius Old Town is the largest in the Baltic states with more Baroque churches per capita than almost anywhere in Europe. The artists micro-republic of Uzupis has its own constitution in dozens of languages. St Anne\'s Gothic facade awed Napoleon himself.',
+    subspots:'蓋帝米納斯塔（Gediminas Tower，登頂俯瞰）、聖安娜教堂（St Anne Church，火焰哥德式）、烏日彼斯共和國（Uzupis，憲法牆）、維爾紐斯大學（可入內）、黎明之門（Ausros Vartai）',
+    driving:'老城大部分路段限制車輛，建議停在Panorama購物中心停車場步行進入；從里加約4小時車程。',
+    map:'https://maps.google.com/?q=Vilnius+Old+Town' },
+
+  { id:302, country:'LT', name:'特拉凱島城堡 Trakai', tag:'必訪城堡',
+    desc:'立陶宛最具童話感的景點，紅磚哥德式城堡矗立於加爾沃湖中央小島上，由多座木橋串連陸地，四面環水、倒影迷人。14世紀曾是立陶宛大公國的首都與政治中心，現為博物館。距維爾紐斯僅28公里，非常適合半日遊。湖邊有划艇出租，可從水面角度欣賞城堡。特拉凱是卡拉伊姆（Karaim）少數民族的聚居地，有獨特的肉派美食。',
+    food:'Kibinai 卡拉伊姆酥皮肉派（半月形，羊肉或牛肉餡，必吃）、湖邊餐廳的烤魚',
+    souv:'琥珀飾品、當地手工藝品',
+        descEN:'Trakai Island Castle is Lithuania\'s most fairy-tale sight — a red-brick Gothic castle on a lake island connected by wooden bridges. It was the 14th-century capital of the Grand Duchy of Lithuania. Rent a rowboat for water-level views.',
+    subspots:'特拉凱島城堡（博物館內部）、加爾沃湖划艇出租、卡拉伊姆民族文化館（Kenessa祈禱屋）、湖邊步道（全程約4公里）',
+    driving:'從維爾紐斯走A1公路往西約28公里，約30分鐘；Trakai鎮有免費停車場，步行至城堡約10分鐘；夏季週末較擁擠，建議平日前往。',
+    map:'https://maps.google.com/?q=Trakai+Island+Castle' },
+
+  { id:303, country:'LT', name:'考納斯 Kaunas', tag:'城市探索',
+    desc:'立陶宛第二大城，兩次大戰間曾為臨時首都，保存大量裝飾藝術（Art Deco）與現代主義建築，2022年擔任歐洲文化之都。舊城中心的自由大道（Laisvės alėja）是全歐最長的行人步道之一。考納斯城堡是立陶宛最古老的石造城堡，佩爾庫納斯之家（Perkūno namas）是精美的哥德式紅磚建築。此外，二戰期間日本外交官杉原千畝在此簽發6000張簽證救助猶太人，相關紀念館值得拜訪。',
+    food:'Pica Džiazas（考納斯最佳披薩）、傳統立陶宛黑麵包配各式起司',
+    souv:'立陶宛蜂蜜酒（Midus）、裝飾藝術風格文創商品',
+        descEN:'Kaunas was Lithuania\'s interwar capital and retains remarkable Art Deco and Modernist architecture. Sugihara House honours the Japanese diplomat who saved 6,000 Jews here. Kaunas was 2022 European Capital of Culture.',
+    subspots:'自由大道（Laisves aleja）、考納斯城堡（Kauno pilis）、佩爾庫納斯之家（Perkunas namas，哥德式）、杉原千畝紀念館（Sugihara House）、基督復活教堂',
+    driving:'市中心有付費停車場，建議使用Parking Laisves aleja附近的停車庫；從維爾紐斯走A1高速公路約1.5小時。',
+    map:'https://maps.google.com/?q=Kaunas+Lithuania' },
+
+  { id:304, country:'LT', name:'十字架山 Kryžių kalnas', tag:'特殊體驗',
+    desc:'立陶宛最震撼的精神地標，一座小丘上插滿了數十萬個大小十字架，形成如森林般的奇景，遠遠望去令人屏息。起源於19世紀抵抗沙俄統治，蘇聯時期三度用推土機剷平，但每次立陶宛人都夜間重新插回十字架。1993年教宗若望保祿二世到訪後聲名大噪，現已成為全球天主教朝聖地之一。不需門票，全年開放，清晨的薄霧中最有氣氛。距希奧利艾市中心約12公里。',
+    food:'附近小鎮希奧利艾（Šiauliai）的傳統餐館',
+    souv:'可在現場購買小十字架帶回，在丘上掛上一個是許多人的選擇',
+        descEN:'The Hill of Crosses is Lithuania\'s most haunting spiritual landmark — a small hill dense with hundreds of thousands of crosses. Bulldozed three times by the Soviets, Lithuanians returned each night to replant them. Pope John Paul II visited in 1993. Free, open 24 hours.',
+    subspots:'十字架山主丘（登丘漫步）、現場購買小十字架掛上丘（傳統做法）、周邊的本篤會修道院',
+    driving:'從希奧利艾走A9公路北行約12公里，路旁有大型免費停車場，步行至丘約5分鐘；從里加往南約1.5小時。',
+    map:'https://maps.google.com/?q=Hill+of+Crosses+Lithuania' },
+
+  { id:305, country:'LT', name:'帕蘭加 Palanga', tag:'海灘度假',
+    desc:'立陶宛最熱門的波羅的海海濱度假勝地，夏季擁擠熱鬧，細白沙灘延伸數公里，松林與沙丘構成獨特的海岸景觀。帕蘭加碼頭（Palangos tiltas）延伸入海，是看日落的最佳地點，夏日夕陽可至晚間10點才落下。琥珀博物館（Gintaro muziejus）位於美麗的伯爾格曼莊園內，收藏立陶宛出土的珍貴琥珀，其中有含昆蟲的琥珀標本。',
+    food:'海鮮燻魚（波羅的海特產）、Šašlykas 烤肉串、冰淇淋',
+    souv:'琥珀原石與飾品（此地品質好、價格較合理）',
+        descEN:'Palanga is Lithuania\'s most popular Baltic resort with kilometers of white-sand beaches, pine forests and dunes. The pier stretches into the sea for spectacular 10pm summer sunsets. The Amber Museum houses remarkable specimens including insect-in-amber pieces.',
+    subspots:'帕蘭加碼頭（Palangos tiltas，看日落必去）、琥珀博物館（Gintaro muziejus）、帕蘭加植物園、Basanaviciaus步行街',
+    driving:'從克萊佩達（Klaipeda）走A13公路北行約30分鐘；旺季市中心停車困難，建議停在南側的Parking Vytauto步行進城。',
+    map:'https://maps.google.com/?q=Palanga+Lithuania' },
+
+  { id:306, country:'LT', name:'庫爾斯沙嘴 Kuršių nerija', tag:'UNESCO自然遺產',
+    desc:'波羅的海與庫爾斯潟湖之間的細長沙嘴半島，全長98公里，寬僅400公尺至4公里，是全球最長的沙嘴之一，UNESCO世界遺產。沙丘景觀壯闊，其中尼達附近的死亡沙丘（Parnidis dune，高52公尺）可眺望兩側水域。沙嘴上的小漁村尼達（Nida）保存了傳統的科爾斯人（Kursenieki）彩色木屋，作家托瑪斯·曼曾在此居住。需搭渡輪進入，島上有自行車道，騎車漫遊最愜意。',
+    food:'Šprotai 醃燻沙丁魚、煙燻鰻魚、鄉村黑麵包',
+    souv:'琥珀原石（沙灘上有時可撿到）、傳統木馬風向標',
+        descEN:'The Curonian Spit is a 98km sand-spit UNESCO World Heritage Site separating the Baltic Sea from the Curonian Lagoon. Parnidis Dune (52m) near Nida offers views of both waters. The fishing village of Nida has traditional painted wooden houses. Take the ferry from Klaipeda and explore by bicycle.',
+    subspots:'帕爾尼底斯沙丘（Parnidis Dune）、尼達漁村（傳統木屋）、托瑪斯·曼故居、死亡沙丘（Dead Dunes）、渡輪（從Klaipeda出發）',
+    driving:'從克萊佩達開車至渡輪碼頭，渡輪約10分鐘，車輛須購票上船（約20-30 EUR）；旺季渡輪需排隊等待；沙嘴全長98公里，開車或租自行車皆可。',
+    map:'https://maps.google.com/?q=Curonian+Spit+Lithuania' },
+
+  // ════════════════════════════════
+  // 🇱🇻 拉脫維亞 Latvia
+  // ════════════════════════════════
+  { id:401, country:'LV', name:'里加老城 Rīga', tag:'UNESCO世遺',
+    desc:'波羅的海三國規模最大的首都，老城區為UNESCO世界遺產。最令人驚艷的是里加擁有全歐洲密度最高的新藝術風格（Art Nouveau / Jugendstil）建築群，尤以阿爾伯特街（Alberta iela）最為集中，奇幻的人臉浮雕、花卉藤蔓裝飾令人目不暇給。里加中央市場位於五座前飛機棚改建的大廳內，是全歐洲最大的室內市場，可以品嚐各種當地農產與熟食。黑頭屋（Melngalvju nams）是城中最上鏡的地標。',
+    food:'Rīgas šprotes 里加燻沙丁魚（全球最著名出口品之一）、黑麵包配奶油與魚子醬、里加黑醋栗香甜酒（Rīgas Melnais Balzāms）',
+    souv:'琥珀飾品、亞麻製品（桌巾、服飾）、拉脫維亞黑醋栗香甜酒',
+        descEN:'Riga\'s Old Town is UNESCO-listed and the city has the highest concentration of Art Nouveau architecture in Europe — Alberta iela is the showpiece street. The Central Market in five repurposed zeppelin hangars is Europe\'s largest indoor market.',
+    subspots:'阿爾伯特街（Alberta iela，Art Nouveau精華）、黑頭屋（Melngalvju nams）、里加中央市場（Rigas Centraltirgu）、聖彼得教堂鐘塔（登頂俯瞰）、自由紀念碑（Brivibas piemineklis）',
+    driving:'老城停車困難且昂貴，建議停在Park & Ride（Jugla或Imanta）搭電車進城；從塔林約4小時車程。',
+    map:'https://maps.google.com/?q=Riga+Old+Town' },
+
+  { id:402, country:'LV', name:'采西斯城堡 Cēsu pils', tag:'中世紀城堡',
+    desc:'拉脫維亞保存最完好、最雄偉的中世紀城堡遺址，由條頓騎士團建於13世紀，歷經多次戰役留下壯觀的殘垣斷壁。特別的是，城堡提供遊客手持蠟燭進入黑暗的塔樓探索，體驗中世紀的氛圍，非常獨特。城堡旁的采西斯小鎮本身也十分迷人，是拉脫維亞人最喜愛的週末小旅行目的地，鎮上有許多咖啡館與工藝品店。距里加約90公里。',
+    food:'小鎮上的 Cēsu Alus 在地啤酒（當地釀造，非常好喝）、燉豬肉配馬鈴薯',
+    souv:'手工陶瓷、拉脫維亞民族圖騰織品',
+        descEN:'Cesis Castle is Latvia\'s finest medieval ruin, built by the Teutonic Knights in the 13th century. Uniquely, visitors explore the dark towers by candlelight — a genuinely atmospheric medieval experience. The charming town of Cesis is Latvia\'s favorite weekend escape.',
+    subspots:'采西斯城堡主體（持蠟燭探索塔樓）、新城堡博物館（New Castle Museum）、采西斯小鎮廣場（Vienibas laukums）、加烏亞國家公園健行步道',
+    driving:'從里加走A3公路往東北約90公里，約1小時；采西斯鎮中心有免費停車場；城堡步行可達。',
+    map:'https://maps.google.com/?q=Cesis+Castle+Latvia' },
+
+  { id:403, country:'LV', name:'庫爾迪加 Kuldīga', tag:'小鎮風情',
+    desc:'被稱為「拉脫維亞最美小鎮」，紅磚老建築和鵝卵石街道保存完整，宛如時光倒流。最著名的是文塔瀑布（Venta Rapid）——歐洲最寬的自然瀑布，寬達249公尺，落差雖只有2公尺，但春季魚汛時節魚群奮力逆流跳越瀑布的壯觀景象令人難忘。橫跨文塔河的老磚橋建於1874年，是拉脫維亞最長的磚造橋。小鎮悠閒寧靜，適合漫步半天。',
+    food:'河邊餐廳的烤魚、拉脫維亞鬆餅（Pankūkas）配野莓果醬',
+    souv:'手工蜂蜜、在地陶器',
+        descEN:'Kuldiga is Latvia\'s most beautiful small town. The Venta Rapid is Europe\'s widest natural waterfall (249m wide, 2m drop). In spring, fish spectacularly leap upstream over the falls. The 1874 brick bridge is Latvia\'s longest.',
+    subspots:'文塔瀑布（Venta Rapid，歐洲最寬瀑布）、1874年老磚橋、庫爾迪加老城歷史中心、阿列克蘇皮特城中小瀑布',
+    driving:'從里加走A9公路往西約165公里，約2小時；鎮中心有免費停車場，步行可至所有景點；可與隆黛爾宮安排同日遊覽。',
+    map:'https://maps.google.com/?q=Kuldiga+Latvia' },
+
+  { id:404, country:'LV', name:'阿列克蘇皮特瀑布 Alekšupīte', tag:'自然景觀',
+    desc:'位於庫爾迪加老城內的城市瀑布，文塔河的支流阿列克蘇皮特溪從老街橋下穿過後傾瀉而下，旁邊就是磚砌老建築與水車遺址，形成歐洲罕見的「城中瀑布」景觀。體積雖不大，但與老城環境融合的場景極具畫面感，是攝影愛好者的寶地。可與文塔瀑布同日參觀，步行可達。',
+    food:'瀑布旁咖啡館的自製蛋糕與熱可可',
+    souv:'庫爾迪加在地手工藝品',
+        descEN:'The Aleksupite stream flows through Kuldiga\'s old town before tumbling over a small waterfall beside a medieval brick bridge and millhouse ruins — creating Europe\'s rarest sight: a waterfall in a town center. Walk here from the Venta Rapid in 5 minutes.',
+    subspots:'阿列克蘇皮特瀑布本身、旁邊的中世紀磚橋、廢棄水車遺址、庫爾迪加老城街道',
+    driving:'位於庫爾迪加老城內，從主停車場步行約5分鐘；與文塔瀑布同在鎮內，步行可串連兩地。',
+    map:'https://maps.google.com/?q=Aleksupite+waterfall+Kuldiga' },
+
+  { id:405, country:'LV', name:'隆黛爾宮 Rundāles pils', tag:'巴洛克宮殿',
+    desc:'被譽為「拉脫維亞的凡爾賽宮」，由俄羅斯女皇安娜的寵臣下令建造，出自設計聖彼得堡冬宮的義大利建築師拉斯特雷利之手。宮殿內部76個廳室金碧輝煌，以金廳（Gold Hall）和白廳（White Hall）最為精緻。宮外的法式幾何花園面積廣大，種植超過1000種玫瑰，夏季盛開時美不勝收。距里加約80公里，可與庫爾迪加安排同日遊覽。',
+    food:'宮殿內附設的精緻咖啡廳、當地農莊的傳統料理',
+    souv:'宮殿主題瓷器、拉脫維亞蜂蜜酒',
+        descEN:'Rundale Palace is Latvia\'s Versailles — 76 rooms of gilded Baroque splendor designed by Rastrelli (who also built St Petersburg\'s Winter Palace). The Gold Hall and White Hall are the highlights. The French formal garden has 1,000+ rose varieties blooming in summer.',
+    subspots:'金廳（Gold Hall）、白廳（White Hall）、宮殿主要廳室導覽、法式花園與玫瑰園（夏季盛開）',
+    driving:'從里加走A8公路往南約80公里，約1小時；宮殿有大型免費停車場；可與庫爾迪加安排同一天：隆黛爾宮（上午）→庫爾迪加（下午）。',
+    map:'https://maps.google.com/?q=Rundale+Palace+Latvia' },
+
+  // ════════════════════════════════
+  // 🇪🇪 愛沙尼亞 Estonia
+  // ════════════════════════════════
+  { id:501, country:'EE', name:'塔林老城 Tallinn', tag:'UNESCO世遺',
+    desc:'北歐最完整的中世紀城市，保存最好的漢薩同盟商城之一，1997年列入UNESCO世界遺產。老城分為上城（Toompea，貴族區）與下城（商人區），各有不同風貌。市政廳廣場（Raekoja plats）是中世紀廣場，周圍藥局（1422年創業，全歐最古老）、酒館至今仍在營業。托姆比亞山上可俯瞰整個老城紅瓦屋頂，是全塔林最著名的觀景點。塔林也是歐洲數位化程度最高的城市，第一個實施電子投票的國家。',
+    food:'Olde Hansa（15世紀風格中世紀餐廳，蜂蜜啤酒與烤野豬肉）、愛沙尼亞黑麵包、鹿肉料理、Kama 穀物粉配優格',
+    souv:'手工羊毛織品（手套、圍巾）、juniper木製品、愛沙尼亞亞麻布、Vana Tallinn甜酒',
+        descEN:'Tallinn\'s Old Town is the best-preserved medieval city in Northern Europe and one of the finest Hanseatic League cities (UNESCO 1997). The upper Toompea hill and lower Merchant City have distinct characters. The 1422 pharmacy on Town Hall Square is Europe\'s oldest.',
+    subspots:'市政廳廣場（Raekoja plats）、托姆比亞山觀景台（Kohtuotsa & Patkuli）、亞歷山大涅夫斯基教堂（俄式圓頂）、塔林城牆及塔樓步道、全歐最古老藥局（Raeapteek）、Olde Hansa中世紀餐廳',
+    driving:'老城全面禁止外來車輛進入，建議停在Park & Ride（Ulemiste或Jarve）搭電車進城；從里加約4小時車程。',
+    map:'https://maps.google.com/?q=Tallinn+Old+Town' },
+
+  { id:502, country:'EE', name:'拉赫馬國家公園 Lahemaa', tag:'自然必訪',
+    desc:'愛沙尼亞最大的國家公園，也是蘇聯時期成立的第一個國家公園，涵蓋壯觀的海岸線、原始森林、泥炭沼澤與冰河遺留的巨石（Erratic boulders）。帕爾姆塞莊園（Palmse Manor）是保存最完好的波羅的海德意志莊園，現為博物館。古老漁村阿尔塔马（Altja）保存了傳統的棕色木屋與魚網架。公園內可騎自行車、健行、賞鳥，夏季有海狸與麋鹿出沒。距塔林約70公里。',
+    food:'漁村餐廳的新鮮煙燻魚、野菇濃湯、莊園咖啡廳的傳統愛沙尼亞點心',
+    souv:'公園內的天然蜂蜜、手工羊毛製品',
+        descEN:'Lahemaa, Estonia\'s largest national park, encompasses stunning coastline, ancient forests, peat bogs and glacial erratic boulders. Palmse Manor is the finest Baltic German manor house. The fishing village of Altja has traditional brown wooden houses and fish-drying racks.',
+    subspots:'帕爾姆塞莊園（Palmse Manor，博物館）、阿爾塔賈漁村（Altja，傳統木屋）、薩格利沼澤步道（Sagadi bog walk）、拉赫馬半島岩石海岸',
+    driving:'從塔林走E20公路往東約70公里，約1小時；公園範圍廣大，需開車串連各景點；帕爾姆塞莊園有免費停車場。',
+    map:'https://maps.google.com/?q=Lahemaa+National+Park+Estonia' },
+
+  { id:503, country:'EE', name:'派爾努 Pärnu', tag:'海灘度假',
+    desc:'愛沙尼亞的「夏都」，波羅的海沿岸最受歡迎的度假城市，以4公里長的白沙灘聞名。19世紀起即是俄羅斯貴族的療養勝地，至今仍保留著眾多水療（SPA）設施。老城區有保存完好的18世紀城市格局，紅塔（Punane torn）是中世紀城牆遺跡。夏季（7-8月）城市充滿活力，音樂節與戶外活動不斷；其他季節較為安靜。海灘旁松林中散步是一大享受。',
+    food:'海濱餐廳的新鮮海鮮、愛沙尼亞烤豬肉、藍莓派',
+    souv:'波羅的海琥珀、愛沙尼亞手工針織品',
+        descEN:'Parnu is Estonia\'s Summer Capital with 4km of white-sand Baltic beach. Since the 19th century it has been a spa resort for Russian aristocracy, and excellent spa facilities remain today. The 18th-century old town has a well-preserved grid layout.',
+    subspots:'派爾努海灘（4公里白沙灘）、紅塔（Punane torn，中世紀城牆）、伊麗莎白教堂、派爾努博物館、Tervis Paradise水療中心',
+    driving:'從塔林走E67公路往南約130公里，約1.5小時；市中心停車場集中在Rutli街附近（付費）；海灘旁有大型免費停車場。',
+    map:'https://maps.google.com/?q=Parnu+Estonia' },
+
+  { id:504, country:'EE', name:'塔圖 Tartu', tag:'大學城文化',
+    desc:'愛沙尼亞第二大城，擁有全波羅的海最古老的大學（塔圖大學，建於1632年），是充滿學術氣息的文化中心。老城區有許多新古典主義建築，山丘上的廢墟教堂已成為拍照熱點。愛沙尼亞國家博物館（Eesti Rahva Muuseum）是全愛沙尼亞規模最大、最現代的博物館，建築本身即為一大看點——以前蘇聯軍用跑道為基底打造。城市年輕氣息濃厚，咖啡館與酒吧文化豐富。',
+    food:'Hea Maa 農夫市集的在地食材料理、Tartu 精釀啤酒、愛沙尼亞式開放式三明治',
+    souv:'大學紀念品、愛沙尼亞設計師品牌（此城設計感強）',
+        descEN:'Tartu has the Baltic\'s oldest university (founded 1632) and a vibrant intellectual atmosphere. The hilltop cathedral ruins are a charming photo spot. The Estonian National Museum, built over a former Soviet military runway, is one of the world\'s finest folk culture museums.',
+    subspots:'塔圖大學主樓（可免費參觀）、大教堂廢墟（Toomkirik ruins）觀景台、愛沙尼亞國家博物館（Eesti Rahva Muuseum）、塔圖老城廣場（Raekoja plats）',
+    driving:'從塔林走E263公路往南約185公里，約2.5小時；市中心有付費停車場，建議停在Parking Kaubamaja附近。',
+    map:'https://maps.google.com/?q=Tartu+Estonia' },
+
+  // ════════════════════════════════
+  // 🇸🇰 斯洛伐克 Slovakia
+  // ════════════════════════════════
+  { id:601, country:'SK', name:'斯皮什城堡 Spišský hrad', tag:'UNESCO世遺',
+    desc:'中歐面積最大的城堡遺址之一，建於12世紀，佔地約4公頃，雄踞於玄武岩山丘之上，俯瞰斯洛伐克東部的廣袤平原，景色極為壯觀。城堡歷史可追溯至12世紀，曾歷多次擴建，1780年一場大火後成為廢墟，現已修復部分塔樓供遊客登頂。城堡周邊的斯皮什地區還有斯皮什小鎮（Spišské Podhradie）、城堡山丘旁的斯皮什大教堂均為UNESCO遺產群的一部分。',
+    food:'附近餐廳的斯洛伐克燉羊肉、Bryndzové halušky 布林扎奶酪麵疙瘩（斯洛伐克國民料理）',
+    souv:'斯洛伐克民俗工藝品、蜂蜜酒',
+        descEN:'Spissky Castle is one of Central Europe\'s largest castle complexes at 4 hectares, dramatically perched on a basalt hill. The 12th-century fortress\'s surviving towers offer sweeping views of eastern Slovakia. The surrounding Spis region has three UNESCO sites within a few kilometers of each other.',
+    subspots:'城堡主塔登頂（360度全景）、城堡博物館（中世紀武器與生活展覽）、斯皮什大教堂（Spišska Kapitula，UNESCO）、斯皮什小鎮（城堡腳下）',
+    driving:'停車場位於城堡山腳（免費），步行上山約30分鐘；從波普拉德（Poprad）走E50公路往東約30公里；與高塔特拉山可安排同一地區行程。',
+    map:'https://maps.google.com/?q=Spis+Castle+Slovakia' },
+
+  { id:602, country:'SK', name:'班斯卡-比斯特里察 Banská Bystrica', tag:'歷史古城',
+    desc:'斯洛伐克中部最重要的歷史城市，曾因銅礦與銀礦貿易而繁榮，舊城廣場保存多棟文藝復興式建築。二戰期間是1944年「斯洛伐克民族起義」的指揮中心，城內的斯洛伐克民族起義博物館（SNP Museum）是規模最大的反法西斯博物館之一，值得參觀。距布拉提斯拉瓦約200公里，可作為旅途中的過夜站。',
+    food:'Reštaurácia Balkán 的道地斯洛伐克料理、Kapustnica 酸椰菜湯、烤香腸',
+    souv:'斯洛伐克民俗刺繡、木雕工藝品',
+        descEN:'Banska Bystrica prospered from copper and silver mining, leaving fine Renaissance buildings on its main square. It was the command center of the 1944 Slovak National Uprising against Nazi occupation — the SNP Museum here is Central Europe\'s most important anti-fascist museum.',
+    subspots:'斯洛伐克民族起義博物館（SNP Museum）、舊城廣場（Namestie SNP）、馬提亞什王之家（Thurzov dom）、城堡區（Barbakan）',
+    driving:'從布拉提斯拉瓦走D1/E571往東約200公里，約2小時；市中心有付費停車場；可作為前往高塔特拉山途中的停靠點。',
+    map:'https://maps.google.com/?q=Banska+Bystrica+Slovakia' },
+
+  { id:603, country:'SK', name:'布拉提斯拉瓦 Bratislava', tag:'首都探索',
+    desc:'世界上唯一一個與兩個不同國家（奧地利、匈牙利）邊界接壤的國家首都。老城緊湊迷人，布拉提斯拉瓦城堡在多瑙河畔巍峨聳立，山丘下是保存良好的巴洛克老城。城中散布著許多幽默的銅像裝置藝術，如從人孔蓋探出頭的水管工、靠在長椅上的拿破崙士兵，讓城市散步充滿驚喜。距維也納僅1小時車程，許多旅客把兩城安排在同一天。',
+    food:'Bratislavský rožok 牛角麵包、Lokša 馬鈴薯薄餅、多瑙河鮮魚料理',
+    souv:'斯洛伐克瓷器（Modranská keramika）、葡萄酒（斯洛伐克是產酒國）',
+        descEN:'Bratislava is the only capital city bordered by two different countries (Austria and Hungary). The compact old town has a hilltop castle, charming Baroque streets and whimsical bronze statues including Cumil the watching worker in a manhole. Just 1 hour from Vienna.',
+    subspots:'布拉提斯拉瓦城堡（Bratislavsky hrad，俯瞰多瑙河）、老城廣場（Hlavne namestie）、水管工銅像（Cumil）、拿破崙士兵銅像、聖馬丁大教堂',
+    driving:'老城設有禁車區，建議停在Parking Aupark步行進城；從維也納走A6高速公路約1小時；從布達佩斯約2.5小時。',
+    map:'https://maps.google.com/?q=Bratislava+Old+Town' },
+
+  // ════════════════════════════════
+  // 🇭🇺 匈牙利 Hungary
+  // ════════════════════════════════
+  { id:701, country:'HU', name:'布達佩斯漁夫堡 & 馬加什教堂', tag:'必訪景觀',
+    desc:'俯瞰多瑙河與佩斯區的新哥德式城堡迴廊，七座塔樓代表征服匈牙利的七個馬扎爾部落。與旁邊的馬加什教堂（Mátyás-templom）共同構成布達山丘上最精彩的建築群。馬加什教堂以其鑲嵌彩色琉璃磚的屋頂最為著名，室內馬賽克裝飾極其精緻。漁夫堡日落與夜景是布達佩斯最著名的拍攝場景，建議日落前1小時抵達佔好位置。免費入場（部分塔樓需購票）。',
+    food:'Gundel 餐廳（布達佩斯最著名的百年老餐廳，布達山丘旁）、Lángos 炸麵餅配酸奶油、鴨肝醬',
+    souv:'匈牙利辣椒粉（Paprika，必帶伴手禮）、Pálinka 水果白蘭地、赫倫德瓷器（Herend）',
+        descEN:'Fisherman\'s Bastion\'s seven neo-Gothic towers represent the seven Magyar tribes who conquered Hungary. It overlooks the Danube and the UNESCO Parliament building perfectly. Adjacent Matthias Church has a spectacular diamond-patterned tiled roof. The sunset and night views are Budapest\'s most photographed scenes.',
+    subspots:'漁夫堡迴廊（免費入場，登塔需購票）、馬加什教堂（Matyas-templom，彩色琉璃磚屋頂）、山頂俯瞰多瑙河與國會大廈、布達城堡區（Budavari Palota）、匈牙利國家美術館',
+    driving:'漁夫堡無法開車直達，建議停在Parking Dozsa Gyorgy或城堡山丘下停車場，步行或搭纜車（Siklo）上山。',
+    map:'https://maps.google.com/?q=Fishermans+Bastion+Budapest' },
+
+  { id:702, country:'HU', name:'布達佩斯溫泉浴場', tag:'特殊體驗',
+    desc:'布達佩斯地處溫泉地帶，市內有逾百個溫泉，泡湯文化是城市生活不可缺少的一部分。塞切尼溫泉浴場（Széchenyi）是全歐最大的戶外溫泉，新巴洛克黃色建築宏偉壯觀，戶外泡池冬天在熱氣蒸騰中泡湯是絕景。蓋勒特溫泉（Gellért）建於1918年，擁有最精美的新藝術風格浴場大廳，是布達佩斯最上鏡的溫泉。建議平日一早前往避開人潮，攜帶泳衣。',
+    food:'溫泉旁的露天咖啡座、Kürtőskalács 煙囪蛋糕',
+    souv:'溫泉浴場紀念品、匈牙利蜂蜜（品質極佳）',
+        descEN:'Budapest sits on over 100 thermal springs — bathing culture is inseparable from city life. Szechenyi is Europe\'s largest outdoor thermal bath with a neo-Baroque yellow palace exterior. Art Nouveau Gellert Baths (1918) are the city\'s most beautiful. Bring a swimsuit; visit on weekday mornings to avoid crowds.',
+    subspots:'塞切尼溫泉（Szechenyi Thermal Bath，戶外大池最有氣氛）、蓋勒特溫泉（Gellert Baths，Art Nouveau大廳）、魯達斯溫泉（Rudas Baths，鄂圖曼圓頂）',
+    driving:'各溫泉浴場附近均有停車場（付費）；塞切尼在城市公園內，步行可達；蓋勒特在自由橋旁，對面有停車場。',
+    map:'https://maps.google.com/?q=Szechenyi+Thermal+Bath+Budapest' },
+
+  { id:703, country:'HU', name:'埃格爾 Eger', tag:'古城美酒',
+    desc:'匈牙利北部的歷史古城，以兩件事著稱：一是埃格爾城堡（1552年匈牙利人以寡擊眾抵禦鄂圖曼大軍的歷史發生地），二是「公牛血」（Egri Bikavér）紅酒的產地。城堡可俯瞰整座城市，博物館內展示當年抵禦戰的詳細歷史。城中心的多貝街（Dobó tér）廣場優雅精緻，周邊的「美女谷」（Szépasszony-völgy）是上百家酒窖匯集的葡萄酒品飲區，可持小杯逐家試飲，非常歡樂。距布達佩斯約130公里。',
+    food:'埃格爾公牛血紅酒、燉牛肉（Gulyás）、Töltött káposzta 釀椰菜',
+    souv:'埃格爾在地紅酒、陶瓷酒瓶',
+        descEN:'Eger is famous for its 1552 castle where Hungarians heroically repelled an Ottoman army twice their size, and Egri Bikavor \'Bull\'s Blood\' red wine. The Valley of Beautiful Women has 200+ wine cellars open for tasting — visit with a small cup and wander freely between them.',
+    subspots:'埃格爾城堡（Egri Var，博物館與城牆）、美女谷酒窖區（Szpasszony-volgy，必訪）、埃格爾大教堂（Bazilika）、清真寺鐘塔（Minaret，匈牙利最北端的鄂圖曼建築）',
+    driving:'從布達佩斯走M3高速公路往北，在Gyongyos轉25號公路，全程約130公里約1.5小時；城中心有付費停車場，美女谷有免費停車場。',
+    map:'https://maps.google.com/?q=Eger+Hungary' },
+
+  // ════════════════════════════════
+  // 🇷🇸 塞爾維亞 Serbia
+  // ════════════════════════════════
+  { id:801, country:'RS', name:'貝爾格勒卡萊梅格丹要塞', tag:'歷史地標',
+    desc:'塞爾維亞首都最重要的歷史地標，建於羅馬時代，歷經拜占庭、鄂圖曼等不同統治者多次擴建。要塞位於薩瓦河（Sava）與多瑙河（Danube）的匯流處高地，站在城牆邊可俯瞰兩條大河交匯的壯闊景色，日落時分格外迷人。要塞公園是貝爾格勒市民最喜愛的散步與約會場所，園內有軍事博物館（展示各時代武器）與多座雕像。免費入場，全年開放。',
+    food:'Skadarlija 卵石街（貝爾格勒的蒙馬特）的傳統塞爾維亞烤肉餐廳、Ćevapi 烤肉捲配洋蔥與麵餅、Pljeskavica 塞爾維亞特大漢堡排',
+    souv:'塞爾維亞拉基亞白蘭地（Rakija，李子或葡萄）、手工編織地毯、貝爾格勒足球俱樂部球衣',
+        descEN:'Belgrade Fortress at the confluence of the Sava and Danube rivers has been contested by Romans, Byzantines and Ottomans for millennia. The park is Belgrade\'s favourite meeting spot. The Military Museum traces Serbia\'s complex history. The sunset view over two rivers is unmissable. Free entry.',
+    subspots:'要塞城牆與砲台（俯瞰薩瓦河與多瑙河交匯）、軍事博物館（Vojni muzej）、卡萊梅格丹公園、動物園（Beogradski zoo）、維克托紀念柱（Pobednik）',
+    driving:'要塞附近有付費停車場（Parking Kalemegdan）；市中心交通擁擠，建議步行或搭乘市區電車；從布達佩斯走E75高速公路南行約250公里約3小時。',
+    map:'https://maps.google.com/?q=Belgrade+Fortress+Serbia' },
+
+  { id:802, country:'RS', name:'諾維薩德 & 彼得羅瓦拉丁要塞', tag:'音樂祭聖地',
+    desc:'塞爾維亞第二大城，多瑙河畔的美麗城市。彼得羅瓦拉丁要塞（Petrovaradin Fortress）是全歐最壯觀的巴洛克要塞之一，要塞內有博物館、畫廊與旅館，每年7月在此舉辦的EXIT音樂節是歐洲最著名的夏季音樂節之一，吸引全球樂迷。諾維薩德老城保留著奧匈帝國時期的建築風格，自由廣場（Trg slobode）是城市核心。2021年擔任歐洲文化之都。',
+    food:'多瑙河畔的新鮮河魚料理（鯉魚、鯰魚）、Vojvodina 地區的獵人燉肉（Lovački gulaš）',
+    souv:'塞爾維亞葡萄酒（Fruška Gora 山的出品極佳）、EXIT音樂節周邊',
+        descEN:'Novi Sad\'s Petrovaradin Fortress is Europe\'s most impressive Baroque fort. The annual EXIT Music Festival in July draws global artists to the fortress ramparts. The old town retains elegant Austro-Hungarian architecture. Novi Sad was 2021 European Capital of Culture.',
+    subspots:'彼得羅瓦拉丁要塞（夜晚燈光迷人）、自由廣場（Trg slobode）、諾維薩德老城、多瑙河岸步道（Kej）',
+    driving:'從貝爾格勒走E75高速公路往北約90公里，約1小時；要塞上方有停車場，亦可停在多瑙河岸旁步行上山。',
+    map:'https://maps.google.com/?q=Petrovaradin+Fortress+Novi+Sad' },
+
+  // ════════════════════════════════
+  // 🇲🇪 蒙特內哥羅 Montenegro
+  // ════════════════════════════════
+  { id:901, country:'ME', name:'科托古城 Kotor', tag:'UNESCO世遺',
+    desc:'亞德里亞海最深處的峽灣（科托灣）中的中世紀古城，三面被巨大的喀斯特山崖環抱，城牆沿山壁蜿蜒而上。古城完整保存了中世紀的威尼斯風格建築，石板巷弄錯綜複雜，廣場上的聖特里豐大教堂建於1166年。古城城牆步道（Kotor Walls）全長4.5公里，爬上最高的聖若望要塞（海拔260公尺）需約1小時，但鳥瞰科托灣的景色是蒙特內哥羅最令人難忘的風景之一。',
+    food:'Školjke 淡菜（科托灣養殖，全蒙特內哥羅最佳）、Njeguški pršut 煙燻火腿（Njeguši村出產）、烤海鮮、Crni rižot 墨魚汁燉飯',
+    souv:'橄欖木雕製品、蒙特內哥羅當地葡萄酒（Vranac 紅酒）、海鹽',
+        descEN:'Kotor\'s walled medieval city sits at the deepest point of the Adriatic\'s only fjord, encircled by massive karst cliffs. The Venetian old town is perfectly preserved. Climbing the 4.5km city walls to St John\'s Fortress (260m) takes about an hour but offers Montenegro\'s finest panorama over the bay.',
+    subspots:'科托城牆步道（全長4.5km，登頂需1小時）、聖特里豐大教堂（Cathedral of St Tryphon，1166年）、武器廣場（Trg od oruzja）、貓博物館（科托以貓聞名）、海事博物館',
+    driving:'科托灣道路在旺季極度擁擠，建議早出發；科托古城入口旁有停車場（付費，旺季可能排隊）；從杜布羅夫尼克走E65公路約1.5-2小時（含邊境等待）。',
+    map:'https://maps.google.com/?q=Kotor+Old+Town+Montenegro' },
+
+  { id:902, country:'ME', name:'科托灣 Boka Kotorska', tag:'峽灣絕景',
+    desc:'全歐洲最南端的峽灣，也是地中海唯一的峽灣，蔚藍海水深入喀斯特山脈之間形成多個內灣。沿岸散落著中世紀的小鎮、教堂與威尼斯時期的堡壘。佩拉斯特（Perast）小鎮僅有兩條街，卻擁有17座教堂與16座宮殿，是蒙特內哥羅最精緻的歷史小鎮；從此可搭小船前往海中小島上的Our Lady of the Rocks教堂。開車環繞科托灣一圈約需3-4小時，風景從各個角度都美不勝收。',
+    food:'佩拉斯特的淡菜鍋、烤章魚、峽灣沿岸各小鎮的新鮮魚湯',
+    souv:'科托灣採集的珊瑚飾品、當地橄欖油',
+        descEN:'The Bay of Kotor is the Mediterranean\'s only true fjord and Europe\'s southernmost. The 3-4 hour drive around its shores passes medieval towns, Venetian fortresses and two offshore islands. Perast\'s 17 churches and 16 palaces are extraordinary for a village of 350 people.',
+    subspots:'佩拉斯特（Perast，最美村莊）、岩礁聖母堂小島（Our Lady of the Rocks）、普爾查涅（Prcanj，巴洛克宮殿）、多布羅塔（Dobrota，濱海別墅群）',
+    driving:'環灣公路全程約40公里，部分路段蜿蜒且狹窄；夏季車多，建議清晨或傍晚出發；泰拉（Tivat）和科托都有大型停車場可作為起點。',
+    map:'https://maps.google.com/?q=Bay+of+Kotor+Montenegro' },
+
+  { id:903, country:'ME', name:'波德戈里察 Podgorica', tag:'首都踏訪',
+    desc:'蒙特內哥羅首都，現代化城市與古老文明的交疊之處。二戰期間幾乎被夷平、重建後的城市現代感較強，但附近有兩個值得探訪的景點：杜克利亞古城遺址（Dioclea，羅馬時期城市廢墟）與里巴尼察河谷的修道院群。城市本身的明日廣場、塞爾維亞正教大教堂與城中的舊土耳其老城（Stara Varoš）可作半日探索。主要作為進出蒙特內哥羅的中轉點。',
+    food:'餐廳林立的自由廣場周邊、Rakija 白蘭地、蒙特內哥羅烤肉',
+    souv:'蒙特內哥羅特產蜂蜜、Vranac 葡萄酒',
+        descEN:'Podgorica was bombed flat in WWII and rebuilt as a modern city. The Stara Varos Turkish quarter and the Serbian Orthodox Cathedral survive. Nearby Dioclea Roman ruins are worth a visit. Primarily useful as a transit hub for Montenegro.',
+    subspots:'舊城（Stara Varos）鐘塔、塞爾維亞正教大教堂（Saborni hram）、里巴尼察城堡廢墟、杜克利亞古羅馬城市遺址（Dioclea，市郊）',
+    driving:'波德戈里察是蒙特內哥羅的主要公路樞紐；市內停車相對容易；從科托走E762公路約1.5小時；機場在市中心南方約10公里。',
+    map:'https://maps.google.com/?q=Podgorica+Montenegro' },
+
+  // ════════════════════════════════
+  // 🇧🇦 波士尼亞與赫塞哥維納 Bosnia and Herzegovina
+  // ════════════════════════════════
+  { id:1001, country:'BA', name:'莫斯塔爾 & 古橋 Mostar', tag:'UNESCO世遺',
+    desc:'波士尼亞最具代表性的城市，以橫跨內雷特瓦河（Neretva）的16世紀鄂圖曼古橋聞名於世。古橋（Stari Most，字面意思即「老橋」）在1993年內戰中被砲彈摧毀，2004年依原圖重建，2005年與周邊老城列為UNESCO世界遺產。橋上每年夏季舉辦跳橋比賽，年輕人從27公尺高處跳入河中，蔚為奇觀。河岸兩側的舊城區有濃厚的鄂圖曼風格，石板路旁滿是銅器工藝品店。',
+    food:'Ćevapi 烤肉捲（波士尼亞版Ćevapi比塞爾維亞更大更多汁）、Burek 千層酥皮肉餡派、Dolma 釀蔬菜、Baklava 果仁蜜餅',
+    souv:'銅製手工藝品（土耳其風格咖啡壺Džezva、托盤等）、波士尼亞地毯、石榴石飾品',
+        descEN:'Mostar\'s iconic Ottoman bridge (Stari Most) was destroyed by shelling in 1993 and rebuilt in 2004, then UNESCO-listed in 2005. The surrounding old town has a strong Ottoman character. Each summer young men dive from the 27m bridge — you can sponsor a jump.',
+    subspots:'莫斯塔爾古橋（Stari Most，橋上觀景）、克吉烏拉塔清真寺（Koski Mehmed Pasha Mosque，登塔俯瞰）、舊城巴扎（Kujundziluk，銅器工藝品街）',
+    driving:'莫斯塔爾市區有付費停車場，建議停在古橋南側或北側停車場步行進入；從杜布羅夫尼克走E65/M17公路約2小時（含邊境）；波士尼亞境內加油站較少，注意油量。',
+    map:'https://maps.google.com/?q=Stari+Most+Mostar+Bosnia' },
+
+  { id:1002, country:'BA', name:'塞拉耶佛 Sarajevo', tag:'歷史文化',
+    desc:'波士尼亞首都，「歐洲的耶路撒冷」——清真寺、東正教堂、天主教堂與猶太會堂在此地比鄰而立，是歐洲最具多元宗教文化氛圍的城市。1914年奧匈帝國皇儲斐迪南大公在此遇刺，引爆第一次世界大戰；1990年代又成為波士尼亞戰爭中最受圍城的城市之一（圍城長達1425天）。必訪景點：巴斯卡爾西亞鄂圖曼老市集、瞭望塔（Yellow Fortress）俯瞰全城、1984年冬季奧運遺址。',
+    food:'Ćevapi（Sarajevski ćevapi 是全波士尼亞最正宗的版本）、Bosanski lonac 瓦罐燉肉、波士尼亞咖啡（附方糖與土耳其軟糖）、Tufahija 核桃蘋果甜點',
+    souv:'波士尼亞咖啡壺組（Džezva）、手工銅器、波士尼亞玫瑰造型紀念品（代表戰爭傷痕的藝術符號）',
+        descEN:'Sarajevo is where WWI began (1914 assassination of Archduke Franz Ferdinand) and where a 4-year siege during the Bosnian War (1992-96) left deep scars. \'Jerusalem of Europe\' — mosque, Orthodox church, Catholic cathedral and synagogue stand within meters of each other.',
+    subspots:'巴斯卡爾西亞鄂圖曼老市集（Bascarsija）、黃色要塞（Yellow Fortress，俯瞰全城）、1984年冬奧遺址、戰爭童年博物館（War Childhood Museum）、拉丁橋（Latin Bridge，刺殺地點）',
+    driving:'市中心停車有限，建議停在Parking Skenderija附近步行進入巴扎區；從莫斯塔爾走M17公路北行約130公里約2小時；山路蜿蜒，注意速限。',
+    map:'https://maps.google.com/?q=Sarajevo+Bosnia' },
+
+  // ════════════════════════════════
+  // 🇭🇷 克羅埃西亞 Croatia
+  // ════════════════════════════════
+  { id:1101, country:'HR', name:'杜布羅夫尼克 Dubrovnik', tag:'UNESCO世遺',
+    desc:'「亞德里亞海明珠」，完整城牆環繞的中世紀共和國古城，1979年列入UNESCO世界遺產。白色石灰岩城牆全長約1940公尺，步行一圈約2小時，每個轉角都有不同的海景與城市視角。影集《冰與火之歌》大量取景此地，米拉克大道（Stradun）為主要步行大街。建議一早8點前就上城牆，避開人潮並享受晨光。搭纜車上爾德山（Mt Srđ）可俯瞰整座城市與深藍亞德里亞海，震撼無比。',
+    food:'Konoba（傳統小館）的烤海鮮、章魚沙拉（Salata od hobotnice）、Peka 爐烤小羔羊或章魚（需事先預訂）、黑松露料理（伊斯特拉半島特產）',
+    souv:'珊瑚飾品、杜布羅夫尼克紀念橄欖油、達爾馬提亞薰衣草產品',
+        descEN:'Dubrovnik\'s \'Pearl of the Adriatic\' has 1,940m of medieval city walls walkable in 2 hours. Game of Thrones filming location. The Stradun limestone main street gleams white. Climb the walls before 8am to beat crowds. The cable car to Mt Srd (405m) gives a breathtaking bird\'s-eye view of the walled city.',
+    subspots:'城牆步道（全長1940m，建議早8點前）、主街米拉克大道（Stradun）、爾德山纜車（Mt Srd Cable Car）、聖布萊斯教堂（St Blaise Church）、道明修道院（Dominican Monastery）、城外洛克魯姆島（Lokrum Island）',
+    driving:'旺季強烈建議不要開車進城，停在Pile門外停車場或搭公車進入；可停在郊外Parking Ilijina Glavica再搭接駁巴士；從斯普利特約3.5小時沿海岸公路。',
+    map:'https://maps.google.com/?q=Dubrovnik+Old+City+Croatia' },
+
+  { id:1102, country:'HR', name:'普利特維采湖群國家公園', tag:'UNESCO世遺',
+    desc:'克羅埃西亞最著名的自然景點，16個階梯形湖泊被瀑布與石灰岩壩串連，湖水因藻類與礦物質呈現翡翠綠、湛藍、青綠等多種顏色。全園覆蓋著原始山毛櫸與冷杉森林，木棧道在湖面上穿梭。園內分上湖與下湖兩區，步道選項從2小時到8小時不等。強烈建議提前在官網購票（旺季極易售罄），夏季清晨7點前入園以避開大量遊客。秋季（9-10月）是最佳時節，遊客稍少且楓葉美麗。',
+    food:'公園入口附近的餐廳提供傳統克羅埃西亞料理；建議自備午餐在公園內享用',
+    souv:'克羅埃西亞薰衣草精油、Šibenik在地橄欖油',
+        descEN:'Plitvice Lakes is Croatia\'s most stunning natural wonder — 16 terraced lakes connected by waterfalls, their water shifting between emerald, turquoise and azure. Boardwalks float over the water. Buy tickets online in advance (they sell out). September-October offers fewer crowds and beautiful autumn colour.',
+    subspots:'下湖區（Donja jezera，瀑布最密集）、大瀑布（Veliki Slap，78m，克羅埃西亞最高瀑布）、上湖區（Gornja jezera，較寬廣）、渡輪（連接上下湖）',
+    driving:'公園有Entrance 1和Entrance 2兩個入口，各有大型停車場（付費）；旺季7-8月建議清晨7點前抵達；從薩格勒布約2小時，從斯普利特約2.5小時。',
+    map:'https://maps.google.com/?q=Plitvice+Lakes+National+Park+Croatia' },
+
+  { id:1103, country:'HR', name:'斯普利特 Split', tag:'UNESCO世遺',
+    desc:'克羅埃西亞第二大城，最特別的是整個舊城區就建在羅馬皇帝戴克里先（Diocletian）的宮殿遺址之內——人們在1700年前的宮殿裡生活至今，教堂、餐廳、公寓全在古羅馬城牆內。地下室（Substructure）完整保留了宮殿的原始結構，是全世界保存最好的羅馬建築之一。城外的馬爾揚山丘（Marjan Hill）可健行，俯瞰斯普利特港口與達爾馬提亞群島全景。',
+    food:'Peka 爐烤料理（必吃，需提前1天預訂）、醃漬鯷魚（Inćuni）、Prstaci 馬頭蛤（受保護野生貝類，只有此地才有）',
+    souv:'薰衣草產品、達爾馬提亞式橄欖油、克羅埃西亞領帶（領帶起源於克羅埃西亞軍人）',
+        descEN:'Split is built inside Diocletian\'s 4th-century Roman palace — people have lived, shopped and worshipped inside it for 1,700 years. The palace substructure is the world\'s best-preserved Roman basement. Marjan Hill offers great views over the port and Dalmatian islands.',
+    subspots:'戴克里先宮地下室（Substructure，必訪）、主教堂（Cathedral of St Domnius，鐘塔登頂）、金門（Zlatna Vrata）、馬爾揚山丘健行步道、港口（Riva）傍晚散步',
+    driving:'舊城禁止車輛進入，建議停在Parking Lora或Parking Brodarica（付費），步行10分鐘進城；渡輪至赫瓦爾島從港口出發；從杜布羅夫尼克約3.5小時。',
+    map:'https://maps.google.com/?q=Diocletians+Palace+Split+Croatia' },
+
+  { id:1104, country:'HR', name:'薩格勒布 Zagreb', tag:'首都文化',
+    desc:'克羅埃西亞首都，充滿中歐帝國都市風情，融合了奧匈帝國的典雅建築與現代創意氣息。上城（Gornji grad）是中世紀老城核心，石門（Kamenita vrata）是薩格勒布唯一保存的城門，聖馬可教堂的彩色琉璃磚屋頂是全城最上鏡的景點。下城有美麗的林蔭大道與歐洲品質最高的失戀博物館（Muzej prekinutih veza）——展示真實情侶分手後捐贈的物品，感人又幽默，全球唯一。',
+    food:'Štrukli 起司餡麵糰（薩格勒布特色料理）、Kremšnita 奶油蛋糕（斯洛維尼亞傳來，此地也盛行）、豬排配薯條',
+    souv:'失戀博物館周邊商品、克羅埃西亞設計師品牌、克羅埃西亞葡萄酒',
+        descEN:'Zagreb\'s upper Gornji grad retains its medieval character with the iconic coloured-tile roof of St Mark\'s Church. The Museum of Broken Relationships — displaying real donated objects from failed relationships — is Zagreb\'s most unique attraction.',
+    subspots:'聖馬可教堂（St Mark Church，彩色琉璃磚屋頂）、石門（Kamenita vrata）、失戀博物館（Museum of Broken Relationships）、多拉茨市場（Dolac Market，早市必訪）',
+    driving:'市中心有付費停車場，建議停在Parking Importanne或Parking Kvaternik；從盧布爾雅那約2小時，從普利特維采約2小時。',
+    map:'https://maps.google.com/?q=Zagreb+Upper+Town+Croatia' },
+
+  { id:1105, country:'HR', name:'羅維尼 Rovinj', tag:'最美小鎮',
+    desc:'伊斯特拉半島最迷人的漁港小鎮，彩色房屋沿著半島小山丘層層疊疊，山頂是聖歐弗拉西亞教堂的鐘樓。在義大利統治時期留下濃厚的義式氛圍，許多居民今日仍說義大利語。港邊的礁岩非常適合跳海游泳，鎮內石板路錯綜迷宮，隨意漫步都充滿驚喜。這裡也是克羅埃西亞重要的藝術家聚落，畫廊與工作室遍布巷弄。',
+    food:'Istarska maneštra 伊斯特拉蔬菜燉湯、黑松露（Tartufi）義大利麵、生醃海鮮、在地白葡萄酒 Malvazija',
+    souv:'伊斯特拉松露產品（松露醬、松露鹽）、手工魚罐頭、橄欖油',
+        descEN:'Rovinj is Istria\'s most photogenic town — pastel-colored houses climbing a peninsula hill to the St Euphemia church bell tower. Strong Italian heritage (many still speak Italian). The harbour rocks are perfect for swimming. The winding old town streets hide galleries, artists studios and excellent restaurants.',
+    subspots:'聖歐弗拉西亞教堂鐘塔（登塔俯瞰，需購票）、海邊礁岩游泳區、格蘭登海洋保護區（Zlatni rt - Golden Cape Forest Park）、藝術家工作室巷弄',
+    driving:'老城禁止外來車輛，需停在城鎮入口的Parking Valentino或Parking Monte Mulini（付費），步行進入老城約10分鐘。',
+    map:'https://maps.google.com/?q=Rovinj+Croatia' },
+
+  { id:1106, country:'HR', name:'普拉 Pula', tag:'羅馬競技場',
+    desc:'伊斯特拉半島南端的古城，擁有全世界保存最完好的羅馬競技場之一（建於西元前27年-西元68年間），可容納兩萬觀眾，現今仍用於舉辦夏季音樂會與電影節。除競技場外，還有奧古斯都神廟（幾乎完整的羅馬神殿）、勢力之門（Arch of the Sergii）等羅馬遺跡。普拉的海灣也有許多美麗的游泳點，海水清澈見底。',
+    food:'競技場旁的酒吧與餐廳、新鮮生蠔與淡菜、伊斯特拉烤章魚',
+    souv:'伊斯特拉橄欖油（品質絕佳，建議多帶幾瓶）、松露相關產品',
+        descEN:'Pula\'s 1st-century Roman amphitheatre is one of the world\'s best-preserved — still hosting summer concerts for 20,000 people. The Temple of Augustus and Arch of the Sergii are remarkably intact Roman monuments. Pula\'s clear Adriatic coves make it an excellent swimming base for exploring Istria.',
+    subspots:'普拉競技場（Pula Arena，全球最完好羅馬競技場之一）、奧古斯都神廟（Temple of Augustus）、勢力之門（Arch of the Sergii）、普拉城堡（Kaštel，威尼斯要塞）',
+    driving:'競技場旁有付費停車場（Parking Arena）；老城內道路狹窄；從羅維尼約40分鐘；從薩格勒布走A8高速公路約2.5小時。',
+    map:'https://maps.google.com/?q=Pula+Arena+Croatia' },
+
+  { id:1107, country:'HR', name:'莫托文 Motovun', tag:'山城秘境',
+    desc:'伊斯特拉半島內陸的山頂小鎮，建於海拔277公尺的山頂，整座城鎮被中世紀城牆環繞，俯瞰米里納河谷（Mirna Valley）的葡萄園與橡樹林，是歐洲著名的松露（Tartufo）產地。每年8月舉辦莫托文電影節（Motovun Film Festival）。城牆步道一圈約600公尺，任何角度都是明信片風景。松露獵人可帶遊客深入橡樹林找松露，是超特殊的體驗行程。',
+    food:'松露義大利麵（現刨新鮮黑白松露）、松露蛋料理、當地 Teran 紅酒配松露起司',
+    souv:'新鮮松露（若在季節內）、松露醬、松露鹽、伊斯特拉橄欖油',
+        descEN:'Motovun is a medieval hilltop walled town at 277m above the Mirna Valley — one of Europe\'s finest truffle territories. The wall circuit (600m) gives constant panoramic views. August\'s Motovun Film Festival attracts art cinema fans. Truffle hunters offer tours into the oak forests — book in advance.',
+    subspots:'城牆步道（600m環繞，全景俯瞰河谷）、城鎮廣場（Trg Andrea Antico）、松露獵人導覽（需預約）、米里納河谷葡萄酒莊',
+    driving:'城鎮山頂禁止外來車輛，停車場在山腳（免費），步行上坡約15分鐘；從羅維尼約1小時。',
+    map:'https://maps.google.com/?q=Motovun+Croatia' },
+
+  { id:1108, country:'HR', name:'札達爾 Zadar', tag:'海風琴 & 日落',
+    desc:'達爾馬提亞地區保存最完好的羅馬城市之一，舊城建於海角半島上，四周被城牆環繞。必訪的海風琴（Morske orgulje）是世界首創，由35根石管嵌入海岸階梯，海浪波動驅動空氣產生樂音，24小時不間斷演奏。旁邊的「太陽致敬」（Zadar Sun Salutation）是一個300個太陽能板鑲嵌的圓形廣場，夜晚閃爍燈光與海風琴的樂音結合，令人屏息。阿爾弗雷德·希區考克曾盛讚此地的夕陽是全世界最美的。',
+    food:'Pag島起司（羊乳起司，達爾馬提亞特產）、淡菜鍋、新鮮漁獲、馬拉斯奇諾 Maraschino 利口酒（札達爾特產）',
+    souv:'馬拉斯奇諾酒、Pag起司、達爾馬提亞薰衣草產品',
+        descEN:'Zadar\'s Sea Organ (35 stone pipes played by wave action) and Sun Salutation (300 solar panels that light up at night) are unique artworks on its Roman waterfront. Alfred Hitchcock called the Zadar sunset the world\'s most beautiful.',
+    subspots:'海風琴（Morske orgulje，24小時自然音樂）、太陽致敬（Sun Salutation，夜間燈光秀）、聖多納特教堂（St Donatus Church，9世紀圓形）、城市牆垛（日落觀景點）',
+    driving:'老城禁止外來車輛，建議停在Parking Jazine或Parking Varos（付費），步行進入；從斯普利特約1.5小時；從薩格勒布約3小時。',
+    map:'https://maps.google.com/?q=Zadar+Croatia' },
+
+  { id:1109, country:'HR', name:'克爾卡國家公園 Krka', tag:'瀑布秘境',
+    desc:'克爾卡河沿岸的國家公園，以一系列的石灰華瀑布最為著名，其中斯克拉丁斯基布克（Skradinski Buk）是全公園最大的瀑布群，曾可讓遊客直接在瀑布下游泳（現已禁止）。園內還有羅馬遺跡、中世紀修道院，以及在清澈河水中游泳的機會。比普利特維采湖群遊客稍少，步道也較平緩。距斯普利特約80公里，距西貝尼克（Šibenik）約15公里。建議在普利特維采之後安排此處。',
+    food:'西貝尼克的新鮮魚湯與海鮮燉飯、Peka 烤肉',
+    souv:'石灰華（Travertine）小擺件、在地蜂蜜',
+        descEN:'Krka NP features a series of stunning travertine waterfalls along the Krka River. Skradinski Buk is the largest — swimming was once allowed below the falls (now banned). The park also has Roman ruins and Visovac Island Monastery. Fewer crowds than Plitvice with easier, flatter trails.',
+    subspots:'斯克拉丁斯基布克瀑布（Skradinski Buk）、維索瓦克島修道院（Visovac Island Monastery，需搭船）、羅馬遺址（Burnum）、克爾卡瀑布步道',
+    driving:'從西貝尼克走D56公路進入公園約15分鐘；Skradin入口有停車場（付費），可搭船進入瀑布區；從斯普利特約1小時；從普利特維采約2小時。',
+    map:'https://maps.google.com/?q=Krka+National+Park+Croatia' },
+
+  { id:1110, country:'HR', name:'赫瓦爾島 Hvar', tag:'島嶼度假',
+    desc:'達爾馬提亞群島中最受歡迎的島嶼，以薰衣草田、水晶海水與夜生活聞名。赫瓦爾鎮的威尼斯哥德式建築廣場是達爾馬提亞最大的廣場，西班牙要塞俯瞰整個港口。島上遍布薰衣草田，7月盛開時香氣瀰漫。帕클馬塔群島（Pakleni Islands）是近岸的一串小島，海水清澈適合浮潛。島上葡萄酒品質極佳，Hvar Pošip白酒值得一試。需在斯普利特或特羅吉爾搭渡輪前往。',
+    food:'章魚沙拉、Gregada 魚雜燉湯（赫瓦爾特有料理）、薰衣草蜂蜜、赫瓦爾在地葡萄酒',
+    souv:'薰衣草精油/香皂/蜂蜜、Hvar葡萄酒、船錨造型飾品',
+        descEN:'Hvar is Croatia\'s most glamorous island — lavender fields, crystal water and the most vibrant nightlife on the Adriatic. Hvar Town\'s Gothic square is Dalmatia\'s largest. The Spanish Fortress overlooks the harbour. The Pakleni Islands just offshore have excellent snorkeling. Ferry from Split (1 hour).',
+    subspots:'赫瓦爾鎮廣場（達爾馬提亞最大）、西班牙要塞（Fortica，俯瞰全鎮）、帕克倫塔群島（Pakleni Islands，浮潛）、薰衣草田（Stari Grad平原附近，7月）',
+    driving:'從斯普利特搭Jadrolinija渡輪至Stari Grad（約2小時）或高速艇至Hvar Town（約1小時）；島上可開車但道路較窄；Hvar Town有付費停車場（旺季很快客滿）。',
+    map:'https://maps.google.com/?q=Hvar+Town+Croatia' },
+
+  { id:1111, country:'HR', name:'科爾丘拉老城 Korčula', tag:'傳說古城',
+    desc:'被稱為「小杜布羅夫尼克」的中世紀城市，建在半島頂端，同樣有完整的城牆環繞。傳說馬可孛羅（Marco Polo）出生於此地（有爭議，但科爾丘拉人深信不疑），島上有馬可孛羅的紀念塔。科爾丘拉是克羅埃西亞劍舞（Moreška）的發源地，每週夏季演出，是獨特的文化體驗。島上橄欖油與葡萄酒品質極佳，Grk 白葡萄酒是全克羅埃西亞最獨特的品種之一。',
+    food:'Peka料理（需預訂）、烤海鮮、Grk 白酒配海鮮',
+    souv:'科爾丘拉橄欖油、Grk葡萄酒、馬可孛羅主題紀念品',
+        descEN:'Korcula\'s medieval walled town is called \'Little Dubrovnik\' for its similar Venetian layout. The town claims to be the birthplace of Marco Polo. The Moreška sword dance performed weekly in summer is unique. The island produces excellent Grk white wine.',
+    subspots:'科爾丘拉老城城牆漫步、馬可孛羅紀念塔（Marco Polo Tower）、聖馬可大教堂（St Mark Cathedral）、Moreška劍舞表演（夏季週四）',
+    driving:'從斯普利特或杜布羅夫尼克搭渡輪；島上可開車，停車場在老城外圍步行可達。',
+    map:'https://maps.google.com/?q=Korcula+Old+Town+Croatia' },
+
+  // ════════════════════════════════
+  // 🇸🇮 斯洛維尼亞 Slovenia
+  // ════════════════════════════════
+  { id:1201, country:'SI', name:'布萊德湖 Blejsko jezero', tag:'絕景必訪',
+    desc:'斯洛維尼亞最著名的明信片風景，阿爾卑斯翡翠色湖水中央有一座小島，島上有許願教堂（Church of the Assumption），傳說敲響教堂鐘聲許願會成真。可搭傳統木槳船（Pletna）前往小島，費用約15歐元。湖畔的布萊德城堡（Blejski grad）懸崖高聳，俯瞰湖景，內有博物館與餐廳。環湖步道全程約6公里。秋季紅葉倒映湖中，是一年中最美的時節。',
+    food:'布萊德奶油蛋糕 Kremšnita（當地最著名甜點，外酥內嫩的奶油方塊）、Park餐廳的傳統斯洛維尼亞料理',
+    souv:'斯洛維尼亞蜂蜜（蜜蜂是斯洛維尼亞國家符號，品質世界頂級）、手工木製品、布萊德城堡葡萄酒',
+        descEN:'Lake Bled is Slovenia\'s most iconic scene — a turquoise Alpine lake with a tiny island church and clifftop castle backdrop. The traditional Pletna wooden rowboat to the island (where bell-ringing makes wishes come true) is a must-do. Walk the 6km lake circuit or climb to the castle for the classic view.',
+    subspots:'布萊德湖中小島（Pletna船前往，約15 EUR）、布萊德城堡（俯瞰最佳角度）、環湖步道（6km全程）、奧斯皮克岩頂（Ojstrica，免費最佳觀景台）',
+    driving:'布萊德有多個停車場（Parking Jezero等，付費），旺季快速客滿，建議清晨8點前抵達；從盧布爾雅那走A2公路約40分鐘。',
+    map:'https://maps.google.com/?q=Lake+Bled+Slovenia' },
+
+  { id:1202, country:'SI', name:'盧布爾雅那 Ljubljana', tag:'首都漫遊',
+    desc:'全歐洲面積最小、卻最可愛的首都之一。市中心的三重橋（Triple Bridge）、龍橋（Dragon Bridge）與盧布爾雅那城堡構成完美的城市構圖，全城以綠色環保著稱，舊城禁止汽車進入，腳踏車與行人是主角。每年夏季布滿露天咖啡座的舊城廣場（Mestni trg）熱鬧非凡。城堡纜車或步行上山可俯瞰城市，並遠眺朱利安阿爾卑斯山。城市小巧但咖啡館、餐廳與酒吧水準極高。',
+    food:'Potica 核桃捲餅（斯洛維尼亞傳統點心）、Kranjska klobasa 卡尼奧拉香腸、豬油炸餅（Ocvirki）、Ljubljana精釀啤酒',
+    souv:'斯洛維尼亞蜂蜜酒（Medica）、斯洛維尼亞葡萄酒、龍橋龍造型紀念品',
+        descEN:'Ljubljana is Europe\'s most charming small capital. The Triple Bridge, Dragon Bridge and hilltop castle form perfect urban compositions. The car-free old town buzzes with cafe culture. A funicular reaches the castle for panoramic Alps views.',
+    subspots:'三重橋（Triple Bridge）、龍橋（Dragon Bridge）、盧布爾雅那城堡（纜車或步行上山）、普列舍倫廣場（Presernov trg）、中央市場（Pogacarjev trg）',
+    driving:'市中心禁止外來車輛，建議停在Parking NUK或Parking Kongresni trg（付費），步行進入舊城；從維也納約3小時；從薩格勒布約2小時。',
+    map:'https://maps.google.com/?q=Ljubljana+Old+Town+Slovenia' },
+
+  { id:1203, country:'SI', name:'波斯托伊納溶洞 Postojna Cave', tag:'地質奇觀',
+    desc:'全歐洲最著名的溶洞系統之一，全長24公里，開放給遊客的部分超過5公里，搭乘小火車深入洞穴後徒步參觀約1.5小時。巨大的鐘乳石、石筍與石柱令人嘆為觀止，最高石柱超過5公尺。洞內常年溫度8°C，記得帶外套。洞穴中生活著神秘的人魚蟲（Proteus anguinus），這是全球唯一一種洞穴脊椎動物。附近的普雷賈馬城堡（Predjama Castle）建在懸崖峭壁的洞穴中，是世界最大的洞穴城堡，可合併參觀。',
+    food:'普雷賈馬城堡旁的餐廳、波斯托伊納鎮的傳統料理',
+    souv:'人魚蟲相關紀念品、溶洞造型文創商品',
+        descEN:'Postojna is Europe\'s most famous cave — 5km of passages toured by underground train and on foot (1.5hrs total). Spectacular stalactites, stalagmites and pillars fill vast chambers. At a constant 8°C, bring a jacket. The cave\'s resident Proteus anguinus (human fish) is the world\'s only cave vertebrate.',
+    subspots:'洞穴小火車（進入洞穴）、音樂廳（Concert Hall，最大洞穴廳）、人魚蟲展示（Proteus anguinus）、普列賈馬城堡（僅9公里，合併參觀）',
+    driving:'從盧布爾雅那走A1公路往南西方約52公里，約40分鐘；停車場在溶洞入口（付費）；與普列賈馬城堡可安排同一天（溶洞上午→城堡下午）。',
+    map:'https://maps.google.com/?q=Postojna+Cave+Slovenia' },
+
+  // ════════════════════════════════
+  // 🇦🇹 奧地利 Austria
+  // ════════════════════════════════
+  { id:1301, country:'AT', name:'維也納歷史中心', tag:'UNESCO世遺',
+    desc:'哈布斯堡王朝數百年的帝國首都，現為全球公認的音樂之都與高品質生活城市。環城大道（Ringstrasse）兩側的國家歌劇院、維也納美術史博物館、自然史博物館、議會等宏偉建築群代表了19世紀的歷史主義美學高峰。熊布朗宮（Schönbrunn Palace）是維也納必訪，宮殿加上廣大法式花園，登上小丘的凱旋亭可俯瞰全城。維也納咖啡館文化（UNESCO非物質文化遺產）更是城市靈魂——坐進一家老咖啡館點杯Melange，就能感受百年前音樂家、哲學家在此思辯的氛圍。',
+    food:'Wiener Schnitzel 維也納炸牛排（必點，建議去 Figlmüller）、Sachertorte 沙哈巧克力蛋糕（Hotel Sacher的才是正宗）、Apfelstrudel 蘋果捲餅、Melange 維也納咖啡',
+    souv:'莫扎特巧克力球（Mozartkugeln）、維也納瓷器、奧地利水晶（施華洛世奇）、樂譜與音樂相關文創',
+        descEN:'Vienna\'s Habsburg imperial legacy fills the Ringstrasse with the Opera, art history museum and natural history museum. Schonbrunn Palace\'s gardens and Gloriette viewpoint are unmissable. Vienna\'s coffee house culture is a UNESCO Intangible Heritage — sit in a grand cafe for hours with a Melange and newspaper.',
+    subspots:'熊布朗宮（Schonbrunn Palace）與花園、維也納國家歌劇院（Vienna State Opera）、聖史蒂芬大教堂（Stephansdom，登塔俯瞰）、美景宮（Belvedere Palace，克林姆特的吻）、維也納中央咖啡館（Cafe Central）',
+    driving:'市中心停車昂貴且困難，強烈建議使用地鐵（U-Bahn）；如必須開車，使用Park & Ride設施；從布拉提斯拉瓦約1小時；從薩爾斯堡約3小時。',
+    map:'https://maps.google.com/?q=Vienna+Historic+Centre+Austria' },
+
+  { id:1302, country:'AT', name:'薩爾斯堡 Salzburg', tag:'UNESCO世遺',
+    desc:'莫扎特的出生地，巴洛克城市建築保存完好，1997年列入UNESCO世界遺產。電影《真善美》（The Sound of Music）在此取景，吸引全球影迷朝聖。霍亨薩爾斯堡城堡（Hohensalzburg Fortress）是奧地利最大的中世紀城堡，俯瞰老城景色壯觀。米拉貝爾宮（Mirabell Palace）的花園是《真善美》Do-Re-Mi場景所在。薩爾斯堡老城可步行遊覽，穿越廊道（Durchhäuser）是城市特有的通道建築文化。距維也納約3小時車程。',
+    food:'白香腸（Weißwurst）配甜芥末、Mozartkugeln（薩爾斯堡原版）、Salzburger Nockerl 鹽堡甜奶泡（必吃名點）',
+    souv:'莫扎特巧克力（Fürst品牌是原版，注意別買到仿冒品）、《真善美》相關紀念品',
+        descEN:'Salzburg is Mozart\'s birthplace and a perfectly preserved Baroque city (UNESCO 1997). The Sound of Music brings fans on pilgrimage — Mirabell Gardens is the Do-Re-Mi scene. Hohensalzburg Fortress is Austria\'s largest castle.',
+    subspots:'霍亨薩爾斯堡城堡（Hohensalzburg Fortress，纜車或步行上山）、米拉貝爾宮與花園（Sound of Music場景）、薩爾斯堡大教堂（Dom）、格特萊德巷（Getreidegasse，莫扎特出生地）',
+    driving:'老城禁止外來車輛，建議停在Garage Altstadtgarage或Park & Ride搭巴士進城；從維也納走A1高速公路約3小時。',
+    map:'https://maps.google.com/?q=Salzburg+Old+Town+Austria' },
+
+  { id:1303, country:'AT', name:'哈爾施塔特 Hallstatt', tag:'湖畔仙境',
+    desc:'全球最多人打卡的小鎮之一，UNESCO世界遺產，700人口的小鎮每年吸引百萬遊客。建在薩爾茨卡默古特（Salzkammergut）湖畔峭壁上，鮮豔的房屋倒映在哈爾施塔特湖中，景色宛如童話。擁有全世界最古老的鹽礦（距今逾7000年），可深入地下參觀。五指山（Dachstein）纜車可登上山頂，跨越冰川橋與懸空玻璃步道。旺季遊客極多，建議住一晚享受清晨寧靜。距薩爾斯堡約75公里。',
+    food:'湖魚料理（Reinanke 白鮭魚）、奧地利蘋果醋、湖邊咖啡廳的自製蛋糕',
+    souv:'哈爾施塔特鹽礦岩鹽、小鎮木雕紀念品、奧地利傳統服飾',
+        descEN:'Hallstatt is one of the world\'s most photographed towns — 700 residents but 1 million visitors annually. The UNESCO-listed village clings to a cliff above the lake with colorful houses reflected in the water. The world\'s oldest salt mine (7,000+ years) is open for tours. Stay overnight for magical solitude at dawn.',
+    subspots:'哈爾施塔特全景（從湖對岸拍攝，搭渡輪）、世界最古老鹽礦（Salzwelten，地下參觀）、五指山纜車（Dachstein）、骸骨博物館（Beinhaus）、天主教教堂與墓地',
+    driving:'小鎮停車極其困難，建議在Hallstatt Lahn停車場（付費）停車後搭渡輪進城；或停在Obertraun搭渡輪；旺季建議清晨7點前抵達。距薩爾斯堡約75公里。',
+    map:'https://maps.google.com/?q=Hallstatt+Austria' },
+
+  // ════════════════════ NEW SPOTS ════════════════════
+
+  // 🇵🇱 Poland - new
+  { id:205, country:'PL', name:'格但斯克 & 索波特 Gdańsk + Sopot', tag:'波羅的海古城',
+    desc:'格但斯克是波蘭最重要的港口城市，以其輝煌的漢薩同盟歷史和二戰導火線聞名。長街（Długa Street）是全波蘭最美的巴洛克街道，黃金門、綠門等地標串連其間，尼普頓噴泉是城市象徵。格但斯克也是自由工聯（Solidarity）運動的發源地，格但斯克造船廠的鐵門前有著名的紀念雕像。索波特（Sopot）位於北方10分鐘車程，擁有全歐最長的木棧橋碼頭（515公尺），沙灘細白、夜生活熱鬧。',
+    descEN:'Gdańsk is Poland\'s most important port city, famous for its Hanseatic heritage and WWII history (the first shots of WWII were fired here). The Long Street is Poland\'s most beautiful Baroque boulevard. Nearby Sopot has Europe\'s longest wooden pier and the Baltic\'s best beach scene.',
+    food:'Gdańsk的燻魚、Żurek酸湯配水煮蛋、Sopot海灘旁的冰淇淋與燒烤',
+    souv:'琥珀飾品（格但斯克是全球最大琥珀市場之一）、波蘭陶器',
+    subspots:'長街黃金門、尼普頓噴泉、格但斯克起重機（Gdańsk Crane）、瑪利亞大教堂、造船廠連帶自由廣場紀念碑、索波特木棧橋（Molo）',
+    driving:'市區停車建議Parking Stare Miasto；索波特沿海計時停車位，旺季很快客滿',
+    map:'https://maps.google.com/?q=Gdansk+Old+Town+Poland' },
+
+  { id:206, country:'PL', name:'扎科帕內 & 塔特拉山 Zakopane / Tatra', tag:'山岳聖地',
+    desc:'扎科帕內是波蘭的「冬季首都」，海拔850公尺，背靠高塔特拉山。克魯普夫基（Krupówki）步行街是城鎮中心，布滿傳統木造建築。登頂卡斯普羅維山（Kasprowy Wierch）可搭纜車，莫爾斯基奧科湖（Morskie Oko）是高山湖泊中最壯觀的一個，有8公里山路可步行或搭馬車抵達。秋季山景絕美，冬季是波蘭最頂級的滑雪勝地。',
+    descEN:'Zakopane is Poland\'s mountain capital at 850m, backed by the stunning Tatra Mountains. Cable cars reach near-summit viewpoints, while the beautiful Morskie Oko alpine lake rewards an 8km walk or horse-drawn carriage ride. Góral culture, smoked sheep cheese, and wooden architecture are local highlights.',
+    food:'Oscypek 煙燻羊乳酪（街頭現烤必吃）、Góralski 山區烤肉、熱覆盆子酒（Grzaniec）',
+    souv:'手工木雕、傳統高山羊毛毯、Oscypek羊乳酪',
+    subspots:'卡斯普羅維山纜車（Kasprowy Wierch）、莫爾斯基奧科湖、克魯普夫基步行街、扎科帕內木造別墅建築群（Villa Koliba）',
+    driving:'莫爾斯基奧科湖夏季禁止一般車輛進入，在Palenica Białczańska停妥後步行或搭馬車8公里；市區停車可用Parking na Równi Krupowej',
+    map:'https://maps.google.com/?q=Zakopane+Poland' },
+
+  { id:207, country:'PL', name:'波茲南 Poznań', tag:'歷史古城',
+    desc:'波蘭國家起源地之一，老市集廣場（Stary Rynek）是全波蘭最美的廣場，中央市政廳每天中午12點有兩隻鐵山羊從塔頂冒出互相頂角，是波茲南最著名的景觀。廣場附近的波茲南大教堂是波蘭最古老的基督教教堂，地下室保存著波蘭第一批君主的陵墓。城市也以國際貿易展覽聞名，充滿活力與學生氣息。',
+    descEN:'Poznań\'s gorgeous Old Market Square features Renaissance townhouses and the famous Goats Clock whose two mechanical goats butt heads at noon. The cathedral island (Ostrów Tumski) holds Poland\'s oldest Christian church with the tombs of Poland\'s first rulers. Vibrant student nightlife.',
+    food:'Rogale świętomarcińskie 聖馬丁角形甜餅（白罌粟籽餡，波茲南特產）、Czernina 鴨血湯、波茲南啤酒',
+    souv:'聖馬丁甜餅、波蘭琥珀、Lech啤酒',
+    subspots:'老市集廣場山羊時鐘市政廳、波茲南大教堂（Katedra Poznańska）、主教島（Ostrów Tumski）、大波蘭起義博物館',
+    driving:'老城周邊付費停車區，建議停Parking Stary Rynek或附近停車場，步行進入廣場',
+    map:'https://maps.google.com/?q=Poznan+Old+Market+Square' },
+
+  { id:208, country:'PL', name:'琴斯托霍瓦 Częstochowa', tag:'天主教聖地',
+    desc:'波蘭最重要的天主教朝聖地，雅斯納古拉修道院（Jasna Góra）供奉著「黑聖母」（Czarna Madonna）聖像——據說是聖路加所繪、帶有神蹟的聖母馬利亞畫像，每年吸引逾400萬名朝聖者。修道院是波蘭最重要的宗教建築，內有寶庫收藏各國朝聖者捐獻的珍貴寶物。每天傍晚有聖母帷幕升降儀式，莊嚴感人。即使非天主教徒，建築與歷史也值得一訪。',
+    descEN:'Jasna Góra Monastery houses the Black Madonna (Czarna Madonna), Poland\'s most sacred relic believed to have miraculous powers. Over 4 million pilgrims visit annually. The monastery fortress and treasure chamber are impressive even for non-religious visitors. The daily veil-raising ceremony is deeply moving.',
+    food:'修道院周邊的朝聖者餐廳、傳統波蘭湯品',
+    souv:'黑聖母複製聖像、宗教紀念品、玫瑰念珠',
+    subspots:'雅斯納古拉修道院主教堂、寶庫（Skarbiec）、武器館（Arsenal）、修道院城牆與砲台',
+    driving:'修道院山丘下有大型免費停車場，步行上山約10分鐘；周邊道路禁止停車',
+    map:'https://maps.google.com/?q=Jasna+Gora+Czestochowa+Poland' },
+
+  // 🇨🇿 Czech - new
+  { id:105, country:'CZ', name:'卡羅維瓦利 Karlovy Vary', tag:'溫泉小鎮',
+    desc:'捷克最著名的溫泉療養小鎮，有12個主要溫泉柱廊，每座柱廊有不同成分的溫泉可免費飲用（帶特製溫泉杯）。蜿蜒在沙普卡河谷（Teplá）兩岸的奧地利帝國式旅館建築群氣派非凡。電影《007大戰皇家賭場》在此取景。卡羅維瓦利國際電影節每年7月舉辦，是全歐最著名的電影節之一。距布拉格約130公里、1.5小時車程。',
+    descEN:'Karlovy Vary (Carlsbad) is the queen of Bohemian spa towns with 12 hot spring colonnades where visitors sip mineral water from special spouted cups. The Belle Époque architecture along the Teplá River valley is extraordinary. Famous for Becherovka herbal liqueur and wafer oblátky.',
+    food:'溫泉威化餅（Lázeňské oplatky）、Svíčková 燉牛肉、Becherovka 草本苦酒（必帶伴手禮）',
+    souv:'Becherovka香甜酒、溫泉陶瓷杯（Lázeňský hrneček）、溫泉威化餅',
+    subspots:'磨坊柱廊（Mlýnská kolonáda）、市場溫泉（Tržní kolonáda）、戴安娜觀景台纜車、聖瑪麗·抹大拉教堂（俯瞰全鎮）',
+    driving:'小鎮禁止一般車輛進入谷底，必須停在上方Parking P1/P2再步行或搭纜車下山；旺季建議早到',
+    map:'https://maps.google.com/?q=Karlovy+Vary+Czech' },
+
+  { id:106, country:'CZ', name:'波希米亞瑞士國家公園', tag:'自然奇景',
+    desc:'捷克最年輕的國家公園（2000年成立），以壯觀的砂岩岩柱、峽谷與森林景觀聞名。最著名的是普拉夫奇卡門（Pravčická brána）——全歐洲最大的天然砂岩拱門，高26公尺、寬26公尺。布拉赫尼峽谷（Kamenice Gorge）可搭平底船穿越垂直峭壁。公園與德國薩克森瑞士國家公園相連，可跨境健行。',
+    descEN:'Czech Switzerland National Park features Europe\'s largest natural sandstone arch (Pravčická brána) and dramatic Kamenice Gorge boat rides through vertical cliffs. The park borders German Saxon Switzerland, offering cross-border hiking through the stunning Elbe Sandstone landscape.',
+    food:'Hřensko村入口的捷克燉肉餐廳；建議自備野餐在公園內',
+    souv:'公園地圖與健行指南、當地蜂蜜',
+    subspots:'普拉夫奇卡門拱門（Pravčická brána）、卡梅尼采峽谷平底船（Kamenice Gorge）、美人谷（Edmundova soutěska）、迪察山頂觀景台',
+    driving:'主入口位於赫瑞內斯科村（Hřensko），停車場在村口（付費）；普拉夫奇卡門需從Mezní Louka停車場步行2.5公里；部分路段單向，注意指示牌',
+    map:'https://maps.google.com/?q=Bohemian+Switzerland+National+Park' },
+
+  // 🇦🇹 Austria - new
+  { id:1304, country:'AT', name:'大鐘山高山公路 Großglockner', tag:'高山公路絕景',
+    desc:'奧地利最著名的高山公路，全長48公里，最高點達2504公尺，穿越陶恩山脈國家公園。沿途觀景台可近距離欣賞奧地利最高峰大鐘山（3798公尺）和帕斯特澤冰川（奧地利最長冰川）。公路建於1930-35年，是工程奇蹟。夏季（通常5月中至11月初）才開放，需繳收費（約40歐元/車）。建議留全天時間充分享受。',
+    descEN:'The Großglockner High Alpine Road winds 48km through Hohe Tauern National Park with views of Austria\'s highest peak (3,798m) and the Pasterze Glacier. The 1930s engineering masterpiece has multiple viewpoint stops. Open summer only; toll required (~€40/car). Allow a full day.',
+    food:'山頂Kaiser-Franz-Josefs-Höhe餐廳、自備熱食飲料',
+    souv:'大鐘山公路專屬收費貼紙（紀念用）、當地奧地利山區蜂蜜',
+    subspots:'弗朗茨約瑟夫山頂站（Kaiser-Franz-Josefs-Höhe，2369m）、帕斯特澤冰川觀景台、艾德爾維斯峰（Edelweißspitze，2571m，最高觀景點）',
+    driving:'北側從薩爾斯堡方向經Fusch/Ferleiten收費站進入；南側從克拉根福方向過Heiligenblut收費站；全程限速50km/h；路面窄，備好暖衣，山頂溫差極大；旺季建議清晨出發避開旅遊巴士',
+    map:'https://maps.google.com/?q=Grossglockner+High+Alpine+Road+Austria' },
+
+  { id:1305, country:'AT', name:'瓦豪河谷 Wachau Valley', tag:'UNESCO世遺',
+    desc:'多瑙河流過的最美峽谷段，全長36公里，UNESCO世界遺產。兩岸是奧地利最重要的葡萄酒產區，梯田式葡萄園沿陡峭河岸層疊而上，間雜著中世紀修道院與城堡廢墟。梅爾克修道院（Stift Melk）是奧地利最重要的巴洛克修道院，懸崖之上如童話城堡。杜恩施泰因（Dürnstein）是瓦豪最美的村莊，獅心王理查一世曾被關押於此。可搭遊船沿河或騎自行車沿河岸路線遊覽。',
+    descEN:'The Wachau Valley UNESCO World Heritage Site is a 36km stretch of the Danube famous for terraced vineyards, Melk\'s Baroque abbey perched above the river, and the charming village of Dürnstein. Cycle or cruise the Danube between Melk and Krems for the best views.',
+    food:'瓦豪Grüner Veltliner & Riesling 白酒（全奧最佳）、杏子白蘭地（Wachauer Marillenschnaps）、魚料理',
+    souv:'瓦豪在地白酒、杏子果醬與果乾（地理標示產品）',
+    subspots:'梅爾克修道院（Stift Melk）、杜恩施泰因村藍色教堂塔、克雷姆斯（Krems）老城、阿格斯泰因城堡廢墟',
+    driving:'從維也納沿A1高速公路往西，於Melk下交流道約1小時；小村路窄，部分單向，跟GPS謹慎行駛；梅爾克停車場在修道院山丘下，步行10分鐘上山',
+    map:'https://maps.google.com/?q=Wachau+Valley+Austria' },
+
+  // 🇸🇰 Slovakia - new
+  { id:604, country:'SK', name:'Dedinky 水庫小村', tag:'山中秘境',
+    desc:'斯洛伐克天堂國家公園（Slovak Paradise National Park）旁的湖畔小村，海拔約800公尺。斯洛伐克天堂以峽谷健行著稱，垂直石灰岩峽谷中裝設梯子與鐵鏈輔助攀爬，是歐洲最獨特的健行體驗之一。Dedinky是探索國家公園的理想基地，秋季楓紅倒映湖面，是攝影聖地。',
+    descEN:'Dedinky village sits beside a reservoir at the edge of Slovak Paradise National Park, famous for its canyon hiking with ladders and chains through dramatic gorges — a unique European adventure. Beautiful autumn colours reflect in the reservoir. Perfect base for park exploration.',
+    food:'村內民宿的家常菜、燉野菇湯、烤香腸',
+    souv:'健行地圖、斯洛伐克蜂蜜',
+    subspots:'斯洛伐克天堂國家公園峽谷步道、Prielom Hornádu峽谷、Dedinky湖泊泳區',
+    driving:'從科希策（Košice）約1小時；公園入口停車場付費，旺季週末早到為宜；峽谷步道單向，嚴格依指示方向行進',
+    map:'https://maps.google.com/?q=Dedinky+Slovakia' },
+
+  { id:605, country:'SK', name:'奧拉瓦城堡 Oravský hrad', tag:'童話城堡',
+    desc:'斯洛伐克最上鏡的城堡，建在112公尺高的垂直岩壁上俯瞰奧拉瓦河，被列為斯洛伐克十大奇景之一。城堡建於13世紀，歷經500年擴建，保存完好。電影《諾斯費拉圖》（Nosferatu，1922年）在此取景拍攝。從城堡頂部有360度的奧拉瓦山谷景色。距波蘭邊境僅30公里，可與塔特拉山路線結合。',
+    descEN:'Oravský Castle clings to a 112m vertical rock above the Orava River and is one of Slovakia\'s most photogenic landmarks. The 13th-century fortress is famous as the filming location for Nosferatu (1922). Climbing to the top reveals stunning valley views. Just 30km from the Polish border.',
+    food:'城堡下方小鎮Oravský Podzámok的傳統斯洛伐克餐館、Bryndzové halušky',
+    souv:'城堡紀念品、斯洛伐克民俗木雕',
+    subspots:'城堡三層（下城堡、中城堡、上城堡）、奧拉瓦博物館、城堡外河邊最佳攝影角度',
+    driving:'停車場位於城堡山腳（免費），步行上山約20-30分鐘；從高塔特拉山沿E77公路約1小時可達',
+    map:'https://maps.google.com/?q=Orava+Castle+Slovakia' },
+
+  { id:606, country:'SK', name:'高塔特拉山 High Tatras / Vysoké Tatry', tag:'山岳壯景',
+    desc:'中歐最高的山脈之一，斯洛伐克最重要的國家公園，與波蘭塔特拉山共享邊界。最高峰格爾拉赫峰（Gerlachovský štít）海拔2655公尺，是整個喀爾巴阡山脈的最高點。有逾100個冰川湖、刀刃般鋒利的山峰與壯闊景色。山腳小鎮塔特蘭斯卡·洛姆尼察（Tatranská Lomnica）有纜車可上升至近山頂。',
+    descEN:'The High Tatras are Central Europe\'s most dramatic alpine environment with over 100 glacier lakes and the Carpathians\' highest summit. Cable cars offer easy access to spectacular viewpoints while serious hikers can tackle multi-day ridge routes. The Tatranská Lomnica cable car reaches 2,634m.',
+    food:'山區小鎮的燉牛肉湯（Guľáš）、Bryndzové halušky、高山藍莓蛋糕',
+    souv:'高塔特拉山健行地圖、手工羊毛製品、斯洛伐克山區蜂蜜',
+    subspots:'塔特蘭斯卡洛姆尼察纜車（至2634m）、波普拉茨科湖（Popradské pleso）、奧斯圖爾尼亞湖（Štrbské Pleso）、自由峰健行路線',
+    driving:'主要小鎮沿218號公路串連，路況良好；冬季需雪鏈；旺季建議搭乘登山小火車（Tatranská elektrická železnica）代替開車入各景點',
+    map:'https://maps.google.com/?q=High+Tatras+Slovakia' },
+
+  { id:607, country:'SK', name:'波耶尼切城堡 Bojnice Castle', tag:'最美城堡',
+    desc:'被評選為全歐洲最美麗的城堡之一，新哥德式浪漫主義建築仿照法國羅亞爾河城堡。城堡歷史可追溯至11世紀，現今外觀是19世紀末由帕爾菲伯爵大規模改建。每年復活節前後舉辦「波耶尼切鬼怪節」（Festival of Ghosts and Spirits）。附近有天然溫泉可泡湯。城堡緊鄰動物園，適合親子遊。',
+    descEN:'Bojnice Castle, modeled on French Loire Valley châteaux, is often called Slovakia\'s most beautiful castle. Count Pálffy\'s 1890s Romanticist reconstruction creates a fairy-tale silhouette. The annual Ghost Festival fills it with haunted atmosphere. Adjacent zoo makes it great for families.',
+    food:'城堡旁的餐廳、溫泉區的咖啡館',
+    souv:'城堡明信片與複製品、斯洛伐克蜂蜜酒',
+    subspots:'城堡主塔、城堡地下洞穴（Cave under the Castle）、波耶尼切動物園、溫泉中心',
+    driving:'從布拉提斯拉瓦沿D1高速公路往東約2小時；城堡山腳有免費停車場，步行上山約10分鐘',
+    map:'https://maps.google.com/?q=Bojnice+Castle+Slovakia' },
+
+  // 🇭🇺 Hungary - new
+  { id:704, country:'HU', name:'巴拉頓湖 & 蒂豪尼半島 Balaton / Tihany', tag:'中歐之海',
+    desc:'巴拉頓湖是中歐最大的湖泊，面積594平方公里，被匈牙利人暱稱為「匈牙利海」。夏季是全國最受歡迎的度假勝地，湖水清澈溫暖，沙灘、帆船、自行車道一應俱全。蒂豪尼半島（Tihany）突入湖中，山丘上的本篤會修道院（建於1055年）俯瞰湖面，視野遼闊。半島內側有神秘的內湖（Belső-tó），薰衣草田7月盛開是攝影聖地。',
+    descEN:'Lake Balaton — Central Europe\'s largest lake — is Hungary\'s summer playground. The Tihany Peninsula offers the lake\'s most scenic views from its Benedictine Abbey (1055 AD), while lavender fields bloom in July. The inner lake (Belső-tó) is a hidden gem. Austria\'s wine region borders the lake.',
+    food:'Fogas/Süllő 梭魚料理（巴拉頓特產淡水魚）、蒂豪尼薰衣草蜂蜜冰淇淋、匈牙利白酒（Balatonfüred產區）',
+    souv:'蒂豪尼薰衣草產品（精油、香皂、蜂蜜）、巴拉頓紀念品',
+    subspots:'蒂豪尼修道院（Tihany Abbey）、蒂豪尼漁夫小屋民族村、巴達吉（Badacsony）火山岩柱、凱斯泰伊（Keszthely）費斯泰提奇宮',
+    driving:'從布達佩斯沿M7高速公路往西南約1.5小時抵達南岸；蒂豪尼在北岸約2小時；夏季湖區停車位緊張，利用村莊外圍停車場步行進入',
+    map:'https://maps.google.com/?q=Tihany+Peninsula+Lake+Balaton+Hungary' },
+
+  { id:705, country:'HU', name:'霍爾托巴吉國家公園 Hortobágy', tag:'UNESCO世遺',
+    desc:'匈牙利大草原（Puszta）最具代表性的國家公園，UNESCO世界遺產，歐洲最大的連續天然草原。廣闊草原上至今仍有傳統的匈牙利牧人（Csikós）騎馬放牧，長角牛與馬在草原漫步。九孔橋（Kilenc lyukú híd，1833年）是匈牙利最長的石橋。草原濕地是歐洲重要的鳥類遷徙停歇地。距德布勒森（Debrecen）約40公里。',
+    descEN:'Hortobágy National Park protects Europe\'s largest continuous natural grassland (Puszta), a UNESCO World Heritage Site. Traditional Hungarian cowboys (Csikós) still herd cattle and horses here in century-old tradition. The Nine-Arch Bridge (1833) and vast wetlands provide unique birdwatching opportunities.',
+    food:'Puszta燉牛肉（Gulyás，真正起源於此）、煙燻香腸、匈牙利羊奶起司',
+    souv:'Csikós手工馬鞭、匈牙利辣椒粉、牧人造型工藝品',
+    subspots:'九孔橋（Kilenc lyukú híd）、霍爾托巴吉牧馬表演（Csikós show）、魚塘鳥類保護區、霍爾托巴吉旅館（Hortobágy Csárda）',
+    driving:'從德布勒森（Debrecen）沿33號公路西行約40分鐘；公園入口有停車場，建議利用馬車遊覽',
+    map:'https://maps.google.com/?q=Hortobagy+National+Park+Hungary' },
+
+  { id:706, country:'HU', name:'多瑙河彎 Danube Bend', tag:'壯麗河景',
+    desc:'多瑙河在布達佩斯北方約40公里急轉90度，是中歐最美的河流景觀之一。三個小鎮各有特色：維塞格拉德（Visegrád）的城堡山頂俯瞰整個多瑙河彎是最著名觀景點；艾斯泰爾戈姆（Esztergom）的大教堂（匈牙利最大）圓頂俯瞰多瑙河對岸斯洛伐克小城；塞特恩德雷（Szentendre）是充滿塞爾維亞色彩的藝術小鎮，陶藝品聞名全國。',
+    descEN:'The Danube Bend north of Budapest is Central Europe\'s most dramatic river scenery. Three towns reward visits: Visegrád\'s hilltop fortress overlooks the bend; Esztergom\'s massive Basilica dominates the Slovak border; artistic Szentendre is famous for Serbian Orthodox churches and handmade ceramics.',
+    food:'塞特恩德雷的匈牙利傳統點心、維塞格拉德的宮廷料理體驗',
+    souv:'塞特恩德雷手工陶瓷（全國最著名）、Marzipan手工杏仁糖',
+    subspots:'維塞格拉德城堡山頂觀景台、艾斯泰爾戈姆大教堂（Esztergom Basilica）、塞特恩德雷陶瓷藝術家工坊、多瑙河彎遊船',
+    driving:'從布達佩斯沿11號公路沿多瑙河北岸行駛可串連三個小鎮，全程約60公里；各小鎮均有停車場，旺季週末擁擠；亦可搭HÉV火車至塞特恩德雷',
+    map:'https://maps.google.com/?q=Danube+Bend+Hungary' },
+
+  // 🇸🇮 Slovenia - new
+  { id:1204, country:'SI', name:'普列賈馬城堡 Predjama Castle', tag:'懸崖奇城',
+    desc:'全世界最大的洞穴城堡，建於垂直123公尺的懸崖絕壁天然洞穴之中，外觀令人難以置信。15世紀騎士艾拉澤姆（Erasmus of Lueg）曾在此憑藉洞穴內的秘密通道抵禦奧地利軍隊長達一年。城堡內部迷宮式通道、隱藏房間與地牢保存良好，非常值得深入探索。距波斯托伊納溶洞僅9公里，強烈建議合併參觀。',
+    descEN:'Predjama Castle is the world\'s largest cave castle, impossibly built into a 123m cliff face. The 13th-century fortress gained fame from the knight Erasmus of Lueg, who used a secret cave passage to survive a year-long siege. Just 9km from Postojna Cave — combine both visits.',
+    food:'城堡旁的餐廳提供斯洛維尼亞傳統料理',
+    souv:'城堡主題文創商品、斯洛維尼亞蜂蜜',
+    subspots:'城堡主體建築與洞穴、地下室（洞穴延伸）、城堡外立面最佳拍攝角度（退至停車場方向）',
+    driving:'停車場位於城堡正前方500公尺（免費），步行可達；從Postojna Cave開車約10分鐘',
+    map:'https://maps.google.com/?q=Predjama+Castle+Slovenia' },
+
+  { id:1205, country:'SI', name:'特里格拉夫國家公園 Triglav NP', tag:'阿爾卑斯壯景',
+    desc:'斯洛維尼亞唯一的國家公園，以斯洛維尼亞最高峰特里格拉夫山（Triglav，2864公尺）命名，也是斯洛維尼亞的國家象徵（出現在國旗上）。索卡河谷（Soča Valley）以碧藍翡翠色的河水最著名，是泛舟、獨木舟與溯溪的聖地。博韋茨（Bovec）是戶外活動的基地城鎮，冰川湖、峽谷、高山草甸交織成中歐最壯觀的山岳風光。',
+    descEN:'Triglav National Park contains Slovenia\'s finest Julian Alps scenery: the turquoise Soča River for kayaking, dramatic Vintgar Gorge, and routes to Triglav\'s summit. Bovec is the adventure sports hub. The park borders Italy and Austria offering superb cross-border alpine experiences.',
+    food:'博韋茨的烤羔羊肉、Tolminc起司（當地特產）、Soška postrv 索卡鱒魚',
+    souv:'斯洛維尼亞蜂蜜、索卡河石製紀念品、登山裝備',
+    subspots:'溫加峽谷（Vintgar Gorge，1.6km步道）、索卡河源頭健行、博希尼湖（Lake Bohinj）、特里格拉夫山登頂路線（需2天）、克里絲尼察瀑布',
+    driving:'從盧布爾雅那走A2高速公路接50號公路進入博韋茨約2小時；公園內山路蜿蜒謹慎行駛；溫加峽谷停車場旺季快速客滿，建議清晨8點前抵達',
+    map:'https://maps.google.com/?q=Triglav+National+Park+Slovenia' },
+
+  { id:1206, country:'SI', name:'博希尼湖 Lake Bohinj', tag:'秘境湖泊',
+    desc:'斯洛維尼亞最大的自然湖泊，比布萊德湖更加幽靜原始，少了觀光人潮，多了真實的山湖靈魂。湖水純淨湛藍，四周被特里格拉夫國家公園的群山環抱，倒影如鏡。湖面設有獨木舟與划船出租，可直接在湖中游泳。里比耶夫村（Ribčev Laz）有精緻的羅馬式教堂與著名的石橋。附近有纜車可登上沃熱爾山（Vogel，1535m）俯瞰全景。',
+    descEN:'Lake Bohinj, Slovenia\'s largest natural lake, offers a more authentic and peaceful alternative to Lake Bled. Crystal-clear swimming, kayaking, and mountain reflections in a pristine alpine setting. The Vogel cable car provides panoramic views and the nearby Savica Waterfall is a rewarding hike.',
+    food:'湖邊Gostilna Rupa傳統餐廳、烤鱒魚、Bohinj起司',
+    souv:'斯洛維尼亞蜂蜜（此區品質極佳）、手工木製品',
+    subspots:'里比耶夫拉茲聖約翰教堂與石橋、沃熱爾纜車（Vogel Cable Car）、薩溫薩瀑布（Savica Waterfall，1小時健行）、克爾麻湖（Lake Črno）',
+    driving:'從布萊德湖沿R201道路往西約20分鐘；里比耶夫拉茲有付費停車場，旺季建議08:00前抵達',
+    map:'https://maps.google.com/?q=Lake+Bohinj+Slovenia' },
+
+  { id:1207, country:'SI', name:'皮蘭 Piran', tag:'亞德里亞海珍珠',
+    desc:'斯洛維尼亞亞德里亞海岸最耀眼的寶石。這座威尼斯風格的中世紀小城建在半島尖端，三面環海，橘紅屋頂與海藍亞德里亞海的對比美得讓人窒息。塔爾廷尼廣場以小提琴家塔爾廷尼（Giuseppe Tartini）命名。城牆步道可俯瞰整個半島與海灣，日落時分是全斯洛維尼亞最美的景色之一。',
+    descEN:'Piran is Slovenia\'s Venetian gem — a medieval walled town on an Adriatic peninsula with terracotta roofs tumbling into the sea. The town square honors violin maestro Tartini. City walls offer stunning sunset panoramas. Piran salt (Piran Sea Salt) is among Europe\'s finest hand-harvested sea salt.',
+    food:'亞德里亞海海鮮、生醃沙丁魚、皮蘭鹽花（Piran Sea Salt）配橄欖油',
+    souv:'皮蘭鹽花與海鹽產品（Sečovlje鹽田出產）、斯洛維尼亞橄欖油',
+    subspots:'塔爾廷尼廣場、聖喬治教堂鐘塔（俯瞰全城最佳）、皮蘭城牆步道、薩利納鹽田自然保護區（Sečovlje Salina）',
+    driving:'老城禁止外來車輛進入，必須停在半島入口Fornače停車場（付費），再搭接駁巴士或步行10-15分鐘進城；切勿把車開入老城',
+    map:'https://maps.google.com/?q=Piran+Slovenia' },
+
+  // 🇭🇷 Croatia - new
+  { id:1112, country:'HR', name:'特羅吉爾 Trogir', tag:'UNESCO世遺',
+    desc:'小小的特羅吉爾島整座就是UNESCO世界遺產，與大陸和契歐沃島（Čiovo）分別以橋相連。島上建築極為密集，希臘化時代、羅馬、威尼斯各時期的建築層層疊疊。聖羅弗羅大教堂（Cathedral of St Lawrence）的西入口羅馬式雕刻是達爾馬提亞中世紀藝術的最高成就。日落時分坐在濱海長廊喝咖啡，是達爾馬提亞最愜意的時刻。距斯普利特僅27公里。',
+    descEN:'Trogir\'s entire island is a UNESCO World Heritage Site — 2,000 years of architecture layered on one tiny island connected by bridges. The Romanesque portal of St Lawrence Cathedral is Dalmatia\'s medieval masterpiece. Just 27km from Split, easily combined in the same day.',
+    food:'濱海長廊的海鮮餐廳、烤海鱸、章魚沙拉',
+    souv:'達爾馬提亞蕾絲（手工刺繡）、橄欖油',
+    subspots:'聖羅弗羅大教堂、卡梅爾倫哥要塞（Kamerlengo Castle）、克里皮斯廣場、城牆步道',
+    driving:'停車在連接大陸的橋頭北側橋外停車場，步行進入島上，全島步行約20分鐘可繞完',
+    map:'https://maps.google.com/?q=Trogir+Old+Town+Croatia' },
+
+  // 🇧🇦 Bosnia - new
+  { id:1003, country:'BA', name:'普羅科什科湖 Prokoško Lake', tag:'高山秘境',
+    desc:'波士尼亞中部弗拉希奇山（Vlašić Mountain）上的高山湖泊，海拔1636公尺，湖水清澈呈現夢幻藍綠色，四周是廣闊的高山草甸。湖邊有少數傳統石砌山中小屋（Katuni），提供過夜住宿，是體驗波士尼亞山區牧民文化的難得機會。秋季金黃色草甸、春季融雪後的清澈湖水各有美感。距特拉夫尼克（Travnik）約2小時山路車程。建議SUV或高底盤車輛。',
+    descEN:'Prokoško Lake at 1,636m on Mount Vlašić is Bosnia\'s most beautiful alpine secret. Crystal-clear turquoise water, vast mountain meadows, and traditional stone shepherd\'s huts (katuni) offering overnight stays. The drive up on mountain gravel roads is an adventure in itself. High-clearance vehicle recommended.',
+    food:'山中小屋的自製羊乳酪、燻肉、傳統波士尼亞烤餅（Somun）',
+    souv:'手工羊毛製品、山區野生蜂蜜',
+    subspots:'普羅科什科湖（游泳、獨木舟）、弗拉希奇山頂觀景台、傳統Katuni石屋聚落',
+    driving:'從特拉夫尼克出發山路約2小時，部分路段為碎石路，強烈建議高底盤SUV；路窄且沿山崖，需謹慎駕駛；備足油料，山上無加油站',
+    map:'https://maps.google.com/?q=Prokosko+Lake+Bosnia' },
+
+  { id:1004, country:'BA', name:'波奇泰利 Počitelj', tag:'鄂圖曼村落',
+    desc:'内雷特瓦河（Neretva）畔的中世紀鄂圖曼小村，建在陡峭岩石山坡上，層疊的石屋、清真寺與城堡構成如電影場景般的畫面，是波士尼亞保存最完整的鄂圖曼式聚落。16世紀的賽特哈吉清真寺和山頂要塞（Kula）可爬上俯瞰全村與河谷。村莊長期是藝術家聚落，今日仍有工作室。距莫斯塔爾僅30公里，非常適合順路探訪。',
+    descEN:'Počitelj is an Ottoman-era stone village clinging to a rocky hillside above the Neretva River, one of Bosnia\'s most picturesque historic sites. The 16th-century mosque, watchtower, and stone houses create an almost theatrical scene. An artist colony for decades. Just 30km south of Mostar.',
+    food:'村內小餐館的Ćevapi、傳統波士尼亞咖啡',
+    souv:'手工銅器、當地無花果乾',
+    subspots:'賽特哈吉清真寺、山頂要塞（Kula）俯瞰整村、石砌古屋群、內雷特瓦河景觀',
+    driving:'從莫斯塔爾沿M17公路南行約30分鐘；村外路旁可停車，步行進入；石板路陡且不平，穿舒適鞋子',
+    map:'https://maps.google.com/?q=Pocitelj+Bosnia+Herzegovina' },
+
+  // 🇲🇪 Montenegro - new
+  { id:904, country:'ME', name:'佩拉斯特 Perast', tag:'威尼斯小鎮',
+    desc:'科托灣內最精緻優雅的小鎮，人口僅約350人，卻擁有17座教堂與16座宮殿，是威尼斯共和國統治時期留下的財富象徵。鎮外海面上有兩座小島：聖喬治島（修道院）與岩礁上的聖母堂（Gospa od Škrpjela）——後者是16世紀水手用沉船與岩石人工填出的人工島，極富傳奇色彩，可搭小船前往。',
+    descEN:'Perast is the Bay of Kotor\'s finest Baroque village — just 350 residents but 17 churches and 16 palaces, testament to Venetian prosperity. Two islands float offshore: St George (monastery) and Our Lady of the Rocks, an artificial island built by sailors over centuries. Boat trips from the waterfront.',
+    food:'濱海餐廳的淡菜料理（Školjke，科托灣最佳）、章魚燉飯',
+    souv:'蒙特內哥羅葡萄酒、橄欖木製品',
+    subspots:'岩礁聖母堂（Gospa od Škrpjela）船程、聖喬治島、佩拉斯特博物館（Muzej Perasta）、城中巴洛克宮殿群',
+    driving:'佩拉斯特主街為濱海單行道；停車在村外北側空地（免費），步行進入；小船費用約5歐元/人',
+    map:'https://maps.google.com/?q=Perast+Montenegro' },
+
+  { id:905, country:'ME', name:'布德瓦 Budva', tag:'海灘度假城',
+    desc:'蒙特內哥羅最著名的海濱度假城市，亞德里亞海最活躍的夜生活中心。老城（Stari grad）建在海角上，威尼斯式城牆環繞，內有精緻教堂與廣場。聖史蒂芬島（Sveti Stefan）是最著名的明信片景觀——紅頂石屋小島以沙灘細橋連接大陸，現已改建為頂級Aman度假村。貝奇奇（Bečići）沙灘非常優美。',
+    descEN:'Budva is Montenegro\'s most popular Adriatic resort with a walled Venetian old town, lively beach scene, and the iconic Sveti Stefan island (now an exclusive Aman resort). The Budva Riviera stretches miles of beautiful beaches. Montenegro\'s most vibrant nightlife and dining scene.',
+    food:'海鮮燒烤（Riba na žaru）、章魚濃湯、新鮮生蠔',
+    souv:'蒙特內哥羅葡萄酒（Plantaže Vranac）、貝殼飾品',
+    subspots:'布德瓦老城城牆、聖史蒂芬島（Sveti Stefan，外觀拍照）、斯拉文斯卡普拉沙灘、達斯特羅修道院（Praskvica Monastery）',
+    driving:'市區停車困難，建議停在Parking Mediteran等大型停車場；聖史蒂芬島停車在橋頭對面（免費但有限）',
+    map:'https://maps.google.com/?q=Budva+Montenegro' },
+
+  { id:906, country:'ME', name:'洛夫琴山 Mount Lovćen', tag:'黑山之心',
+    desc:'洛夫琴山是蒙特內哥羅（「黑山」）國名的由來，深黑色石灰岩在陽光下呈現神秘深黑色澤。最著名的景點是山頂的涅戈什陵墓（Mausoleum of Petar II Petrović Njegoš）——需登上461級台階，但從陵墓露台俯瞰的360度全景，涵蓋科托灣、亞德里亞海，在晴天可見義大利海岸，是整個巴爾幹半島最壯觀的觀景點之一。',
+    descEN:'Mount Lovćen gives Montenegro its name ("Black Mountain"). The national park\'s crown jewel is the Njegoš Mausoleum atop the summit (461 steps), offering 360° panoramas encompassing the Bay of Kotor, the Adriatic, and on clear days the Italian coastline — among the Balkans\' finest views.',
+    food:'科托爾或切廷涅（Cetinje）的餐廳，山上無餐飲設施',
+    souv:'蒙特內哥羅在地紀念品（切廷涅舊王宮附近）',
+    subspots:'涅戈什陵墓頂部觀景台（461級台階）、切廷涅（Cetinje）舊首都歷史建築群、伊萬的缺口（Ivan\'s Cornice，蜿蜒山路景觀）',
+    driving:'從科托爾沿P1號公路盤山而上，髮夾彎眾多但路況良好，風景極佳；陵墓停車場在山頂（免費），步行461級台階；建議油量充足，山路耗油；切廷涅距科托爾約35公里45分鐘',
+    map:'https://maps.google.com/?q=Mount+Lovcen+Montenegro' },
+
+  // 🇷🇸 Serbia - new
+  { id:803, country:'RS', name:'哥魯拜克要塞 Golubac Fortress', tag:'多瑙河要塞',
+    desc:'建於14世紀的哥魯拜克要塞是多瑙河上保存最完好的中世紀要塞之一，九座塔樓沿山坡層層排列直到多瑙河邊，極具視覺衝擊力。要塞扼守多瑙河鐵門峽谷的入口，歷史上是塞爾維亞、匈牙利與鄂圖曼帝國多次爭奪的戰略要地。2019年完成整修全面開放，可走上塔樓俯瞰多瑙河。距貝爾格勒約2小時車程，通常與多瑙河鐵門峽谷一同遊覽。',
+    descEN:'Golubac Fortress, with its nine medieval towers descending to the Danube, is Serbia\'s most dramatic castle — gateway to the Iron Gates gorge. Renovated and reopened in 2019, visitors explore towers with views across the Danube to Romania. 2 hours from Belgrade; combine with Iron Gates.',
+    food:'附近的多瑙河鮮魚料理（特別是烤鯰魚）',
+    souv:'多瑙河石製紀念品、塞爾維亞葡萄酒',
+    subspots:'九塔要塞主體、多瑙河鐵門峽谷入口景觀、Lepenski Vir 新石器時代遺址、羅馬皇帝圖拉真紀念碑（Tabula Traiana）',
+    driving:'從貝爾格勒沿E70高速公路往東，在Požarevac轉B27省道沿河行約2小時；停車場在要塞入口（免費）',
+    map:'https://maps.google.com/?q=Golubac+Fortress+Serbia' },
+
+  { id:804, country:'RS', name:'斯圖代尼察修道院 Studenica', tag:'UNESCO世遺',
+    desc:'塞爾維亞最重要的中世紀東正教修道院，UNESCO世界遺產，建於12世紀末由塞爾維亞國王斯特凡·涅馬尼亞出資興建。白色大理石的主教堂是拉斯卡式（Raškan）建築風格的傑作，內部保存了12-13世紀的拜占庭壁畫，色彩至今仍鮮明動人。修道院至今仍在運作，僧侶在此生活，氣氛莊嚴神聖。距國王之城（Kraljevo）約45公里山路。',
+    descEN:'Studenica Monastery, a UNESCO World Heritage Site built in the 12th century, is Serbia\'s most sacred medieval complex. The white marble church preserves extraordinary Byzantine frescoes from the 12th-13th centuries. The monastery remains active today — monks still live and worship here.',
+    food:'修道院旁的小餐館、傳統塞爾維亞燉菜',
+    souv:'東正教圖像（Icons）、修道院蜂蜜與自製果醬',
+    subspots:'聖母主教堂拜占庭壁畫、聖尼古拉教堂、修道院外牆與塔樓、Studenica河谷自然景觀',
+    driving:'從克拉列沃（Kraljevo）沿212號省道往南進山約45分鐘崎嶇山路；停車場在修道院門外（免費）；路面部分較窄，對向交會需謹慎',
+    map:'https://maps.google.com/?q=Studenica+Monastery+Serbia' },
+
+  { id:805, country:'RS', name:'多瑙河鐵門峽谷 Đerdap / Iron Gates', tag:'壯觀峽谷',
+    desc:'多瑙河流域最壯觀的峽谷地形，延伸約100公里，最窄處僅150公尺寬，峭壁高達300公尺。羅馬皇帝圖拉真刻於岩壁的紀念銘文（Tabula Traiana）保留至今。雷皮斯基維爾（Lepenski Vir）是8500年前的新石器時代聚落遺址，有獨特的魚神頭像雕刻。沿河的Đerdap國家公園可健行賞景。與哥魯拜克要塞可安排同日遊覽。',
+    descEN:'The Iron Gates (Đerdap) gorge is Europe\'s most dramatic stretch of the Danube — 100km of canyon with cliffs up to 300m. Trajan\'s inscription (Tabula Traiana) is carved into the rockface. The Lepenski Vir Neolithic site (8,500 years old) contains unique fish-god sculptures. Combine with Golubac Fortress.',
+    food:'多瑙河沿岸餐廳的鮮魚料理（Šaran烤鯉魚、Som烤鯰魚）',
+    souv:'多瑙河石、塞爾維亞葡萄酒（Negotin地區）',
+    subspots:'鐵門水壩（Iron Gate Dam）、圖拉真銘文（Tabula Traiana）、雷皮斯基維爾遺址博物館、哥魯拜克要塞（同路段）',
+    driving:'從貝爾格勒沿E75往東南，在Požarevac轉向多瑙河沿E771河岸公路行駛；Donji Milanovac是沿途最主要補給小鎮',
+    map:'https://maps.google.com/?q=Djerdap+National+Park+Iron+Gates+Serbia' },
+
+  { id:806, country:'RS', name:'塔拉國家公園 Tara National Park', tag:'塞爾維亞之肺',
+    desc:'塞爾維亞最美的自然保護區，涵蓋塔拉山的原始松杉森林與德里納河（Drina River）峽谷。從巴約維納觀景台（Banjska Stena）俯瞰德里納河谷，蜿蜒的翡翠綠河流在深邃峽谷間流淌，是塞爾維亞最美景色之一。莫克拉戈拉村（Mokra Gora）的復古螺旋式山地鐵道（Šargan Eight）是著名的旅遊亮點。維舍格勒（Višegrad）的鄂圖曼石橋由諾貝爾文學獎得主伊沃·安德里奇的名著《德里納河上的橋》不朽化。',
+    descEN:'Tara National Park protects Serbia\'s finest primeval forest and the spectacular Drina River canyon. The Banjska Stena viewpoint offers Serbia\'s most iconic panorama. Mokra Gora\'s vintage Šargan Eight spiral railway is a charming attraction. Nearby Višegrad has the Ottoman bridge immortalized by Ivo Andrić\'s Nobel Prize-winning novel.',
+    food:'山區小鎮的燻肉、Kajmak 奶油起司、Burek肉派、野生蘑菇料理',
+    souv:'手工燻肉與乳酪、塔拉山蜂蜜、松木製品',
+    subspots:'巴约维納觀景台（Banjska Stena）、莫克拉戈拉螺旋鐵道（Šargan Eight）、維舍格勒鄂圖曼石橋、德里納河泛舟',
+    driving:'從烏日策（Užice）沿23號公路進入公園約45分鐘；山路狹窄，部分地段無護欄，夜間謹慎；建議在卡拉諾維奇（Kaluđerske Bare）補充油料',
+    map:'https://maps.google.com/?q=Tara+National+Park+Serbia' },
+
+];
+
+// ══════════════════════════════════════════════════════
+// COUNTRIES
+// ══════════════════════════════════════════════════════
+const COUNTRIES=[
+  {code:'CZ',name:'捷克',en:'Czech Republic',flag:'🇨🇿'},
+  {code:'PL',name:'波蘭',en:'Poland',flag:'🇵🇱'},
+  {code:'LT',name:'立陶宛',en:'Lithuania',flag:'🇱🇹'},
+  {code:'LV',name:'拉脫維亞',en:'Latvia',flag:'🇱🇻'},
+  {code:'EE',name:'愛沙尼亞',en:'Estonia',flag:'🇪🇪'},
+  {code:'SK',name:'斯洛伐克',en:'Slovakia',flag:'🇸🇰'},
+  {code:'HU',name:'匈牙利',en:'Hungary',flag:'🇭🇺'},
+  {code:'RS',name:'塞爾維亞',en:'Serbia',flag:'🇷🇸'},
+  {code:'ME',name:'蒙特內哥羅',en:'Montenegro',flag:'🇲🇪'},
+  {code:'BA',name:'波赫聯邦',en:'Bosnia and Herzegovina',flag:'🇧🇦'},
+  {code:'HR',name:'克羅埃西亞',en:'Croatia',flag:'🇭🇷'},
+  {code:'SI',name:'斯洛維尼亞',en:'Slovenia',flag:'🇸🇮'},
+  {code:'AT',name:'奧地利',en:'Austria',flag:'🇦🇹'},
+];
+
+// ══════════════════════════════════════════════════════
+// DEFAULT ROUTE (57 days, 2026-08-19 to 2026-10-14)
+// ══════════════════════════════════════════════════════
+function makeDate(y,m,d){return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
+function addDays(dateStr,n){const d=new Date(dateStr);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
+function fmtDate(s){
+  // Parse YYYY-MM-DD without timezone shift
+  const [y,m,d]=s.split('-').map(Number);
+  const dt=new Date(y,m-1,d);
+  return dt.toLocaleDateString('zh-TW',{year:'numeric',month:'short',day:'numeric',weekday:'short'});
+}
+
+const DEFAULT_ROUTE=[
+  {id:'seg1',title:'🇭🇺 匈牙利 → 🇸🇰 斯洛伐克 → 🇵🇱 波蘭',days:[
+    {date:'2026-08-19',from:'台灣出發',to:'布達佩斯',spots:['飛機上','抵達BUD機場'],hotel:'布達佩斯市區'},
+    {date:'2026-08-20',from:'布達佩斯',to:'埃格爾',spots:['布達佩斯城堡區（早）','埃格爾城堡','美女谷酒窖'],hotel:'埃格爾'},
+    {date:'2026-08-21',from:'埃格爾',to:'科希策(SK)',spots:['霍爾托巴吉國家公園','九孔橋'],hotel:'科希策'},
+    {date:'2026-08-22',from:'科希策',to:'斯皮什城堡',spots:['斯皮什城堡','斯皮什大教堂'],hotel:'波多林內茲/萊沃恰'},
+    {date:'2026-08-23',from:'斯皮什',to:'高塔特拉山',spots:['高塔特拉山纜車','Štrbské Pleso湖'],hotel:'高塔特拉山'},
+    {date:'2026-08-24',from:'高塔特拉山',to:'奧拉瓦城堡',spots:['奧拉瓦城堡','Dedinky水庫'],hotel:'奧拉瓦地區'},
+    {date:'2026-08-25',from:'奧拉瓦',to:'扎科帕內(PL)',spots:['扎科帕內Krupówki','莫爾斯基奧科湖'],hotel:'扎科帕內'},
+  ]},
+  {id:'seg2',title:'🇵🇱 波蘭',days:[
+    {date:'2026-08-26',from:'扎科帕內',to:'克拉科夫',spots:['克拉科夫舊城廣場','卡奇米日猶太區'],hotel:'克拉科夫'},
+    {date:'2026-08-27',from:'克拉科夫',to:'克拉科夫',spots:['奧斯威辛-比克瑙集中營（全天）'],hotel:'克拉科夫'},
+    {date:'2026-08-28',from:'克拉科夫',to:'克拉科夫',spots:['維利奇卡鹽礦','瓦維爾城堡'],hotel:'克拉科夫'},
+    {date:'2026-08-29',from:'克拉科夫',to:'琴斯托霍瓦',spots:['琴斯托霍瓦雅斯納古拉修道院','黑聖母'],hotel:'琴斯托霍瓦途中'},
+    {date:'2026-08-30',from:'琴斯托霍瓦',to:'波茲南',spots:['波茲南老市集廣場','山羊時鐘','波茲南大教堂'],hotel:'波茲南'},
+    {date:'2026-08-31',from:'波茲南',to:'格但斯克',spots:['格但斯克長街','尼普頓噴泉','索波特木棧橋'],hotel:'格但斯克'},
+    {date:'2026-09-01',from:'格但斯克',to:'格但斯克',spots:['格但斯克舊城深度遊','造船廠紀念碑','瑪利亞大教堂'],hotel:'格但斯克'},
+  ]},
+  {id:'seg3',title:'🇱🇹 立陶宛 → 🇱🇻 拉脫維亞 → 🇪🇪 愛沙尼亞',days:[
+    {date:'2026-09-02',from:'格但斯克',to:'維爾紐斯(LT)',spots:['波蘭/立陶宛邊境','維爾紐斯舊城初探'],hotel:'維爾紐斯'},
+    {date:'2026-09-03',from:'維爾紐斯',to:'維爾紐斯',spots:['特拉凱島城堡','烏日彼斯共和國','聖安娜教堂'],hotel:'維爾紐斯'},
+    {date:'2026-09-04',from:'維爾紐斯',to:'考納斯',spots:['考納斯舊城','杉原千畝紀念館','自由大道'],hotel:'考納斯'},
+    {date:'2026-09-05',from:'考納斯',to:'帕蘭加',spots:['十字架山（Kryžių kalnas）','帕蘭加海灘'],hotel:'帕蘭加'},
+    {date:'2026-09-06',from:'帕蘭加',to:'庫爾斯沙嘴',spots:['庫爾斯沙嘴渡輪','尼達村','帕爾尼季斯沙丘'],hotel:'尼達(沙嘴上)'},
+    {date:'2026-09-07',from:'庫爾斯沙嘴',to:'里加(LV)',spots:['回程渡輪','里加Art Nouveau街區','黑頭屋'],hotel:'里加'},
+    {date:'2026-09-08',from:'里加',to:'采西斯→庫爾迪加',spots:['采西斯城堡（燭光探索）','庫爾迪加文塔瀑布'],hotel:'庫爾迪加'},
+    {date:'2026-09-09',from:'庫爾迪加',to:'隆黛爾宮→里加',spots:['阿列克蘇皮特城中瀑布','隆黛爾宮花園'],hotel:'里加'},
+    {date:'2026-09-10',from:'里加',to:'塔林(EE)',spots:['愛沙尼亞邊境','塔林老城初探'],hotel:'塔林'},
+    {date:'2026-09-11',from:'塔林',to:'拉赫馬國家公園',spots:['拉赫馬國家公園','帕爾姆塞莊園','阿爾塔賈漁村'],hotel:'塔林'},
+    {date:'2026-09-12',from:'塔林',to:'塔圖',spots:['塔圖大學城','愛沙尼亞國家博物館'],hotel:'塔圖'},
+    {date:'2026-09-13',from:'塔圖',to:'派爾努',spots:['派爾努海灘','水療體驗','派爾努老城'],hotel:'派爾努'},
+    {date:'2026-09-14',from:'派爾努',to:'塔林',spots:['塔林老城深度遊','市政廳廣場','Olde Hansa晚餐'],hotel:'塔林'},
+  ]},
+  {id:'seg4',title:'🔽 南下：波羅的海→中歐',days:[
+    {date:'2026-09-15',from:'塔林',to:'里加(LV)',spots:['塔林→里加長途駕駛','里加中央市場'],hotel:'里加'},
+    {date:'2026-09-16',from:'里加',to:'維爾紐斯(LT)',spots:['里加→維爾紐斯','卡爾尼亞修道院'],hotel:'維爾紐斯'},
+    {date:'2026-09-17',from:'維爾紐斯',to:'華沙(PL)',spots:['立陶宛/波蘭邊境','華沙舊城廣場'],hotel:'華沙'},
+    {date:'2026-09-18',from:'華沙',to:'華沙',spots:['蕭邦博物館','華沙起義博物館','維拉諾夫宮'],hotel:'華沙'},
+    {date:'2026-09-19',from:'華沙',to:'布拉格(CZ)',spots:['長途駕駛','捷克邊境','布拉格抵達'],hotel:'布拉格'},
+  ]},
+  {id:'seg5',title:'🇨🇿 捷克',days:[
+    {date:'2026-09-20',from:'布拉格',to:'布拉格',spots:['布拉格舊城廣場','天文鐘','查理大橋'],hotel:'布拉格'},
+    {date:'2026-09-21',from:'布拉格',to:'布拉格',spots:['布拉格城堡區','聖維特大教堂','黃金小巷'],hotel:'布拉格'},
+    {date:'2026-09-22',from:'布拉格',to:'卡羅維瓦利',spots:['卡羅維瓦利溫泉柱廊','Becherovka酒廠'],hotel:'卡羅維瓦利'},
+    {date:'2026-09-23',from:'卡羅維瓦利',to:'波希米亞瑞士NP',spots:['波希米亞瑞士國家公園','普拉夫奇卡門拱門','峽谷平底船'],hotel:'赫瑞內斯科'},
+    {date:'2026-09-24',from:'波希米亞瑞士',to:'庫特納霍拉→布拉格',spots:['庫特納霍拉人骨教堂','聖芭芭拉大教堂'],hotel:'布拉格'},
+    {date:'2026-09-25',from:'布拉格',to:'克魯姆洛夫',spots:['捷克克魯姆洛夫全天','城堡','獨木舟漂流'],hotel:'克魯姆洛夫'},
+  ]},
+  {id:'seg6',title:'🇦🇹 奧地利',days:[
+    {date:'2026-09-26',from:'克魯姆洛夫',to:'薩爾斯堡(AT)',spots:['捷克/奧地利邊境','薩爾斯堡老城','霍亨薩爾斯堡城堡'],hotel:'薩爾斯堡'},
+    {date:'2026-09-27',from:'薩爾斯堡',to:'哈爾施塔特',spots:['哈爾施塔特（全天）','鹽礦參觀'],hotel:'哈爾施塔特'},
+    {date:'2026-09-28',from:'哈爾施塔特',to:'大鐘山高山公路',spots:['Großglockner高山公路','帕斯特澤冰川'],hotel:'利恩茨(Lienz)'},
+    {date:'2026-09-29',from:'利恩茨',to:'維也納',spots:['瓦豪河谷（梅爾克修道院）','杜恩施泰因'],hotel:'維也納'},
+    {date:'2026-09-30',from:'維也納',to:'維也納',spots:['維也納歷史中心','熊布朗宮','維也納國家歌劇院'],hotel:'維也納'},
+  ]},
+  {id:'seg7',title:'🇸🇮 斯洛維尼亞',days:[
+    {date:'2026-10-01',from:'維也納',to:'盧布爾雅那(SI)',spots:['奧地利/斯洛維尼亞邊境','盧布爾雅那舊城','龍橋'],hotel:'盧布爾雅那'},
+    {date:'2026-10-02',from:'盧布爾雅那',to:'布萊德湖',spots:['布萊德湖','Pletna木槳船','布萊德城堡','Kremšnita奶油蛋糕'],hotel:'布萊德'},
+    {date:'2026-10-03',from:'布萊德',to:'博希尼湖→特里格拉夫NP',spots:['博希尼湖','溫加峽谷','特里格拉夫國家公園'],hotel:'博韋茨/博希尼'},
+    {date:'2026-10-04',from:'博韋茨',to:'波斯托伊納',spots:['波斯托伊納溶洞','普列賈馬懸崖城堡'],hotel:'波斯托伊納/皮蘭'},
+    {date:'2026-10-05',from:'波斯托伊納',to:'皮蘭',spots:['皮蘭老城','塔爾廷尼廣場','城牆日落'],hotel:'皮蘭'},
+  ]},
+  {id:'seg8',title:'🇭🇷 克羅埃西亞',days:[
+    {date:'2026-10-06',from:'皮蘭',to:'羅維尼(HR)',spots:['斯洛維尼亞/克羅埃西亞邊境','伊斯特拉半島','羅維尼港口'],hotel:'羅維尼'},
+    {date:'2026-10-07',from:'羅維尼',to:'普拉→莫托文',spots:['普拉羅馬競技場','莫托文山頂小鎮','松露午餐'],hotel:'伊斯特拉內陸'},
+    {date:'2026-10-08',from:'伊斯特拉',to:'薩格勒布',spots:['薩格勒布上城','失戀博物館','多拉茨市場'],hotel:'薩格勒布'},
+    {date:'2026-10-09',from:'薩格勒布',to:'普利特維采湖群NP',spots:['普利特維采湖群（全天）','下湖區瀑布步道'],hotel:'普利特維采附近'},
+    {date:'2026-10-10',from:'普利特維采',to:'克爾卡NP→特羅吉爾',spots:['克爾卡國家公園','斯克拉丁斯基布克瀑布','特羅吉爾老城'],hotel:'斯普利特'},
+    {date:'2026-10-11',from:'斯普利特',to:'斯普利特',spots:['戴克里先宮地下室','赫瓦爾島渡輪（自選）','斯普利特港口漫遊'],hotel:'斯普利特'},
+  ]},
+  {id:'seg9',title:'🇧🇦 波赫 → 🇲🇪 蒙特內哥羅 → 🇷🇸 塞爾維亞 → 🇭🇺',days:[
+    {date:'2026-10-12',from:'斯普利特',to:'莫斯塔爾(BA)',spots:['克羅埃西亞/波赫邊境','波奇泰利鄂圖曼村','莫斯塔爾古橋'],hotel:'莫斯塔爾'},
+    {date:'2026-10-13',from:'莫斯塔爾',to:'科托(ME)',spots:['波赫/蒙特內哥羅邊境','科托灣','科托古城城牆'],hotel:'科托'},
+    {date:'2026-10-14',from:'科托',to:'佩拉斯特→布德瓦',spots:['佩拉斯特','岩礁聖母堂船程','洛夫琴山陵墓','布德瓦老城'],hotel:'布德瓦'},
+    {date:'2026-10-15',from:'布德瓦',to:'布達佩斯 ✈',spots:['前往機場','返台！'],hotel:'飛機上'},
+  ]},
+];
+
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+// ── 資料儲存：優先用 localStorage，不可用時改 in-memory ──
+function tryLS(fn){ try{ return fn(); }catch(e){ return null; } }
+function lsGet(k,def){ return JSON.parse(tryLS(()=>localStorage.getItem(k))||'null')||def; }
+function lsSet(k,v){ tryLS(()=>localStorage.setItem(k,JSON.stringify(v))); }
+
+let spots=lsGet('tv_spots',null)||JSON.parse(JSON.stringify(DEFAULT_SPOTS));
+let days=lsGet('tv_days',[]);
+let expenses=lsGet('tv_expenses',[]);
+let routeData=lsGet('tv_route',null)||JSON.parse(JSON.stringify(DEFAULT_ROUTE));
+let currentCountry='HU';
+let editingSpotId=null,editingDayId=null,editingExpenseId=null;
+let editingRouteDayIdx=null,editingRouteSegIdx=null;
+let photoTargetDayId=null;
+
+function save(){
+  lsSet('tv_spots',spots);
+  lsSet('tv_days',days);
+  lsSet('tv_expenses',expenses);
+  lsSet('tv_route',routeData);
+  // 若已連線，自動推送到雲端
+  if(syncState.connected && !syncState.applying){
+    clearTimeout(syncState.pushTimer);
+    syncState.pushTimer=setTimeout(pushToCloud,1500); // 防抖：1.5秒後推送
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// ☁️ SYNC (JSONBin)
+// ══════════════════════════════════════════════════════
+const JSONBIN_URL='https://api.jsonbin.io/v3';
+const syncState={
+  connected:false, apiKey:'', binId:'', roomCode:'',
+  pushTimer:null, pullTimer:null, applying:false, lastHash:''
+};
+
+function openSyncModal(){
+  // Pre-fill saved values
+  const saved=JSON.parse(tryLS(()=>localStorage.getItem('tv_sync'))||'{}');
+  document.getElementById('syncApiKey').value=saved.apiKey||'';
+  document.getElementById('syncRoomCode').value=saved.roomCode||'';
+  document.getElementById('syncModalStatus').textContent='';
+  document.getElementById('syncModal').classList.add('open');
+}
+function closeSyncModal(){document.getElementById('syncModal').classList.remove('open');}
+
+function setStatus(msg,color='#c4a882'){
+  document.getElementById('syncModalStatus').style.color=color;
+  document.getElementById('syncModalStatus').textContent=msg;
+}
+
+async function connectSync(){
+  const apiKey=document.getElementById('syncApiKey').value.trim();
+  const roomCode=document.getElementById('syncRoomCode').value.trim().toUpperCase();
+  if(!apiKey){setStatus('❌ 請輸入 API Key','#f87171');return;}
+  setStatus('⏳ 連線中…');
+
+  syncState.apiKey=apiKey;
+
+  if(roomCode){
+    // 加入現有房間：用房間碼找 bin
+    try{
+      const res=await fetch(`${JSONBIN_URL}/b/${roomCode}/latest`,{
+        headers:{'X-Master-Key':apiKey}
+      });
+      if(!res.ok){setStatus('❌ 找不到房間，請確認代碼','#f87171');return;}
+      const json=await res.json();
+      // Apply remote data
+      syncState.connected=true;
+      syncState.apiKey=apiKey;
+      syncState.binId=roomCode;
+      syncState.roomCode=roomCode;
+      applyRemoteData(json.record);
+      saveSync();
+      closeSyncModal();
+      updateSyncBar();
+      startPull();
+      showToast('✅ 已加入房間 '+roomCode+'！');
+    }catch(e){setStatus('❌ 連線失敗：'+e.message,'#f87171');}
+  } else {
+    // 建立新房間
+    try{
+      const data=getLocalData();
+      const res=await fetch(`${JSONBIN_URL}/b`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','X-Master-Key':apiKey,'X-Bin-Private':'false'},
+        body:JSON.stringify(data)
+      });
+      if(!res.ok){
+        const err=await res.json();
+        setStatus('❌ 建立失敗：'+(err.message||res.status),'#f87171');return;
+      }
+      const json=await res.json();
+      const binId=json.metadata.id;
+      syncState.connected=true;
+      syncState.apiKey=apiKey;
+      syncState.binId=binId;
+      syncState.roomCode=binId;
+      saveSync();
+      closeSyncModal();
+      updateSyncBar();
+      startPull();
+      showToast('✅ 房間已建立！代碼：'+binId);
+      // Show code prominently
+      setTimeout(()=>{
+        showConfirm('房間碼：'+binId+' — 傳給旅伴！', '請截圖或複製此代碼傳給旅伴，他們輸入後即可加入同步。', ()=>{});
+      },500);
+    }catch(e){setStatus('❌ 連線失敗：'+e.message,'#f87171');}
+  }
+}
+
+function getLocalData(){
+  return {spots,days,expenses,routeData,updatedAt:Date.now()};
+}
+
+function applyRemoteData(data){
+  syncState.applying=true;
+  if(data.spots) spots=data.spots;
+  if(data.days) days=data.days;
+  if(data.expenses) expenses=data.expenses;
+  if(data.routeData) routeData=data.routeData;
+  lsSet('tv_spots',spots); lsSet('tv_days',days);
+  lsSet('tv_expenses',expenses); lsSet('tv_route',routeData);
+  buildCountryNav(); renderSpots(); renderDays(); renderRoute(); renderExpenses();
+  syncState.applying=false;
+}
+
+async function pushToCloud(){
+  if(!syncState.connected)return;
+  try{
+    const data=getLocalData();
+    const hash=JSON.stringify(data).length+'_'+data.updatedAt;
+    if(hash===syncState.lastHash)return;
+    await fetch(`${JSONBIN_URL}/b/${syncState.binId}`,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json','X-Master-Key':syncState.apiKey},
+      body:JSON.stringify(data)
+    });
+    syncState.lastHash=hash;
+    setSyncDot('on');
+  }catch(e){setSyncDot('off');}
+}
+
+async function syncNow(){
+  if(!syncState.connected)return;
+  setSyncDot('loading');
+  try{
+    const res=await fetch(`${JSONBIN_URL}/b/${syncState.binId}/latest`,{
+      headers:{'X-Master-Key':syncState.apiKey}
+    });
+    if(!res.ok)throw new Error('fetch failed');
+    const json=await res.json();
+    const remote=json.record;
+    const localTime=getLocalData().updatedAt||0;
+    const remoteTime=remote.updatedAt||0;
+    if(remoteTime>localTime){
+      applyRemoteData(remote);
+      showToast('🔄 已從雲端更新最新資料');
+    } else if(localTime>remoteTime){
+      await pushToCloud();
+      showToast('☁️ 本地資料較新，已推送至雲端');
+    } else {
+      showToast('✅ 資料已是最新');
+    }
+    setSyncDot('on');
+  }catch(e){setSyncDot('off');showToast('❌ 同步失敗，請檢查網路');}
+}
+
+function startPull(){
+  clearInterval(syncState.pullTimer);
+  syncState.pullTimer=setInterval(syncNow,30000); // 每30秒自動同步
+}
+
+function disconnectSync(){
+  clearInterval(syncState.pullTimer);
+  clearTimeout(syncState.pushTimer);
+  syncState.connected=false;
+  syncState.binId=''; syncState.roomCode='';
+  tryLS(()=>localStorage.removeItem('tv_sync'));
+  updateSyncBar();
+  showToast('已斷開同步連線');
+}
+
+function saveSync(){
+  lsSet('tv_sync',{apiKey:syncState.apiKey,roomCode:syncState.roomCode,binId:syncState.binId});
+}
+
+function setSyncDot(state){
+  const dot=document.getElementById('syncDot');
+  if(!dot)return;
+  dot.className='sync-status-dot'+(state==='on'?' on':state==='loading'?' loading':'');
+}
+
+function updateSyncBar(){
+  const bar=document.getElementById('syncBar');
+  const text=document.getElementById('syncBarText');
+  const code=document.getElementById('syncBarCode');
+  if(!bar)return;
+  if(syncState.connected){
+    bar.style.display='flex';
+    bar.className='sync-bar connected';
+    text.textContent='已連線 · 房間碼：';
+    code.textContent=syncState.roomCode;
+    code.style.display='inline';
+    setSyncDot('on');
+  } else {
+    bar.style.display='none';
+  }
+}
+
+// 啟動時恢復同步狀態
+(function restoreSync(){
+  const saved=JSON.parse(tryLS(()=>localStorage.getItem('tv_sync'))||'null');
+  if(saved&&saved.apiKey&&saved.binId){
+    syncState.apiKey=saved.apiKey;
+    syncState.binId=saved.binId;
+    syncState.roomCode=saved.roomCode||saved.binId;
+    syncState.connected=true;
+    updateSyncBar();
+    startPull();
+    syncNow(); // 立即拉取最新
+  }
+})();
+
+// ── 匯出資料 ──
+function exportData(){
+  const data={spots,days,expenses,routeData,exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='europe-travel-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('✅ 資料已匯出！請妥善保存 JSON 檔案');
+}
+
+// ── 匯入資料 ──
+function importData(){
+  const inp=document.createElement('input');
+  inp.type='file'; inp.accept='.json';
+  inp.onchange=e=>{
+    const file=e.target.files[0]; if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        if(data.spots) spots=data.spots;
+        if(data.days) days=data.days;
+        if(data.expenses) expenses=data.expenses;
+        if(data.routeData) routeData=data.routeData;
+        save();
+        buildCountryNav(); renderSpots(); renderDays(); renderRoute(); renderExpenses();
+        showToast('✅ 資料匯入成功！');
+      }catch(err){ showToast('❌ 匯入失敗：檔案格式錯誤'); }
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+
+// ── Toast 通知 ──
+function showToast(msg){
+  let t=document.getElementById('toast');
+  if(!t){ t=document.createElement('div'); t.id='toast'; t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1209;color:#f5f0e8;padding:12px 24px;border-radius:8px;font-size:.88rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:opacity .3s;'; document.body.appendChild(t); }
+  t.textContent=msg; t.style.opacity='1';
+  clearTimeout(t._timer); t._timer=setTimeout(()=>{ t.style.opacity='0'; },3000);
+}
+
+// ══════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════
+function switchTab(tab,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  btn.classList.add('active');
+  if(tab==='expense')renderExpenses();
+  if(tab==='route')renderRoute();
+}
+
+// ══════════════════════════════════════════════════════
+// ROUTE
+// ══════════════════════════════════════════════════════
+function renderHotel(d){
+  if(!d.hotelName) return '<span style="color:var(--muted);font-size:.78rem">點擊新增…</span>';
+  var s='<div style="font-size:.82rem;font-weight:600">'+d.hotelName+'</div>';
+  if(d.hotelMap) s+='<a href="'+d.hotelMap+'" target="_blank" onclick="event.stopPropagation()" style="font-size:.72rem;color:var(--accent3);text-decoration:none">📍 地圖</a>';
+  return s;
+}
+function renderRoute(){
+  const tl=document.getElementById('routeTimeline');
+  if(!routeData||!routeData.length){tl.innerHTML='<div class="empty-state"><div class="empty-icon">🗺</div><p>尚無行程資料</p></div>';return;}
+  let dayCount=0;
+  tl.innerHTML=routeData.map((seg,si)=>{
+    const rows=seg.days.map((d,di)=>{
+      dayCount++;
+      const dc=dayCount;
+      const spotsHtml=(d.spots||[]).map(sp=>`<span class="spot-badge">${sp}</span>`).join('');
+      return `<div class="route-day-row" id="rdr-${si}-${di}" onclick="openRouteDayModal(${si},${di})" style="cursor:pointer" title="點擊編輯此天行程">
+        <div class="rdr-cell rdr-date">
+          <span class="daynum">Day ${dc}</span>
+          <span>${fmtDate(d.date)}</span>
+        </div>
+        <div class="rdr-cell rdr-location">${d.from||''}<br><span style="color:var(--muted);font-size:.75rem">→ ${d.to||''}</span></div>
+        <div class="rdr-cell rdr-spots-cell">${spotsHtml||'<span style="color:var(--muted);font-size:.78rem">點擊新增…</span>'}</div>
+        <div class="rdr-cell rdr-km">${d.km?`<span class="km-num">${d.km}</span><span class="km-label">km</span>`:'<span style="color:var(--muted);font-size:.75rem">—</span>'}</div>
+        <div class="rdr-cell rdr-hotel">${renderHotel(d)}</div>
+        <div class="rdr-cell" onclick="event.stopPropagation()">
+          <button class="rdr-btn" onclick="openRouteDayModal(${si},${di})" title="編輯">✏️</button>
+          <button class="rdr-btn" onclick="deleteRouteDay(${si},${di})" title="刪除">🗑</button>
+        </div>
+      </div>`;
+    }).join('');
+    const firstDate=seg.days[0]?fmtDate(seg.days[0].date):'';
+    const lastDate=seg.days[seg.days.length-1]?fmtDate(seg.days[seg.days.length-1].date):'';
+    return `<div class="segment-block">
+      <div class="segment-header">
+        <span class="segment-title">${seg.title}</span>
+        <span class="segment-dates">${firstDate} – ${lastDate}</span>
+      </div>
+      <div class="route-table-header">
+        <div class="rth-cell">日期</div><div class="rth-cell">路線</div>
+        <div class="rth-cell">景點重點</div><div class="rth-cell" style="text-align:center">里程</div><div class="rth-cell">🏨 住宿</div>
+        <div class="rth-cell">操作</div>
+      </div>
+      <div class="segment-days">${rows}</div>
+    </div>`;
+  }).join('');
+  // Update total km
+  const totalKm=routeData.reduce((s,seg)=>s+seg.days.reduce((s2,d)=>s2+(parseInt(d.km)||0),0),0);
+  const el=document.getElementById('totalKm');
+  if(el) el.innerHTML=totalKm?totalKm.toLocaleString()+' <span style="font-size:.8rem;color:var(--warm-mid)">km</span>':'—';
+}
+
+function openRouteDayModal(si,di){
+  editingRouteSegIdx=si; editingRouteDayIdx=di;
+  const d=routeData[si].days[di];
+  document.getElementById('routeDayModalTitle').textContent='編輯行程 — '+fmtDate(d.date);
+  document.getElementById('rdDate').value=d.date;
+  document.getElementById('rdFrom').value=d.from||'';
+  document.getElementById('rdTo').value=d.to||'';
+  document.getElementById('rdSpots').value=(d.spots||[]).join('\n');
+  document.getElementById('rdKm').value=d.km||'';
+  document.getElementById('rdHotelName').value=d.hotelName||'';
+  document.getElementById('rdHotelMap').value=d.hotelMap||'';
+  document.getElementById('rdNote').value=d.note||'';
+  document.getElementById('routeDayModal').classList.add('open');
+}
+function closeRouteDayModal(){document.getElementById('routeDayModal').classList.remove('open');}
+function saveRouteDay(){
+  const si=editingRouteSegIdx,di=editingRouteDayIdx;
+  const d=routeData[si].days[di];
+  d.from=document.getElementById('rdFrom').value.trim();
+  d.to=document.getElementById('rdTo').value.trim();
+  d.spots=document.getElementById('rdSpots').value.split('\n').map(x=>x.trim()).filter(Boolean);
+  d.km=document.getElementById('rdKm').value.trim();
+  d.hotelName=document.getElementById('rdHotelName').value.trim();
+  d.hotelMap=document.getElementById('rdHotelMap').value.trim();
+  d.note=document.getElementById('rdNote').value.trim();
+  save(); closeRouteDayModal(); renderRoute();
+}
+function deleteRouteDay(si,di){
+  showConfirm('刪除行程','確定刪除這一天的行程？',()=>{
+    routeData[si].days.splice(di,1);
+    if(!routeData[si].days.length)routeData.splice(si,1);
+    save(); renderRoute();
+  });
+}
+function addSegment(){
+  const title=prompt('請輸入路段名稱（例：🇨🇿 捷克）','');
+  if(!title)return;
+  routeData.push({id:'seg'+Date.now(),title,days:[]});
+  save(); renderRoute();
+}
+function addRouteDay(){
+  const si=routeData.length-1;
+  if(si<0){alert('請先新增路段');return;}
+  const lastDays=routeData[si].days;
+  const lastDate=lastDays.length?addDays(lastDays[lastDays.length-1].date,1):'2026-08-19';
+  routeData[si].days.push({date:lastDate,from:'',to:'',spots:[],hotel:'',note:''});
+  save(); renderRoute();
+  openRouteDayModal(si,routeData[si].days.length-1);
+}
+function resetRoute(){
+  showConfirm('恢復預設行程','確定恢復預設行程？所有自訂修改將消失。',()=>{
+    routeData=JSON.parse(JSON.stringify(DEFAULT_ROUTE));
+    save(); renderRoute();
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// SPOTS
+// ══════════════════════════════════════════════════════
+function buildCountryNav(){
+  const nav=document.getElementById('countryNav');
+  const sel=document.getElementById('spotCountry');
+  nav.innerHTML=''; sel.innerHTML='';
+  COUNTRIES.forEach(c=>{
+    const btn=document.createElement('button');
+    btn.className='country-btn'+(c.code===currentCountry?' active':'');
+    btn.textContent=c.flag+' '+c.name;
+    btn.onclick=()=>{currentCountry=c.code;buildCountryNav();renderSpots();};
+    nav.appendChild(btn);
+    const opt=document.createElement('option');
+    opt.value=c.code; opt.textContent=c.flag+' '+c.name; sel.appendChild(opt);
+  });
+}
+
+function renderSpots(){
+  const grid=document.getElementById('spotsGrid');
+  const filtered=spots.filter(s=>s.country===currentCountry);
+  if(!filtered.length){
+    grid.innerHTML='<div class="empty-state"><div class="empty-icon">🗺</div><p>此國家尚無景點，點上方按鈕新增！</p></div>';return;
+  }
+  grid.innerHTML=filtered.map(s=>`
+    <div class="spot-card">
+      <div class="spot-card-header">
+        <div class="spot-name">${s.name}</div>
+        ${s.tag?`<div class="spot-tag">${s.tag}</div>`:''}
+      </div>
+      <div class="spot-body">
+        <div class="spot-desc">${s.desc||'尚無介紹'}</div>
+        ${s.descEN?`<div class="spot-desc-en">🇬🇧 ${s.descEN}</div>`:''}
+        ${s.subspots?`<div class="spot-section-label">📍 值得一訪的小景點</div><div class="spot-detail">${s.subspots}</div>`:''}
+        ${s.food?`<div class="spot-section-label">🍴 推薦美食</div><div class="spot-detail">${s.food}</div>`:''}
+        ${s.souv?`<div class="spot-section-label">🛍 紀念品 / 體驗</div><div class="spot-detail">${s.souv}</div>`:''}
+        ${s.driving?`<div class="spot-section-label">🚗 自駕 & 停車注意</div><div class="spot-driving">${s.driving}</div>`:''}
+        <div class="spot-links">
+          ${s.map?`<a href="${s.map}" target="_blank" class="spot-link map">📍 Google Maps</a>`:''}
+          <button class="spot-link edit" onclick="openSpotModal(${s.id})">✏️ 編輯</button>
+          <button class="spot-link del" onclick="deleteSpot(${s.id})">🗑</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openSpotModal(id){
+  editingSpotId=id||null;
+  document.getElementById('spotModalTitle').textContent=id?'編輯景點':'新增景點';
+  document.getElementById('spotCountry').value=currentCountry;
+  if(id){
+    const s=spots.find(x=>x.id===id);
+    if(s){
+      document.getElementById('spotCountry').value=s.country;
+      document.getElementById('spotName').value=s.name;
+      document.getElementById('spotTag').value=s.tag||'';
+      document.getElementById('spotDesc').value=s.desc||'';
+      document.getElementById('spotDescEN').value=s.descEN||'';
+      document.getElementById('spotSubspots').value=s.subspots||'';
+      document.getElementById('spotFood').value=s.food||'';
+      document.getElementById('spotSouv').value=s.souv||'';
+      document.getElementById('spotDriving').value=s.driving||'';
+      document.getElementById('spotMap').value=s.map||'';
+    }
+  } else {
+    ['spotName','spotTag','spotDesc','spotDescEN','spotSubspots','spotFood','spotSouv','spotDriving','spotMap'].forEach(i=>document.getElementById(i).value='');
+  }
+  document.getElementById('spotModal').classList.add('open');
+}
+function closeSpotModal(){document.getElementById('spotModal').classList.remove('open');}
+function saveSpot(){
+  const s={
+    country:document.getElementById('spotCountry').value,
+    name:document.getElementById('spotName').value.trim(),
+    tag:document.getElementById('spotTag').value.trim(),
+    desc:document.getElementById('spotDesc').value.trim(),
+    descEN:document.getElementById('spotDescEN').value.trim(),
+    subspots:document.getElementById('spotSubspots').value.trim(),
+    food:document.getElementById('spotFood').value.trim(),
+    souv:document.getElementById('spotSouv').value.trim(),
+    driving:document.getElementById('spotDriving').value.trim(),
+    map:document.getElementById('spotMap').value.trim(),
+  };
+  if(!s.name){alert('請輸入景點名稱');return;}
+  if(editingSpotId){const idx=spots.findIndex(x=>x.id===editingSpotId);if(idx!==-1)spots[idx]={...spots[idx],...s};}
+  else{s.id=Date.now();spots.push(s);}
+  save(); closeSpotModal(); currentCountry=s.country; buildCountryNav(); renderSpots();
+}
+function deleteSpot(id){showConfirm('刪除景點','確定刪除此景點？',()=>{spots=spots.filter(s=>s.id!==id);save();renderSpots();});}
+
+// ══════════════════════════════════════════════════════
+// ITINERARY
+// ══════════════════════════════════════════════════════
+function renderDays(){
+  const list=document.getElementById('dayList');
+  if(!days.length){list.innerHTML='<div class="empty-state"><div class="empty-icon">📅</div><p>尚未新增行程</p></div>';return;}
+  const sorted=[...days].sort((a,b)=>a.date<b.date?-1:1);
+  list.innerHTML=sorted.map((d,i)=>{
+    const stopItems=[
+      ...(d.sights||[]).map(x=>`<li class="stop-item"><div class="stop-icon sight">🏛</div><div class="stop-text"><div class="stop-name">${x}</div></div></li>`),
+      ...(d.restaurants||[]).map(x=>`<li class="stop-item"><div class="stop-icon food">🍽</div><div class="stop-text"><div class="stop-name">${x}</div></div></li>`),
+      d.hotel?`<li class="stop-item"><div class="stop-icon stay">🏨</div><div class="stop-text"><div class="stop-name">${d.hotel}</div><div class="stop-note">住宿</div></div></li>`:'',
+      d.km?`<li class="stop-item"><div class="stop-icon drive">🚗</div><div class="stop-text"><div class="stop-name">行駛 ${d.km} km</div></div></li>`:'',
+    ].filter(Boolean).join('');
+    const photos=(d.photos||[]).map(p=>`<img class="photo-thumb" src="${p}" onclick="previewPhoto('${p}')">`).join('');
+    return `<div class="day-card" id="day-${d.id}">
+      <div class="day-card-header">
+        <div onclick="toggleDay(${d.id})" style="flex:1;cursor:pointer">
+          <span class="day-num">Day ${i+1}</span><span class="day-title">${d.from} → ${d.to}</span>
+          <div class="day-meta">${d.date}${d.km?'　🚗 '+d.km+' km':''}</div>
+        </div>
+        <button onclick="openDayModal(${d.id})" style="background:none;border:none;font-size:1rem;cursor:pointer;padding:4px 6px;color:var(--muted)">✏️</button>
+        <button onclick="deleteDay(${d.id})" style="background:none;border:none;font-size:1rem;cursor:pointer;padding:4px 6px;color:#c0392b">🗑</button>
+        <div onclick="toggleDay(${d.id})" class="day-chevron" style="cursor:pointer">▾</div>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">${stopItems||'<li style="color:var(--muted);font-size:.86rem;padding:7px 0">尚無行程資料</li>'}</ul>
+        ${d.note?`<div style="background:#fff8f0;border-left:3px solid var(--gold);padding:9px 12px;border-radius:0 5px 5px 0;font-size:.84rem;color:#555;margin-bottom:10px">${d.note}</div>`:''}
+        <div class="day-photos">${photos}<button class="add-photo-btn" onclick="addPhotoToDay(${d.id})"><span class="plus">＋</span><span>照片</span></button></div>
+        <div class="day-actions">
+          <button class="day-action-btn edit" onclick="openDayModal(${d.id})">✏️ 編輯</button>
+          <button class="day-action-btn del" onclick="deleteDay(${d.id})">🗑 刪除</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function toggleDay(id){document.getElementById('day-'+id).classList.toggle('collapsed');}
+function openDayModal(id){
+  editingDayId=id||null;
+  document.getElementById('dayModalTitle').textContent=id?'編輯行程':'新增行程日';
+  const d=id?days.find(x=>x.id===id):null;
+  document.getElementById('dayDate').value=d?d.date:'';
+  document.getElementById('dayFrom').value=d?d.from:'';
+  document.getElementById('dayTo').value=d?d.to:'';
+  document.getElementById('dayKm').value=d?(d.km||''):'';
+  document.getElementById('daySpots').value=d?(d.sights||[]).join('\n'):'';
+  document.getElementById('dayRestaurants').value=d?(d.restaurants||[]).join('\n'):'';
+  document.getElementById('dayHotel').value=d?(d.hotel||''):'';
+  document.getElementById('dayNote').value=d?(d.note||''):'';
+  document.getElementById('dayModal').classList.add('open');
+}
+function closeDayModal(){document.getElementById('dayModal').classList.remove('open');}
+function saveDay(){
+  const d={
+    date:document.getElementById('dayDate').value,
+    from:document.getElementById('dayFrom').value.trim(),
+    to:document.getElementById('dayTo').value.trim(),
+    km:document.getElementById('dayKm').value,
+    sights:document.getElementById('daySpots').value.split('\n').map(x=>x.trim()).filter(Boolean),
+    restaurants:document.getElementById('dayRestaurants').value.split('\n').map(x=>x.trim()).filter(Boolean),
+    hotel:document.getElementById('dayHotel').value.trim(),
+    note:document.getElementById('dayNote').value.trim(),
+  };
+  if(!d.from||!d.to){alert('請輸入出發地與目的地');return;}
+  if(editingDayId){const idx=days.findIndex(x=>x.id===editingDayId);if(idx!==-1)days[idx]={...days[idx],...d};}
+  else{d.id=Date.now();d.photos=[];days.push(d);}
+  save();closeDayModal();renderDays();
+}
+function deleteDay(id){showConfirm('刪除行程','確定刪除此行程記錄？',()=>{days=days.filter(d=>d.id!==id);save();renderDays();});}
+function addPhotoToDay(dayId){photoTargetDayId=dayId;const inp=document.getElementById('photoFileInput');inp.value='';inp.click();}
+document.getElementById('photoFileInput').addEventListener('change',function(){
+  const d=days.find(x=>x.id===photoTargetDayId);if(!d)return;if(!d.photos)d.photos=[];
+  Array.from(this.files).forEach(file=>{const r=new FileReader();r.onload=e=>{d.photos.push(e.target.result);save();renderDays();};r.readAsDataURL(file);});
+});
+function previewPhoto(src){document.getElementById('photoPreviewImg').src=src;document.getElementById('photoModal').classList.add('open');}
+function closePhotoModal(){document.getElementById('photoModal').classList.remove('open');}
+
+// ══════════════════════════════════════════════════════
+// EXPENSES
+// ══════════════════════════════════════════════════════
+const TYPE_LABELS={food:'🍽 餐飲',transport:'🚗 交通',stay:'🏨 住宿',ticket:'🎟 門票',other:'📦 其他'};
+const TYPE_CSS={food:'type-food',transport:'type-transport',stay:'type-stay',ticket:'type-ticket',other:'type-other'};
+
+function renderExpenses(){
+  const tbody=document.getElementById('expenseBody');
+  const empty=document.getElementById('expenseEmpty');
+  if(!expenses.length){tbody.innerHTML='';empty.style.display='';} 
+  else {
+    empty.style.display='none';
+    const sorted=[...expenses].sort((a,b)=>a.date<b.date?-1:1);
+    tbody.innerHTML=sorted.map(e=>`<tr>
+      <td>${e.date||'—'}</td><td>${e.desc}</td>
+      <td><span class="expense-type-badge ${TYPE_CSS[e.type]}">${TYPE_LABELS[e.type]}</span></td>
+      <td><strong>${Number(e.amount).toLocaleString()}</strong></td>
+      <td>${e.currency}</td>
+      <td><span class="payer-badge">${e.payer||'未填'}</span></td>
+      <td>${e.shared?'<span class="payer-badge payer-shared">公費</span>':'<span style="color:var(--muted);font-size:.78rem">個人</span>'}</td>
+      <td><button class="icon-btn" onclick="openExpenseModal(${e.id})">✏️</button><button class="icon-btn" onclick="deleteExpense(${e.id})">🗑</button></td>
+    </tr>`).join('');
+  }
+  const eurTotal=expenses.filter(e=>e.currency==='EUR').reduce((s,e)=>s+Number(e.amount),0);
+  const eurShared=expenses.filter(e=>e.currency==='EUR'&&e.shared).reduce((s,e)=>s+Number(e.amount),0);
+  document.getElementById('statTotal').innerHTML=`€ ${eurTotal.toFixed(0)} <span>EUR</span>`;
+  document.getElementById('statShared').innerHTML=`€ ${eurShared.toFixed(0)} <span>EUR</span>`;
+  document.getElementById('statPer').innerHTML=`€ ${(eurShared/4).toFixed(0)} <span>EUR</span>`;
+  document.getElementById('statCount').innerHTML=`${expenses.length} <span>筆</span>`;
+  const sharedItems=expenses.filter(e=>e.shared);
+  const splitSum=document.getElementById('splitSummary');
+  if(sharedItems.length){
+    splitSum.style.display='';
+    document.getElementById('splitRows').innerHTML=sharedItems.map(e=>`<div class="split-row"><span>${e.desc}</span><span class="split-amt">${e.currency==='EUR'?'€':e.currency} ${Number(e.amount).toLocaleString()}</span></div>`).join('');
+    document.getElementById('splitPerPerson').textContent=`€ ${(eurShared/4).toFixed(2)}`;
+  } else splitSum.style.display='none';
+}
+function openExpenseModal(id){
+  editingExpenseId=id||null;
+  document.getElementById('expenseModalTitle').textContent=id?'編輯花費':'新增花費';
+  const e=id?expenses.find(x=>x.id===id):null;
+  document.getElementById('expDate').value=e?e.date:'';
+  document.getElementById('expDesc').value=e?e.desc:'';
+  document.getElementById('expType').value=e?e.type:'food';
+  document.getElementById('expAmount').value=e?e.amount:'';
+  document.getElementById('expCurrency').value=e?e.currency:'EUR';
+  document.getElementById('expPayer').value=e?(e.payer||''):'';
+  document.getElementById('expShared').checked=e?!!e.shared:false;
+  document.getElementById('expenseModal').classList.add('open');
+}
+function closeExpenseModal(){document.getElementById('expenseModal').classList.remove('open');}
+function saveExpense(){
+  const e={
+    date:document.getElementById('expDate').value,
+    desc:document.getElementById('expDesc').value.trim(),
+    type:document.getElementById('expType').value,
+    amount:document.getElementById('expAmount').value,
+    currency:document.getElementById('expCurrency').value,
+    payer:document.getElementById('expPayer').value.trim(),
+    shared:document.getElementById('expShared').checked,
+  };
+  if(!e.desc||!e.amount){alert('請填寫說明與金額');return;}
+  if(editingExpenseId){const idx=expenses.findIndex(x=>x.id===editingExpenseId);if(idx!==-1)expenses[idx]={...expenses[idx],...e};}
+  else{e.id=Date.now();expenses.push(e);}
+  save();closeExpenseModal();renderExpenses();
+}
+function deleteExpense(id){showConfirm('刪除花費','確定刪除此筆花費記錄？',()=>{expenses=expenses.filter(e=>e.id!==id);save();renderExpenses();});}
+
+// ══════════════════════════════════════════════════════
+// CUSTOM CONFIRM (replaces blocked window.confirm)
+// ══════════════════════════════════════════════════════
+function showConfirm(title, msg, onYes){
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmMsg').textContent = msg;
+  const btn = document.getElementById('confirmYesBtn');
+  btn.onclick = ()=>{ closeConfirm(); onYes(); };
+  document.getElementById('confirmModal').classList.add('open');
+}
+function closeConfirm(){
+  document.getElementById('confirmModal').classList.remove('open');
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+// 若 localStorage 內有舊的 2025 日期資料，自動清除並換成 2026
+(function(){
+  try{
+    const r=localStorage.getItem('tv_route');
+    if(r && r.includes('"2025-')){
+      localStorage.removeItem('tv_route');
+      routeData=JSON.parse(JSON.stringify(DEFAULT_ROUTE));
+      lsSet('tv_route',routeData);
+      console.log('已自動更新行程日期至2026年');
+    }
+  }catch(e){}
+})();
+
+buildCountryNav();
+renderSpots();
+renderDays();
+renderRoute();
+
+// PWA 安裝提示（非 standalone 模式才顯示）
+if(!window.navigator.standalone && !/instagram|fbav/i.test(navigator.userAgent)){
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isAndroid = /android/i.test(navigator.userAgent);
+  if(isIOS || isAndroid){
+    const banner = document.createElement('div');
+    banner.id = 'installBanner';
+    banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#1a1209;color:#f5f0e8;padding:12px 16px 20px;z-index:9997;display:flex;align-items:center;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,.3)';
+    banner.innerHTML = `
+      <span style="font-size:2rem">🗺</span>
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:.9rem;color:#c9a84c">加入主畫面，像 App 一樣使用！</div>
+        <div style="font-size:.78rem;color:#c4a882;margin-top:2px">${isIOS?'點下方 □↑ 分享 → 加入主畫面':'點瀏覽器選單 → 加到主畫面'}</div>
+      </div>
+      <button onclick="document.getElementById('installBanner').remove()" style="background:none;border:1px solid #c4a882;color:#c4a882;border-radius:6px;padding:6px 12px;font-size:.8rem;cursor:pointer">關閉</button>`;
+    document.body.appendChild(banner);
+  }
+}
+</script>
+</body>
+</html>
